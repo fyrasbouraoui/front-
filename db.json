@@ -1,0 +1,24 @@
+{
+  "apis": [
+    {
+      "id": "1",
+      "Nom": "1",
+      "code": "1",
+      "description": "1",
+      "input": "1",
+      "output": "1",
+      "cadre": "1",
+      "mode": "1"
+    },
+    {
+      "id": "dza",
+      "Nom": "dza",
+      "code": "zda",
+      "description": "az",
+      "input": "dza",
+      "output": "dza",
+      "cadre": "zda",
+      "mode": "zad"
+    }
+  ]
+}

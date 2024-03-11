@@ -1,0 +1,89 @@
+<div class='dashboard-app'>
+        <div class='dashboard-content'>
+            <div class='container'>
+                <div class="container-xl">
+                    <div class="table-responsive">
+                        <div class="table-wrapper">
+                            <div class="table-title">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <h2>Liste <b>APIs</b></h2>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <button (click)="openAddEditEmpForm()"  class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Ajouter </span></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <table class="table table-striped table-hover" >
+                                <table mat-table [dataSource]="dataSource" matSort>
+                                  <ng-container matColumnDef="idApi">
+                                    <th mat-header-cell *matHeaderCellDef> id </th>
+                                    <td mat-cell *matCellDef="let row"> {{row.idApi}} </td>
+                                  </ng-container>
+                                  <ng-container matColumnDef="nom">
+                                    <th mat-header-cell *matHeaderCellDef> Nom </th>
+                                    <td mat-cell *matCellDef="let row"> {{row.nom}} </td>
+                                  </ng-container>
+                                  <ng-container matColumnDef="code">
+                                    <th mat-header-cell *matHeaderCellDef> code </th>
+                                    <td mat-cell *matCellDef="let row"> {{row.code}} </td>
+                                  </ng-container>
+                                  <ng-container matColumnDef="description">
+                                    <th mat-header-cell *matHeaderCellDef> description </th>
+                                    <td mat-cell *matCellDef="let row"> {{row.description}} </td>
+                                  </ng-container>
+                                  <ng-container matColumnDef="input">
+                                    <th mat-header-cell *matHeaderCellDef> input </th>
+                                    <td mat-cell *matCellDef="let row"> {{row.input}} </td>
+                                  </ng-container>
+                                  <ng-container matColumnDef="output">
+                                    <th mat-header-cell *matHeaderCellDef> output </th>
+                                    <td mat-cell *matCellDef="let row"> {{row.output}} </td>
+                                  </ng-container>
+                                  <ng-container matColumnDef="cadreUtilisation">
+                                    <th mat-header-cell *matHeaderCellDef> cadre </th>
+                                    <td mat-cell *matCellDef="let row"> {{row.cadreUtilisation}} </td>
+                                </ng-container>
+                                <ng-container matColumnDef="action">
+                                  <th mat-header-cell *matHeaderCellDef>Actions</th>
+                                  <td mat-cell *matCellDef="let row">
+                                    <button class="iconbutton" mat-icon-button (click)="editRow(row)">
+                                      <mat-icon>edit</mat-icon>
+                                    </button>
+                                    <button class="iconbutton2" mat-icon-button (click)="deleteRow(row)">
+                                      <mat-icon>delete</mat-icon>
+                                    </button>
+                                  </td>
+                                </ng-container>
+                                  
+                                  
+
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                                
+                            </table>
+                            
+                            </table>
+                            <div class="clearfix">
+                                <div class="hint-text">Page <b>1</b> de <b>25</b> autres</div>
+                                <ul class="pagination">
+                                    <li class="page-item disabled"><a href="#">Precedent</a></li>
+                                    <li class="page-item active"><a href="#" class="page-link">1</a></li>
+                                    <li class="page-item"><a href="#" class="page-link">2</a></li>
+                                    <li class="page-item"><a href="#" class="page-link">3</a></li>
+
+                                    <li class="page-item"><a href="#" class="page-link">4</a></li>
+                                    <li class="page-item"><a href="#" class="page-link">5</a></li>
+                                    <li class="page-item"><a href="#" class="page-link">suivant</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>        
+                    
+                </div>
+                
+                
+                
+                </div>
+            </div>
+        </div>

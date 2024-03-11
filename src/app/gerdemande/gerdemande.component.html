@@ -1,0 +1,93 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<div class='dashboard'>
+    <div class="dashboard-nav">
+        <header>
+            <a  class="menu-toggle"><i class="fas fa-bars"></i></a>
+            <a  class="brand-logo"><i class=""></i> <span>Nom projet</span></a>
+        </header>
+        <nav class="dashboard-nav-list">
+            <a href="acceuil" class="dashboard-nav-item"><i class="fas fa-home"></i> Acceuil </a>
+            <a href="#" class="dashboard-nav-item "><i class="fas fa-tachometer-alt"></i> dashboard</a>
+            <a href="form" class="dashboard-nav-item "><i class="fas fa-file-upload"></i> Demande API </a>
+            
+            <a href="liste" class="dashboard-nav-item "><i class="fas fa-file-upload"></i> Liste APIs            </a>
+            <button onclick="toggleSubMenu()" class="dashboard-nav-item active"><i class=""></i> Admin </button>
+        <div id="admin-submenu" class="dashboard-nav-liste">
+          <a href="user" class="dashboard-nav-item">Liste utilisateur</a>
+          <a href="demande" class="dashboard-nav-item active">Liste demande</a>
+        </div>
+            <a href="profile" class="dashboard-nav-item"><i class="fas fa-user"></i> Profile </a>
+            <div class="nav-item-divider"></div>
+        </nav>
+        <nav class="dashboard-nav-liste">
+        <a href="#" class="dashboard-nav-item1"><i class="fas fa-sign-out-alt"></i> Se deconnecter </a> </nav>
+    </div>
+    <div class='dashboard-app'>
+        <div class='dashboard-content'>
+            <div class='container'>
+                <div class="container-xl">
+                    <div class="table-responsive">
+                        <div class="table-wrapper">
+                            <div class="table-title">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <h2>Liste <b>Demandes</b></h2>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <table mat-table [dataSource]="dataSource" class="table table-striped table-hover">
+
+                                <ng-container matColumnDef="description">
+                                  <th mat-header-cell *matHeaderCellDef>Description</th>
+                                  <td mat-cell *matCellDef="let row">{{ row.description }}</td>
+                                </ng-container>
+                            
+                                <ng-container matColumnDef="nomApp">
+                                  <th mat-header-cell *matHeaderCellDef>NomApp</th>
+                                  <td mat-cell *matCellDef="let row">{{ row.nomApp }}</td>
+                                </ng-container>
+                            
+                                <ng-container matColumnDef="action">
+                                  <th mat-header-cell *matHeaderCellDef>Action</th>
+                                  <td mat-cell *matCellDef="let row">
+                                    <button mat-icon-button class="iconbutton" (click)="handleCheckIconClick(row)">
+                                      <mat-icon>check</mat-icon>
+                                    </button>
+                                    <button mat-icon-button class="iconbutton2">
+                                      <mat-icon>delete</mat-icon>
+                                    </button>
+                                  </td>
+                                </ng-container>
+                            
+                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                            
+                              </table>
+                              
+                            <div class="clearfix">
+                                <div class="hint-text">Page <b>1</b> de <b>25</b> autres</div>
+                                <ul class="pagination">
+                                    <li class="page-item disabled"><a href="#">Precedent</a></li>
+                                    <li class="page-item active"><a href="#" class="page-link">1</a></li>
+                                    <li class="page-item"><a href="#" class="page-link">2</a></li>
+                                    <li class="page-item"><a href="#" class="page-link">3</a></li>
+
+                                    <li class="page-item"><a href="#" class="page-link">4</a></li>
+                                    <li class="page-item"><a href="#" class="page-link">5</a></li>
+                                    <li class="page-item"><a href="#" class="page-link">suivant</a></li>
+                                </ul>
+                            </div>
+                       
+                           
+               
+                
+                
+               
+           
+        
+    

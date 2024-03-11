@@ -1,0 +1,164 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+
+
+<div class='dashboard'>
+  <div class="dashboard-nav">
+      <header>
+          <a  class="menu-toggle"><i class="fas fa-bars"></i></a>
+          <a  class="brand-logo"><i class=""></i> <span>Nom projet</span></a>
+      </header>
+      <nav class="dashboard-nav-list">
+          <a href="acceuil" class="dashboard-nav-item"><i class="fas fa-home"></i> Acceuil </a>
+          <a href="#" class="dashboard-nav-item "><i class="fas fa-tachometer-alt"></i> dashboard</a>
+          <a href="form" class="dashboard-nav-item active"><i class="fas fa-file-upload"></i> Demande API </a>
+          
+          <a href="liste" class="dashboard-nav-item "><i class="fas fa-file-upload"></i>Liste APIs          </a>
+          <button (click)="toggleSubMenu()" class="dashboard-nav-item active"><i class=""></i> Admin </button>
+      <div *ngIf="isSubMenuVisible" id="admin-submenu" class="dashboard-nav-liste">
+        <a href="user" class="dashboard-nav-item">Liste utilisateur</a>
+        <a href="demande" class="dashboard-nav-item">Liste demande</a>
+      </div>
+          <a href="profile" class="dashboard-nav-item"><i class="fas fa-user"></i> Profile </a>
+          <div class="nav-item-divider"></div>
+      </nav>
+      <nav class="dashboard-nav-liste">
+      <a href="#" class="dashboard-nav-item1"><i class="fas fa-sign-out-alt"></i> Se deconnecter </a> </nav>
+  </div>
+    <div>
+        <div class='dashboard-app'>
+            <div class="container">
+                <h1>Demande de consommation d'un web service</h1>
+                <form [formGroup]="demandeform" (ngSubmit)="FormSubmit()">
+
+                  
+                  <div class="form-group">
+                    <label for="etablissementDemandeur">Etablissement demandeur du web service:</label>
+                    <input type="text" class="form-control"  placeholder="" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="etablissementFournisseur">Etablissement fournisseur du web service:</label>
+                    <input type="text" class="form-control" id="etablissementFournisseur" placeholder="" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="etablissementProprietaire">Etablissement propriétaire des données:</label>
+                    <input type="text" class="form-control" id="etablissementProprietaire" placeholder="" required>
+                  </div>
+            
+            
+                  <h2>1-Informations sur l'API demandée :</h2>
+                  <div class="form-group">
+                    <label for="nomAPI">Nom API</label>
+                    <input type="text" class="form-control" formControlName="nomApp" placeholder="" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="descriptionAPI">Description de l'API:</label>
+                    <textarea class="form-control" formControlName="description" rows="3"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="cadreAPI">Le cadre d'utilisation:</label>
+                    <input type="text" class="form-control" id="cadreAPI" placeholder="" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="donneesEntree">Donnees d'entree:</label>
+                    <input type="text" class="form-control" id="donneesEntree" placeholder="" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="donneedeSortie">Donnees de Sortie:</label>
+                    <input type="text" class="form-control" id="donneesEntree" placeholder="" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="impact">L'impact Attendu:</label>
+                    <textarea class="form-control" id="impact" rows="3"></textarea>
+                  </div>
+            
+            
+            
+                  <h2>2-Informations sur l'application consommant l'API:</h2>
+                  <div class="form-group">
+                    <label >Nom de l'hébergeur</label>
+                    <input type="text" class="form-control"  placeholder="" required>
+                  </div>
+                  <div class="form-group">
+                    <label >Hébergeur situé en Tunisie </label><div class="checkbox-container">
+                      <label for="oui">Oui</label>
+                      <input type="checkbox" id="oui">
+                      <label for="non">Non</label>
+                      <input type="checkbox" id="non">
+                  </div>
+                    <textarea class="form-control" id="situé" rows="3" placeholder="Si non, veuillez spécifier le pays."></textarea>
+                       
+                  </div>
+                  <div class="form-group">
+                    <label >Application publié sur Internet</label>
+                    <div class="checkbox-container">
+                      <label for="oui">Oui</label>
+                      <input type="checkbox" id="oui">
+                      <label for="non">Non</label>
+                      <input type="checkbox" id="non">
+                  </div>
+                  </div>
+                  <div class="form-group">
+                    <label >Le nom de domaine de l'application</label>
+                    <input type="text" class="form-control" id="domaine" placeholder="">
+                  </div>
+                  <div class="form-group">
+                    <label >Adresses IP des serveurs:</label>
+                    <input type="text" class="form-control" id="addresseIP" placeholder="">
+                  </div>
+                  <div class="form-group">
+                    <label >Type de connexion au CNI (RNIA,VPN…)</label>
+                    <input type="text" class="form-control" id="typeCnx" placeholder="">
+                  </div>
+            
+            
+            
+                  <h2>3-Type de consommation:</h2>
+                  <div class="form-group">
+                    <label >Le nombre estimé d'appels par an</label>
+                    <input type="text" class="form-control" id="nbrappelan" placeholder="">
+                  </div>
+                  <div class="form-group">
+                    <label >Le nombre estimé d'appels par minute</label>
+                    <input type="text" class="form-control" id="nbrappelmin" placeholder="">
+                  </div>
+                  <div class="form-group">
+                    <label >Avez-vous besoin d'invoquer l'API en masse: </label>
+                    <input type="text" class="form-control" id="cadreAPI" placeholder="">
+                  </div>
+            
+            
+                  <h2>4-Informations sur le vis-à-vis avec le CNI:</h2>
+                  <div class="form-group">
+                    <label >Nom, Prénom et qualité</label>
+                    <input type="text" class="form-control"  placeholder="">
+                  </div>
+                  <div class="form-group">
+                    <label >Adresse mail professionnelle</label>
+                    <input type="text" class="form-control"  placeholder="">
+                  </div>
+                  <div class="form-group">
+                    <label >Numéro du téléphone </label>
+                    <input type="text" class="form-control"  placeholder="">
+                  </div>
+            
+                  <h2>5-Informations sur le responsable:</h2>
+                  <div class="form-group">
+                    <label >Nom, Prénom et qualité</label>
+                    <input type="text" class="form-control"  placeholder="">
+                  </div>
+                  <div class="form-group">
+                    <label >Adresse mail professionnelle</label>
+                    <input type="text" class="form-control"  placeholder="">
+                  </div>
+                  <div class="form-group">
+                    <label >Numéro du téléphone </label>
+                    <input type="text" class="form-control"  placeholder="">
+                  </div>
+                  
+            
+                  
+                  <button type="submit" class="btn btn-primary">Suivant</button>
+                </form>
+              </div>

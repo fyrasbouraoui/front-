@@ -1,0 +1,24 @@
+<!-- prmiere-validation.component.html -->
+<div class='container'>
+  <h2>Shared Data in Table</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Description</th>
+        <th>NomApp</th>
+        <!-- Add more headers if needed -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngIf="selectedData">
+        <td>{{ selectedData.description }}</td>
+        <td>{{ selectedData.nomApp }}</td>
+        <!-- Display additional data if needed -->
+      </tr>
+      <tr *ngIf="!selectedData">
+        <td colspan="2">No data available</td>
+        <!-- Adjust colspan based on the number of columns in your table -->
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,221 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Variables */
+:root {
+    --primary-color: #8b0000;
+    /* Rouge bordeaux */
+    --secondary-color: #ffffff;
+    /* Blanc */
+}
+h2{
+    color: #ffffff;
+}
+body {
+    font-family: sans-serif;
+    font-size: 16px;
+    background-size:auto; /* Pour couvrir toute la page */
+    background-repeat: no-repeat; /* Ne pas répéter l'image */
+    background-position: center; 
+    color: var(--primary-color);
+    background-color: #f1f1f1;
+}
+
+
+
+/* Header */
+header {
+    background-color: var(--primary-color);
+    padding: 10px 0;
+}
+
+/* Conteneur */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    /* Ajouter un peu d'espace intérieur */
+    border-radius: 10px;
+    /* Ajouter des coins arrondis */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* Ajouter une ombre */
+}
+
+/* Liste */
+ul {
+    list-style-type: none;
+    /* Supprimer les puces de la liste */
+    display: flex;
+    /* Utiliser flexbox pour aligner les éléments sur la même ligne */
+    flex-wrap: wrap;
+    /* Permettre le retour à la ligne des éléments */
+    justify-content: center;
+    /* Aligner horizontalement les éléments sur l'axe principal */
+    align-items: center;
+    /* Aligner verticalement les éléments sur l'axe transversal */
+    padding: 0;
+    /* Supprimer le remplissage par défaut */
+}
+
+ul li {
+    width: 200px;
+    /* Définir une largeur pour chaque élément de liste */
+    height: 150px;
+    /* Définir une hauteur pour chaque élément de liste */
+    margin: 10px;
+    /* Ajouter un espace autour de chaque élément de liste */
+    transition: transform 0.3s ease;
+    /* Ajouter une transition fluide */
+    border-radius: 8px;
+    /* Ajouter un rayon de bordure */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Ajouter une ombre douce */
+    overflow: hidden;
+    /* Cacher le débordement du contenu */
+}
+
+ul li:hover {
+    transform: translateY(-5px);
+    /* Animer le déplacement vers le haut au survol */
+}
+
+ul li img {
+    margin-right: 10px;
+    /* Ajouter un espace entre l'image et le titre */
+    max-width: 100px;
+    /* Définir une largeur maximale pour les images */
+}
+
+ul li img:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    /* Augmenter l'ombre au survol */
+}
+
+ul li h3 {
+    margin: 10px 0;
+    /* Ajouter des marges au titre */
+    font-weight: bold;
+    /* Rendre le titre en gras */
+    font-size: 18px;
+    /* Augmenter la taille de la police */
+    color: #ffffff;
+    /* Changer la couleur du texte */
+}
+
+/* Footer */
+footer {
+    background-color: var(--primary-color);
+    padding: 20px 0;
+    text-align: center;
+    color: #fff;
+}
+
+footer p {
+    margin-top: 10px;
+}
+
+/* Logo */
+.logo {
+    /* Chemin de votre image */
+    background-size: contain;
+    /* Ajuster la taille de l'image pour qu'elle soit contenue dans la zone */
+    width: 150px;
+    /* Définir la largeur de l'image */
+    height: auto;
+    /* Ajuster automatiquement la hauteur en fonction de la largeur */
+    font-size: 24px;
+    color: var(--secondary-color);
+    text-decoration: none;
+    display: inline-block;
+    /* Afficher l'élément en tant que bloc */
+    padding-left: 90px;
+    /* Ajouter un espacement à gauche du texte pour laisser de la place à l'image */
+}
+
+/* Navigation */
+nav {
+    float: right;
+}
+
+nav a {
+    margin-right: 10px;
+    color: var(--secondary-color);
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: #ffffff;
+}
+
+/* Hero */
+.hero {
+    background-size: cover;
+    background-position: center;
+    height: 500px;
+}
+
+.hero h1 {
+    font-size: 48px;
+    color: var(--secondary-color);
+    margin-bottom: 10px;
+}
+
+.hero p {
+    font-size: 18px;
+    color: var(--secondary-color);
+    margin-bottom: 20px;
+}
+
+/* Bouton */
+.button {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    padding: 10px 20px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #ad3f3e;
+    /* Rouge bordeaux assombri */
+}
+
+/* Styles pour les ul et li du footer */
+/* Styles pour les ul et li du footer */
+footer ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    /* Changer la direction en ligne */
+    justify-content: center;
+    /* Centrer les éléments horizontalement */
+}
+
+footer ul li {
+    margin-right: 10px;
+    /* Ajouter un espacement entre chaque élément */
+}
+
+footer ul li:last-child {
+    margin-right: 0;
+    /* Supprimer la marge à droite du dernier élément */
+}
+
+footer ul li a {
+    color: #fff;
+    /* Si les éléments li contiennent des liens */
+    text-decoration: none;
+    transition: color 0.3s ease;
+    /* Transition fluide pour la couleur du texte */
+}
+
+footer ul li a:hover {
+    color: #ccc;
+    /* Couleur du texte au survol */
+}
