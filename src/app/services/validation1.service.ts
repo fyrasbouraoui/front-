@@ -5,15 +5,10 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class Validation1Service {
+  private demandeDataSubject = new BehaviorSubject<any>(null);
+  demandeData$ = this.demandeDataSubject.asObservable();
 
-  private selectedDataSubject = new BehaviorSubject<any>(null);
-  selectedData$: Observable<any> = this.selectedDataSubject.asObservable();
-
-  setSelectedData(data: any) {
-    console.log('Data emitted from Validation1Service:', data);
-    this.selectedDataSubject.next(data);
-  }
-  getSelectedData(): Observable<any> {
-    return this.selectedData$;
+  setDemandeData(data: any) {
+    this.demandeDataSubject.next(data);
   }
 }

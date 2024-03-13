@@ -5,6 +5,7 @@ import { ApiService } from '../services/api.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { EditdialogComponent } from '../editdialog/editdialog.component';
 
 @Component({
   selector: 'app-test',
@@ -39,9 +40,23 @@ ngOnInit(): void {
       });}
 
       editRow(row: any) {
-        // Add your edit logic here
-        console.log('Edit row:', row);
+        // Open edit dialogue with the selected row
+        const dialogRef = this._dialog.open(EditdialogComponent, {
+          data: { row: { ...row } }, // Pass a copy of the selected row to prevent changes in the table during editing
+        });
+    
+        dialogRef.afterClosed().subscribe((result) => {
+          if (result) {
+            // Update the row in the data source
+            const index = this.dataSource.data.indexOf(row);
+            this.dataSource.data[index] = result;
+            // Add logic to save the edited data to the backend using your API service
+            // this._apiservice.updateApi(result).subscribe(/* handle success/error */);
+            this.dataSource._updateChangeSubscription(); // Trigger update in the data source
+          }
+        });
       }
+    
     
       deleteRow(row: any) {
         // Add your delete logic here

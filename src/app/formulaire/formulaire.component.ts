@@ -14,7 +14,7 @@ export class FormulaireComponent {
     private _demandeservice:DemandeServiceService)
   {
     this.demandeform = this._fb.group({
-      reference: '',
+      
       description: '',
       nomApp:'',
       hebergeurApp:'',

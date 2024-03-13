@@ -51,11 +51,14 @@
                                   <th mat-header-cell *matHeaderCellDef>NomApp</th>
                                   <td mat-cell *matCellDef="let row">{{ row.nomApp }}</td>
                                 </ng-container>
-                            
+                                <ng-container matColumnDef="status">
+                                  <th mat-header-cell *matHeaderCellDef>Status</th>
+                                  <td mat-cell *matCellDef="let row">{{ row.status }}</td>
+                                </ng-container>
                                 <ng-container matColumnDef="action">
                                   <th mat-header-cell *matHeaderCellDef>Action</th>
                                   <td mat-cell *matCellDef="let row">
-                                    <button mat-icon-button class="iconbutton" (click)="handleCheckIconClick(row)">
+                                    <button mat-icon-button class="iconbutton" (click)="handleCheckIconClick(row.userId, row.structureId, row.profilId, row.demandeId)">
                                       <mat-icon>check</mat-icon>
                                     </button>
                                     <button mat-icon-button class="iconbutton2">

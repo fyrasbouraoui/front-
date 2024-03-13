@@ -11,7 +11,6 @@ import { AcceuilComponent } from './acceuil/acceuil.component';
 import { ProfileComponent } from './profile/profile.component';
 import { GerdemandeComponent } from './gerdemande/gerdemande.component';
 import { ListeuserComponent } from './listeuser/listeuser.component';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
@@ -22,6 +21,12 @@ import { DialogComponentComponent } from './dialog-component/dialog-component.co
 import { HttpClientModule } from '@angular/common/http';
 import {MatTableModule} from '@angular/material/table';
 import { PrmiereValidationComponent } from './prmierevalidation/prmierevalidation.component';
+import { Validation1Service } from './services/validation1.service';
+import { EditdialogComponent } from './editdialog/editdialog.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 @NgModule({
@@ -36,7 +41,8 @@ import { PrmiereValidationComponent } from './prmierevalidation/prmierevalidatio
     ListeuserComponent,
     TestComponent,
     DialogComponentComponent,
-    PrmiereValidationComponent
+    PrmiereValidationComponent,
+    EditdialogComponent
   ],
   imports: [
     BrowserModule,
@@ -50,10 +56,12 @@ import { PrmiereValidationComponent } from './prmierevalidation/prmierevalidatio
     ReactiveFormsModule,
     HttpClientModule,
     MatTableModule,
+    MatFormFieldModule,
+    MatInputModule,
+    BrowserAnimationsModule,
+    MatPaginatorModule
   ],
-  providers: [
-    provideAnimationsAsync()
-  ],
+  providers: [Validation1Service],
   bootstrap: [AppComponent]
 })
 export class AppModule { 
