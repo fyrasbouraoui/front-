@@ -9,6 +9,8 @@ import { TestComponent } from './test/test.component';
 import { GerdemandeComponent } from './gerdemande/gerdemande.component';
 import { ListeuserComponent } from './listeuser/listeuser.component';
 import {  PrmiereValidationComponent } from './prmierevalidation/prmierevalidation.component';
+import { InscriptionComponent } from './inscription/inscription.component';
+import { ConnectionComponent } from './connection/connection.component';
 
 const routes: Routes = [
   { path: 'form', component: FormulaireComponent },
@@ -20,6 +22,9 @@ const routes: Routes = [
   {path: 'demande',component:GerdemandeComponent},
   {path: 'user',component:ListeuserComponent},
   { path: 'pval', component: PrmiereValidationComponent },
+  { path: 'inscrit', component: InscriptionComponent },
+  { path: 'connect', component: ConnectionComponent },
+
 
 ];
 

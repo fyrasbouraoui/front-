@@ -27,6 +27,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { InscriptionComponent } from './inscription/inscription.component';
+import { ConnectionComponent } from './connection/connection.component';
 
 
 @NgModule({
@@ -42,7 +44,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     TestComponent,
     DialogComponentComponent,
     PrmiereValidationComponent,
-    EditdialogComponent
+    EditdialogComponent,
+    InscriptionComponent,
+    ConnectionComponent
   ],
   imports: [
     BrowserModule,
