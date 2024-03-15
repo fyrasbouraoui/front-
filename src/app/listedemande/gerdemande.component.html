@@ -20,6 +20,11 @@
           <a href="user" class="dashboard-nav-item">Liste utilisateur</a>
           <a href="demande" class="dashboard-nav-item active">Liste demande</a>
         </div>
+        <button (click)="toggleSub()" class="dashboard-nav-item active"><i class=""></i> Data Owner </button>
+      <div *ngIf="isSubMenu" id="admin-submenu" class="dashboard-nav-liste">
+        <a href="" class="dashboard-nav-item">1er Validateur</a>
+        <a href="" class="dashboard-nav-item">2eme Validateur</a>
+      </div>
             <a href="profile" class="dashboard-nav-item"><i class="fas fa-user"></i> Profile </a>
             <div class="nav-item-divider"></div>
         </nav>

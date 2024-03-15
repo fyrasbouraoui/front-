@@ -10,4 +10,10 @@ export class ProfileComponent {
   toggleSubMenu() {
     this.isSubMenuVisible = !this.isSubMenuVisible;
   }
-}
+  isSubMenu: boolean = false;
+
+    toggleSub(){
+        this.isSubMenu = !this.isSubMenu;
+
+    }
+  }

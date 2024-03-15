@@ -18,8 +18,13 @@
             <button onclick="toggleSubMenu()" class="dashboard-nav-item active "><i class=""></i> Admin </button>
         <div id="admin-submenu" class="dashboard-nav-liste">
           <a href="user" class="dashboard-nav-item active">Liste utilisateur</a>
-          <a href="demande" class="dashboard-nav-item">Gerer demande</a>
+          <a href="demande" class="dashboard-nav-item">Liste demande</a>
         </div>
+        <button (click)="toggleSub()" class="dashboard-nav-item active"><i class=""></i> Data Owner </button>
+      <div *ngIf="isSubMenu" id="admin-submenu" class="dashboard-nav-liste">
+        <a href="" class="dashboard-nav-item">1er Validateur</a>
+        <a href="" class="dashboard-nav-item">2eme Validateur</a>
+      </div>
             <a href="profile" class="dashboard-nav-item"><i class="fas fa-user"></i> Profile </a>
             <div class="nav-item-divider"></div>
         </nav>
@@ -51,33 +56,31 @@
                                                 <label for="selectAll"></label>
                                             </span>
                                         </th>
-                                        <th>prenom</th>
-                                        <th>Nom</th>
-                                        <th>email</th>
-                                        <th>cin</th>
-                                        <th>action</th>
+                                        <th>Prénom</th>
+                                        <th>Email</th>
+                                        <th>CIN</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                    <tr *ngFor="let user of registeredUsers">
                                         <td>
                                             <span class="custom-checkbox">
-                                                <input type="checkbox" id="checkbox1" name="options[]" value="1">
-                                                <label for="checkbox1"></label>
+                                                <input type="checkbox" id="checkbox{{user.idUser}}" name="options[]" [value]="user.idUser">
+                                                <label for="checkbox{{user.idUser}}"></label>
                                             </span>
                                         </td>
-                                        <td>prenom</td>
-                                        <td>nom</td>
-                                        <td>nom&#64;gmail.com</td>
-                                        <td>123145678</td>
+                                        <td>{{ user.prenom }}</td>
+                                        <td>{{ user.email }}</td>
+                                        <td>{{ user.cin }}</td>
                                         <td>
-                                            <a href="#" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                            <a href="#" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                            <a href="" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                                            <a  class="delete" (click)="deleteUser(user.idUser)"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                                         </td>
                                     </tr>
-                                    
                                 </tbody>
                             </table>
+                            
                             <div class="clearfix">
                                 <div class="hint-text">Page <b>1</b> de <b>25</b> autres</div>
                                 <ul class="pagination">

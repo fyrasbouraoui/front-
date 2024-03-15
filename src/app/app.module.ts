@@ -4,12 +4,12 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormulaireComponent } from './formulaire/formulaire.component';
-import { ListeComponent } from './liste/liste.component';
+import { ListeComponent } from './listeapi/liste.component';
 import { AddComponent } from './add/add.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AcceuilComponent } from './acceuil/acceuil.component';
 import { ProfileComponent } from './profile/profile.component';
-import { GerdemandeComponent } from './gerdemande/gerdemande.component';
+import { GerdemandeComponent } from './listedemande/gerdemande.component';
 import { ListeuserComponent } from './listeuser/listeuser.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
@@ -17,18 +17,19 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
 import { TestComponent } from './test/test.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { DialogComponentComponent } from './dialog-component/dialog-component.component';
+import { DialogComponentComponent } from './Ajoutapi/dialog-component.component';
 import { HttpClientModule } from '@angular/common/http';
 import {MatTableModule} from '@angular/material/table';
 import { PrmiereValidationComponent } from './prmierevalidation/prmierevalidation.component';
 import { Validation1Service } from './services/validation1.service';
-import { EditdialogComponent } from './editdialog/editdialog.component';
+import { EditdialogComponent } from './editapi/editdialog.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { InscriptionComponent } from './inscription/inscription.component';
 import { ConnectionComponent } from './connection/connection.component';
+import { FormsModule } from '@angular/forms'; // Import FormsModule
 
 
 @NgModule({
@@ -46,8 +47,7 @@ import { ConnectionComponent } from './connection/connection.component';
     PrmiereValidationComponent,
     EditdialogComponent,
     InscriptionComponent,
-    ConnectionComponent
-  ],
+    ConnectionComponent  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -63,7 +63,8 @@ import { ConnectionComponent } from './connection/connection.component';
     MatFormFieldModule,
     MatInputModule,
     BrowserAnimationsModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    FormsModule
   ],
   providers: [Validation1Service],
   bootstrap: [AppComponent]

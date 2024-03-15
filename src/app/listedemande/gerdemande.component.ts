@@ -4,7 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { StatusService } from '../services/status.service'; // Import StatusService
-import { Status } from '../services/status.model'; // Assuming you have a Status model
+import { Status } from '../interface/status.model'; // Assuming you have a Status model
 
 @Component({
   selector: 'app-gerdemande',
@@ -12,7 +12,7 @@ import { Status } from '../services/status.model'; // Assuming you have a Status
   styleUrls: ['./gerdemande.component.scss'],
 })
 export class GerdemandeComponent implements OnInit {
-  displayedColumns: string[] = ['description', 'nomApp', 'status', 'action'];
+  displayedColumns: string[] = ['description', 'nomApp',  'action'];
   dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -58,4 +58,10 @@ export class GerdemandeComponent implements OnInit {
         }
       );
   }
+  isSubMenu: boolean = false;
+
+    toggleSub(){
+        this.isSubMenu = !this.isSubMenu;
+
+    }
 }

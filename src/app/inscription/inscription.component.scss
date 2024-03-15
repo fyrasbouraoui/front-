@@ -15,10 +15,14 @@ body {
 
 .container {
     width: 400px;
-    padding: 40px;
+    padding: 20px;
     background-color: #fff;
-    box-shadow: 0 5px 10px #fff;
     border-radius: 4px;
+    margin: auto;
+    border-radius: 4px;
+    margin-top: 50px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
 }
 
 .container h1 {

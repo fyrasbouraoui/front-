@@ -49,15 +49,17 @@ section header ul li a:hover {
     color: #701518;
 }
 
-section header p {
+header .login-link {
     cursor: pointer;
     padding: 10px 25px;
     border: 1px solid #701518;
     border-radius: 30px;
     transition: 0.3s;
+    color: #701518;
+    text-decoration: none; /* Ensure no underline for the link */
 }
 
-section header p:hover {
+header .login-link:hover {
     color: white;
     background: #701518;
 }

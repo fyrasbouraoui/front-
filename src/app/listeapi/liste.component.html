@@ -2,13 +2,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
 
-<script>
-    // JavaScript for showing and hiding submenus
-    function toggleSubMenu() {
-      var submenu = document.getElementById("admin-submenu");
-      submenu.classList.toggle("show");
-    }
-  </script>
+
 <div class='dashboard'>
     <div class="dashboard-nav">
         <header>
@@ -25,6 +19,11 @@
       <div *ngIf="isSubMenuVisible" id="admin-submenu" class="dashboard-nav-liste">
         <a href="user" class="dashboard-nav-item">Liste utilisateur</a>
         <a href="demande" class="dashboard-nav-item">Liste demande</a>
+      </div>
+      <button (click)="toggleSub()" class="dashboard-nav-item active"><i class=""></i> Data Owner </button>
+      <div *ngIf="isSubMenu" id="admin-submenu" class="dashboard-nav-liste">
+        <a href="" class="dashboard-nav-item">1er Validateur</a>
+        <a href="" class="dashboard-nav-item">2eme Validateur</a>
       </div>
             <a href="profile" class="dashboard-nav-item"><i class="fas fa-user"></i> Profile </a>
             <div class="nav-item-divider"></div>
@@ -50,49 +49,48 @@
                             </div>
                             <table class="table table-striped table-hover">
                                 <thead>
-                                    <tr>
-                                        <th>
-                                            <span class="custom-checkbox">
-                                                <input type="checkbox" id="selectAll">
-                                                <label for="selectAll"></label>
-                                            </span>
-                                        </th>
-                                        <th>id</th>
-                                        <th>Nom</th>
-                                        <th>code</th>
-                                        <th>description</th>
-                                        <th>input</th>
-                                        <th>output</th>
-                                        <th>cadre d'utilisation</th>
-                                        <th>mode</th>
-                                        <th>action</th>
-                                    </tr>
+                                  <tr>
+                                    <th>
+                                      <span class="custom-checkbox">
+                                        <input type="checkbox" id="selectAll">
+                                        <label for="selectAll"></label>
+                                      </span>
+                                    </th>
+                                    <th>id</th>
+                                    <th>Nom</th>
+                                    <th>code</th>
+                                    <th>description</th>
+                                    <th>input</th>
+                                    <th>output</th>
+                                    <th>cadre d'utilisation</th>
+                                    <th>mode</th>
+                                    <th>action</th>
+                                  </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>
-                                            <span class="custom-checkbox">
-                                                <input type="checkbox" id="checkbox1" name="options[]" value="1">
-                                                <label for="checkbox1"></label>
-                                            </span>
-                                        </td>
-                                        <td>1</td>
-                                        <td>Api exemple</td>
-                                        <td>API123</td>
-                                        <td>exemple d'api</td>
-                                        <td>Entrée</td>
-                                        <td>Sortie</td>
-                                        <td>Cadre</td>
-                                        <td>mode</td>
-
-                                        <td>
-                                            <a href="#" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                            <a href="#" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                                        </td>
-                                    </tr>
-                                    
+                                  <tr *ngFor="let row of dataSource.data">
+                                    <td>
+                                      <span class="custom-checkbox">
+                                        <input type="checkbox" id="checkbox{{row.idApi}}" name="options[]" [value]="row.idApi">
+                                        <label for="checkbox{{row.idApi}}"></label>
+                                      </span>
+                                    </td>
+                                    <td>{{ row.idApi }}</td>
+                                    <td>{{ row.nom }}</td>
+                                    <td>{{ row.code }}</td>
+                                    <td>{{ row.description }}</td>
+                                    <td>{{ row.input }}</td>
+                                    <td>{{ row.output }}</td>
+                                    <td>{{ row.cadreUtilisation }}</td>
+                                    <td>{{ row.mode }}</td>
+                                    <td>
+                                      <a  class="edit" (click)="editRow(row)"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                                      <a  class="delete" (click)="deleteRow(row)"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                    </td>
+                                  </tr>
                                 </tbody>
-                            </table>
+                              </table>
+                              
                             <div class="clearfix">
                                 <div class="hint-text">Page <b>1</b> de <b>25</b> autres</div>
                                 <ul class="pagination">

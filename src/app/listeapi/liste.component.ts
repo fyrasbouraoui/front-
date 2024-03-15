@@ -6,14 +6,23 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { EditdialogComponent } from '../editapi/editdialog.component';
-
 @Component({
-  selector: 'app-test',
-  templateUrl: './test.component.html',
-  styleUrl: './test.component.scss'
+  selector: 'app-liste',
+  templateUrl: './liste.component.html',
+  styleUrl: './liste.component.scss'
 })
-export class TestComponent implements OnInit{
-  displayedColumns: string[] = ['idApi', 'nom', 'code', 'description', 'input', 'output', 'cadreUtilisation','action']
+export class ListeComponent {
+  isSubMenuVisible: boolean = false;
+  toggleSubMenu() {
+    this.isSubMenuVisible = !this.isSubMenuVisible;
+  }
+  isSubMenu: boolean = false;
+
+    toggleSub(){
+        this.isSubMenu = !this.isSubMenu;
+
+    }
+    displayedColumns: string[] = ['idApi', 'nom', 'code', 'description', 'input', 'output', 'cadreUtilisation','action']
   dataSource!: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -62,11 +71,4 @@ ngOnInit(): void {
         // Add your delete logic here
         console.log('Delete row:', row);
       }
-
 }
-
-
-
-
-
-
