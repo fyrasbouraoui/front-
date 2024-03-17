@@ -7,6 +7,8 @@ import { Observable } from 'rxjs';
 })
 
 export class DemandeServiceService {
+  private baseUrl = 'http://localhost:8080'; // Adjust the base URL as needed
+
   constructor(private _http: HttpClient) {}
   
 
@@ -19,6 +21,16 @@ export class DemandeServiceService {
   validateDemande(userId: number, structureId: number, profilId: number, demandeId: number): Observable<any> {
     const url = `http://localhost:8080/demandes/validation?userId=${userId}&structureId=${structureId}&profilId=${profilId}&Idemande=${demandeId}`;
     return this._http.post(url, {});
+  }
+  createDemande(demande: any, structureId: number, userId: number, profilId: number): Observable<any> {
+    const url = `${this.baseUrl}/demandes`;
+    return this._http.post(url, demande, {
+      params: {
+        structureId: structureId.toString(),
+        userId: userId.toString(),
+        profilId: profilId.toString()
+      }
+    });
   }
 }
 

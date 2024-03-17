@@ -8,6 +8,9 @@ import { User } from '../interface/user.model';
 })
 export class UserService {
   private baseUrl = 'http://localhost:8080/api/users';
+  private idUser: number | null = null;
+  private profilId: number | null = null;
+  private structureId: number | null = null;
 
   constructor(private http: HttpClient) {}
 
@@ -20,9 +23,9 @@ export class UserService {
   }
 
   createUser(user: User): Observable<User> {
-    return this.http.post<User>(this.baseUrl, user);
+    return this.http.post<User>(`${this.baseUrl}/register`, user);
   }
-
+  
   updateUser(id: number, user: User): Observable<User> {
     return this.http.put<User>(`${this.baseUrl}/${id}`, user);
   }
@@ -31,6 +34,18 @@ export class UserService {
     return this.http.delete<void>(`${this.baseUrl}/${idUser}`);
   }
   authenticate(email: string, password: string): Observable<User> {
-    return this.http.post<User>(`${this.baseUrl}/authenticate`, { email, password });
+    return this.http.post<User>(`${this.baseUrl}/login`, { email, password });
+  }
+  logout(): Observable<string> {
+    return this.http.delete<string>(`${this.baseUrl}/logout`);
+  }
+  setUserInfo(userId: number, profilId: number, structureId: number): void {
+    this.idUser = userId;
+    this.profilId = profilId;
+    this.structureId = structureId;
+  }
+
+  getUserInfo(): { userId: number | null, profilId: number | null, structureId: number | null } {
+    return { userId: this.idUser ?? null, profilId: this.profilId ?? null, structureId: this.structureId ?? null };
   }
 }

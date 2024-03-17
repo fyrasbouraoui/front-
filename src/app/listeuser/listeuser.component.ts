@@ -24,7 +24,7 @@ export class ListeuserComponent implements OnInit {
       next: (users: User[]) => {
         // Assign a unique identifier to each user
         console.log(users);
-        this.registeredUsers = users.map((user, index) => ({ ...user, id: index + 1, profileId: user.profileId }));
+        this.registeredUsers = users.map((user, index) => ({ ...user, id: index + 1 }));
       },
       error: (err: any) => {
         console.error('Error fetching users:', err);

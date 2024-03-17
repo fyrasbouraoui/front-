@@ -8,4 +8,5 @@ export interface User {
   password: string;
   grade: string;
   profileId: number;
+  structureId:number;
 }
