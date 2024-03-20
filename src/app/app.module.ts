@@ -29,7 +29,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { InscriptionComponent } from './inscription/inscription.component';
 import { ConnectionComponent } from './connection/connection.component';
-import { FormsModule } from '@angular/forms'; // Import FormsModule
+import { FormsModule } from '@angular/forms';
+import { Validation1Component } from './validation1/validation1.component'; // Import FormsModule
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { FormsModule } from '@angular/forms'; // Import FormsModule
     PrmiereValidationComponent,
     EditdialogComponent,
     InscriptionComponent,
-    ConnectionComponent  ],
+    ConnectionComponent,
+    Validation1Component  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

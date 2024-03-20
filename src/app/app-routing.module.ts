@@ -11,6 +11,7 @@ import { ListeuserComponent } from './listeuser/listeuser.component';
 import {  PrmiereValidationComponent } from './prmierevalidation/prmierevalidation.component';
 import { InscriptionComponent } from './inscription/inscription.component';
 import { ConnectionComponent } from './connection/connection.component';
+import { Validation1Component } from './validation1/validation1.component';
 
 const routes: Routes = [
   { path: 'form', component: FormulaireComponent },
@@ -24,6 +25,8 @@ const routes: Routes = [
   { path: 'pval', component: PrmiereValidationComponent },
   { path: 'inscrit', component: InscriptionComponent },
   { path: 'connect', component: ConnectionComponent },
+  { path: 'validation1', component: Validation1Component },
+
 
 
 ];

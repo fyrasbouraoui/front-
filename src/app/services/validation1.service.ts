@@ -5,10 +5,12 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class Validation1Service {
-  private demandeDataSubject = new BehaviorSubject<any>(null);
-  demandeData$ = this.demandeDataSubject.asObservable();
+  private rowDataSubject = new BehaviorSubject<any>(null);
+  rowData$ = this.rowDataSubject.asObservable();
 
-  setDemandeData(data: any) {
-    this.demandeDataSubject.next(data);
+  constructor() {}
+
+  sendRowData(rowData: any) {
+    this.rowDataSubject.next(rowData);
   }
 }

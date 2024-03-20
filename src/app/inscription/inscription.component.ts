@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators  } from '@angular/forms';
 import { UserService } from '../services/user.service';
+import { Router } from '@angular/router'; 
 
 @Component({
   selector: 'app-inscription',
@@ -13,14 +14,15 @@ export class InscriptionComponent {
 
   constructor(
     private fb: FormBuilder,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router 
   ) {
     this.userForm = this.fb.group({
-      prenom: '',
-      cin: '',
-      email: '',
-      password: '',
-      mobile: ''
+      prenom: ['', Validators.required], 
+      cin: ['', Validators.required],    
+      email: ['', [Validators.required, Validators.email]], 
+      password: ['', [Validators.required, Validators.minLength(6)]], 
+      mobile: [''] 
     });
   }
 
@@ -30,6 +32,7 @@ export class InscriptionComponent {
         next: () => {
           alert('User registered successfully');
           this.userForm.reset();
+          this.router.navigate(['/connect']);
         },
         error: (err: any) => {
           console.error('User registration failed:', err);

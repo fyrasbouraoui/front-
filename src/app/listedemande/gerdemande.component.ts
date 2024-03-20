@@ -5,6 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { StatusService } from '../services/status.service'; // Import StatusService
 import { Status } from '../interface/status.model'; // Assuming you have a Status model
+import { Validation1Service } from '../services/validation1.service';
 
 @Component({
   selector: 'app-gerdemande',
@@ -12,7 +13,7 @@ import { Status } from '../interface/status.model'; // Assuming you have a Statu
   styleUrls: ['./gerdemande.component.scss'],
 })
 export class GerdemandeComponent implements OnInit {
-  displayedColumns: string[] = ['description', 'nomApp',  'action'];
+  displayedColumns: string[] = ['description', 'nomApp','status' , 'action'];
   dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -20,7 +21,8 @@ export class GerdemandeComponent implements OnInit {
 
   constructor(
     private _demandeservice: DemandeServiceService,
-    private statusService: StatusService // Inject StatusService
+    private statusService: StatusService, // Inject StatusService
+    private validation1:Validation1Service
   ) {}
 
   ngOnInit(): void {
@@ -63,5 +65,27 @@ export class GerdemandeComponent implements OnInit {
     toggleSub(){
         this.isSubMenu = !this.isSubMenu;
 
+    }
+    handleDeleteIconClick(id: number): void {
+      if (confirm('Are you sure you want to delete this demande?')) {
+        this._demandeservice.deleteDemande(id)
+          .subscribe(
+            response => {
+              console.log('Deletion successful:', response);
+              // Reload the demande list or update the table
+              this.getDemande();
+              // Optionally, display a success message
+            },
+            error => {
+              console.error('Deletion failed:', error);
+              // Optionally, display an error message
+            }
+          );
+      }
+    }
+    moveRow(rowData: any) {
+      console.log("Moving row:", rowData);
+
+      this.validation1.sendRowData(rowData);
     }
 }

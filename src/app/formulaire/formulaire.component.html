@@ -22,7 +22,7 @@
       </div>
       <button (click)="toggleSub()" class="dashboard-nav-item active"><i class=""></i> Data Owner </button>
       <div *ngIf="isSubMenu" id="admin-submenu" class="dashboard-nav-liste">
-        <a href="" class="dashboard-nav-item">1er Validateur</a>
+        <a href="validation1" class="dashboard-nav-item">1er Validateur</a>
         <a href="" class="dashboard-nav-item">2eme Validateur</a>
       </div>
           <a href="profile" class="dashboard-nav-item"><i class="fas fa-user"></i> Profile </a>
@@ -40,15 +40,15 @@
                   
                   <div class="form-group">
                     <label for="etablissementDemandeur">Etablissement demandeur du web service:</label>
-                    <input type="text" class="form-control"  placeholder="" required>
+                    <input type="text" class="form-control"   placeholder="" required>
                   </div>
                   <div class="form-group">
                     <label for="etablissementFournisseur">Etablissement fournisseur du web service:</label>
-                    <input type="text" class="form-control" id="etablissementFournisseur" placeholder="" required>
+                    <input type="text" class="form-control"  placeholder="" required>
                   </div>
                   <div class="form-group">
                     <label for="etablissementProprietaire">Etablissement propriétaire des données:</label>
-                    <input type="text" class="form-control" id="etablissementProprietaire" placeholder="" required>
+                    <input type="text" class="form-control"  placeholder="" required>
                   </div>
             
             
@@ -63,19 +63,19 @@
                   </div>
                   <div class="form-group">
                     <label for="cadreAPI">Le cadre d'utilisation:</label>
-                    <input type="text" class="form-control" id="cadreAPI" placeholder="" required>
+                    <input type="text" class="form-control"  placeholder="" required>
                   </div>
                   <div class="form-group">
                     <label for="donneesEntree">Donnees d'entree:</label>
-                    <input type="text" class="form-control" id="donneesEntree" placeholder="" required>
+                    <input type="text" class="form-control"  placeholder="" required>
                   </div>
                   <div class="form-group">
                     <label for="donneedeSortie">Donnees de Sortie:</label>
-                    <input type="text" class="form-control" id="donneesEntree" placeholder="" required>
+                    <input type="text" class="form-control" placeholder="" required>
                   </div>
                   <div class="form-group">
                     <label for="impact">L'impact Attendu:</label>
-                    <textarea class="form-control" id="impact" rows="3"></textarea>
+                    <textarea class="form-control"  rows="3"></textarea>
                   </div>
             
             
@@ -86,35 +86,35 @@
                     <input type="text" class="form-control"  placeholder="" required>
                   </div>
                   <div class="form-group">
-                    <label >Hébergeur situé en Tunisie </label><div class="checkbox-container">
+                    <label >Hébergeur situé en Tunisie </label><div class="checkbox-container" >
                       <label for="oui">Oui</label>
-                      <input type="checkbox" id="oui">
+                      <input type="checkbox" id="oui"  formControlName="paysHebergeur">
                       <label for="non">Non</label>
-                      <input type="checkbox" id="non">
+                      <input type="checkbox" id="non" formControlName="paysHebergeur">
                   </div>
                     <textarea class="form-control" id="situé" rows="3" placeholder="Si non, veuillez spécifier le pays."></textarea>
                        
                   </div>
                   <div class="form-group">
-                    <label >Application publié sur Internet</label>
-                    <div class="checkbox-container">
-                      <label for="oui">Oui</label>
-                      <input type="checkbox" id="oui">
-                      <label for="non">Non</label>
-                      <input type="checkbox" id="non">
-                  </div>
+                    <label>Application publié sur Internet</label>
+                    <div class="checkbox-container" >
+                        <label for="oui">Oui</label>
+                        <input type="checkbox" id="oui" >
+                        <label for="non">Non</label>
+                        <input type="checkbox" id="non" >
+                    </div>
                   </div>
                   <div class="form-group">
                     <label >Le nom de domaine de l'application</label>
-                    <input type="text" class="form-control" id="domaine" placeholder="">
+                    <input type="text" class="form-control" formControlName="nomDomaineApp" placeholder="">
                   </div>
                   <div class="form-group">
                     <label >Adresses IP des serveurs:</label>
-                    <input type="text" class="form-control" id="addresseIP" placeholder="">
+                    <input type="text" class="form-control" formControlName="adresseIpApp" placeholder="">
                   </div>
                   <div class="form-group">
                     <label >Type de connexion au CNI (RNIA,VPN…)</label>
-                    <input type="text" class="form-control" id="typeCnx" placeholder="">
+                    <input type="text" class="form-control" formControlName="typeConnexion" placeholder="">
                   </div>
             
             
@@ -122,15 +122,15 @@
                   <h2>3-Type de consommation:</h2>
                   <div class="form-group">
                     <label >Le nombre estimé d'appels par an</label>
-                    <input type="text" class="form-control" id="nbrappelan" placeholder="">
+                    <input type="text" class="form-control" formControlName="nombreAppelAn" placeholder="">
                   </div>
                   <div class="form-group">
                     <label >Le nombre estimé d'appels par minute</label>
-                    <input type="text" class="form-control" id="nbrappelmin" placeholder="">
+                    <input type="text" class="form-control" formControlName="nombreAppelMin" placeholder="">
                   </div>
                   <div class="form-group">
                     <label >Avez-vous besoin d'invoquer l'API en masse: </label>
-                    <input type="text" class="form-control" id="cadreAPI" placeholder="">
+                    <input type="text" class="form-control"  placeholder="">
                   </div>
             
             
@@ -155,7 +155,7 @@
                   </div>
                   <div class="form-group">
                     <label >Adresse mail professionnelle</label>
-                    <input type="text" class="form-control"  placeholder="">
+                    <input type="text" class="form-control" placeholder="">
                   </div>
                   <div class="form-group">
                     <label >Numéro du téléphone </label>

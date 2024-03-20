@@ -1,5 +1,5 @@
 export interface Demande {
-    id: number;
+    idDemande: number;
     // Ajoutez ici les autres propriétés de la demande en fonction de votre modèle
     nomApp: string;
     hebergeurApp: string;

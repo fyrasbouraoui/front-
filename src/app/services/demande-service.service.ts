@@ -32,6 +32,9 @@ export class DemandeServiceService {
       }
     });
   }
+  deleteDemande(id: number): Observable<any> {
+    return this._http.delete(`${this.baseUrl}/demandes/${id}`);
+  }
 }
 
 
