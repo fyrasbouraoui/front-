@@ -9,9 +9,9 @@ import { TestComponent } from './test/test.component';
 import { GerdemandeComponent } from './listedemande/gerdemande.component';
 import { ListeuserComponent } from './listeuser/listeuser.component';
 import {  PrmiereValidationComponent } from './prmierevalidation/prmierevalidation.component';
-import { InscriptionComponent } from './inscription/inscription.component';
 import { ConnectionComponent } from './connection/connection.component';
 import { Validation1Component } from './validation1/validation1.component';
+import { InscriptionComponent } from './inscription/inscription.component';
 
 const routes: Routes = [
   { path: 'form', component: FormulaireComponent },

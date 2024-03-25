@@ -43,7 +43,7 @@
                                         <h2>Liste <b>Utilisateur</b></h2>
                                     </div>
                                     <div class="col-sm-6">
-                                        <a href="" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Ajouter </span></a>
+                                        <button type="button" class="btn btn-primary" (click)="openAddUserModal()">Ajouter</button>
                                     </div>
                                 </div>
                             </div>
@@ -63,7 +63,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let user of registeredUsers">
+                                    <tr *ngFor="let user of registeredUsers; let i = index" [attr.id]="'user-row-' + i">
                                         <td>
                                             <span class="custom-checkbox">
                                                 <input type="checkbox" id="checkbox{{user.idUser}}" name="options[]" [value]="user.idUser">
@@ -74,12 +74,21 @@
                                         <td>{{ user.email }}</td>
                                         <td>{{ user.cin }}</td>
                                         <td>
-                                            <a href="" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                            <a  class="delete" (click)="deleteUser(user.idUser)"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                            <a class="edit" (click)="openUpdateUserDialog(user)"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                                            <a class="delete" (click)="deleteUser(user.idUser!)"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                            <button class="details-button" (click)="showDetails(user, i)">Details</button>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
+                            <div *ngIf="selectedUser" class="details-section">
+                                <p><strong>Prenom:</strong> {{ selectedUser.prenom }}</p>
+                                <p><strong>Email:</strong> {{ selectedUser.email }}</p>
+                                <p><strong>CIN:</strong> {{ selectedUser.cin }}</p>
+                                <p><strong>Mobile:</strong> {{ selectedUser.mobile }}</p>
+                                <p><strong>Mot de passe:</strong> {{ selectedUser.password }}</p>
+                            </div>
+                            
                             
                             <div class="clearfix">
                                 <div class="hint-text">Page <b>1</b> de <b>25</b> autres</div>

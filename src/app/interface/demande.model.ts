@@ -1,5 +1,16 @@
+import { Profil } from "./profil.model";
+import { Status } from "./status.model";
+import { Structure } from "./structure.model";
+import { TraceDemande } from "./trace.model";
+import { User } from "./user.model";
+
 export interface Demande {
-    idDemande: number;
+    idDemande?: number;
+    user?: User;
+    structure?: Structure;
+    profil?: Profil;
+    status?: Status[];
+    traces?: TraceDemande[];
     reference: number;
     description: string;
     nomApp: string;
@@ -16,9 +27,4 @@ export interface Demande {
     raisonInMasse: string;
     dateCreation: Date;
     dateModification: Date;
-    user: any; // Assuming User interface is defined
-    structure: any; // Assuming Structure interface is defined
-    profil: any; // Assuming Profil interface is defined
-    status: any[]; // Assuming Status interface is defined as an array
-    traces: any[]; // Assuming TraceDemande interface is defined as an array
   }

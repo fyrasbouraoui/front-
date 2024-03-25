@@ -556,3 +556,24 @@ table.table .avatar {
 }	
 
 
+/** detail css **/
+.details-section {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.details-section h2 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.details-section p {
+    margin-bottom: 5px;
+}
+
+.details-section strong {
+    font-weight: bold;
+    margin-right: 5px;
+}

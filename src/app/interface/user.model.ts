@@ -1,5 +1,10 @@
+import { Profil } from "./profil.model";
+import { Structure } from "./structure.model";
+
 export interface User {
   idUser: number;
+  structure?: Structure;
+  profil?: Profil;
   cin: string;
   nom: string;
   prenom: string;
@@ -7,6 +12,5 @@ export interface User {
   mobile: string;
   password: string;
   grade: string;
-  profileId: number;
-  structureId:number;
+  token?: string;
 }

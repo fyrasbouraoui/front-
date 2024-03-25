@@ -41,22 +41,18 @@ export class FormulaireComponent {
   FormSubmit() {
     if (this.demandeform.valid) {
       // Get the user information from the service
-      
       const userInfo = this.userService.getUserInfo() as { userId: number, profilId: number, structureId: number };
-    
-      // Extract the userId, profilId, and structureId from the user information
-      const { userId, profilId, structureId } = userInfo;
-    
+  
       // Create an object containing the demand data along with the user information
       const demandData = {
         ...this.demandeform.value,
-        userId: userId,
-        profilId: profilId, // Changed from profileId to profilId
-        structureId: structureId
+        userId: userInfo.userId,
+        profilId: userInfo.profilId,
+        structureId: userInfo.structureId
       };
-    
+  
       // Make the HTTP request to create the demand with the user information
-      this._demandeservice.createDemande(this.demandeform.value, structureId, userId, profilId).subscribe({
+      this._demandeservice.createDemande(demandData, userInfo.structureId, userInfo.userId, userInfo.profilId).subscribe({
         next: (val: any) => {
           alert('Ajouter avec succès');
         },
@@ -66,6 +62,7 @@ export class FormulaireComponent {
       });
     }
   }
+  
 
   toggleSubMenu() {
     this.isSubMenuVisible = !this.isSubMenuVisible;

@@ -27,11 +27,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { InscriptionComponent } from './inscription/inscription.component';
 import { ConnectionComponent } from './connection/connection.component';
 import { FormsModule } from '@angular/forms';
-import { Validation1Component } from './validation1/validation1.component'; // Import FormsModule
-
+import { Validation1Component } from './validation1/validation1.component';
+import { UpdateUserDialogComponent } from './update-user-dialog/update-user-dialog.component'; // Import FormsModule
+import { InscriptionComponent } from './inscription/inscription.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { Validation1Component } from './validation1/validation1.component'; // I
     EditdialogComponent,
     InscriptionComponent,
     ConnectionComponent,
-    Validation1Component  ],
+    Validation1Component,
+    UpdateUserDialogComponent  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -66,7 +68,8 @@ import { Validation1Component } from './validation1/validation1.component'; // I
     MatInputModule,
     BrowserAnimationsModule,
     MatPaginatorModule,
-    FormsModule
+    FormsModule,
+    RouterModule.forRoot([])
   ],
   providers: [Validation1Service],
   bootstrap: [AppComponent]

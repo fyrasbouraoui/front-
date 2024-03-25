@@ -1,8 +1,10 @@
+import { Demande } from "./demande.model";
+
+// status.model.ts
 export interface Status {
-    id: number;
-    codeStatus: string;
-    nomStatus: string;
-    description: string;
-    // Add any other properties as needed
-  }
-  
+  id?: number;
+  demande?: Demande;
+  codeStatus: number;
+  nomStatus: string;
+  description: string;
+}

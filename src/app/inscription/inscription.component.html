@@ -1,5 +1,4 @@
 <div class="container">
-  <h1>Inscription</h1>
   <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="first-name">Entrez votre Prenom</label>
@@ -23,8 +22,11 @@
       <input type="tel" id="mobile-number" placeholder="Votre numero mobile" formControlName="mobile">
     </div>
     <div class="form-group">
-      <button type="submit" [disabled]="!userForm.valid">Inscrivez-vous</button>
+      <label for="profil-name">Entrez votre Nom de Profil</label>
+      <input type="text" id="profil-name" placeholder="Votre nom de profil" formControlName="nomProfil">
+    </div>
+    <div class="form-group">
+      <button type="submit" [disabled]="!userForm.valid">Ajouter</button>
     </div>
   </form>
-  <p class="sign-in"> <a href="connect">Avez-vous déjà un compte ?</a></p>
 </div>
