@@ -55,6 +55,9 @@ export class DemandeServiceService {
   updateAndValidateDemand(id: number, demande: any): Observable<any> {
     return this._http.put<any>(`${this.baseUrl}/${id}/validation`, demande);
   }
+  getDemandesByStatus(nomStatus: string): Observable<Demande[]> {
+    return this._http.get<Demande[]>(`${this.baseUrl}/status?nomStatus=${nomStatus}`);
+  }
 }
 
 
