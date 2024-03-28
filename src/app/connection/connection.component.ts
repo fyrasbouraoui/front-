@@ -17,12 +17,9 @@ export class ConnectionComponent {
     this.userService.authenticate(this.email, this.password).subscribe({
       next: (response: any) => {
         alert('Login successful');
-        // Assuming the backend response contains user ID, profile ID, and structure ID
-        this.userService.setUserInfo(response.userId, response.profileId, response.structureId);
-        localStorage.setItem('currentUser', JSON.stringify(response));
-        const userInfo = this.userService.getUserInfo();
-        console.log('User information saved:', userInfo);
-        this.router.navigate(['/form']); // Navigate to the form page
+        localStorage.setItem('currentUser', JSON.stringify(response)); // Store user info in local storage
+        console.log('User information saved:', response);
+        this.router.navigate(['/demande']); // Navigate to the user page
       },
       error: (err: any) => {
         console.error('Login failed:', err);

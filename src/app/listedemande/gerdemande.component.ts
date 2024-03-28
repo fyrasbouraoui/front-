@@ -6,6 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { StatusService } from '../services/status.service';
 import { Status } from '../interface/status.model';
 import { Validation1Service } from '../services/validation1.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-gerdemande',
@@ -15,36 +16,40 @@ import { Validation1Service } from '../services/validation1.service';
 export class GerdemandeComponent implements OnInit {
   displayedColumns: string[] = ['description', 'nomApp', 'status', 'action'];
   dataSource!: MatTableDataSource<any>;
-
+  validationMessage: string = '';
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
     private _demandeservice: DemandeServiceService,
     private statusService: StatusService,
-    private validation1: Validation1Service
+    private validation1: Validation1Service,
+    private userService: UserService // Inject the UserService
+
   ) {}
 
   ngOnInit(): void {
-    this.getDemande();
-  }
+    this.getAllDemandes();  }
 
-  getDemande() {
-    this._demandeservice.getDemande().subscribe({
-      next: (res: any) => {
-        console.log(res); // Log the received data
-
-        // Assign unique identifiers to each row
-        res.forEach((item: any, index: number) => {
-          item.id = index + 1; // Assuming index + 1 as the unique identifier
-        });
-
-        // Fetch status data for each demande
-        this.fetchStatusForDemandes(res);
-      },
-      error: console.error,
-    });
-  }
+    getAllDemandes() {
+      this._demandeservice.getAllDemandes().subscribe({ // Use getAllDemandes
+        next: (res: any[]) => { // Use array type any[]
+          console.log(res); // Log the received data
+          
+  
+          // Assign unique identifiers to each row
+          res.forEach((item: any, index: number) => {
+            item.id = index + 1; // Assuming index + 1 as the unique identifier
+          });
+  
+          // Fetch status data for each demande
+          this.fetchStatusForDemandes(res);
+        },
+        error: console.error,
+      });
+    }
+    
+  
 
   fetchStatusForDemandes(demandes: any[]): void {
     demandes.forEach((demande: any) => {
@@ -67,19 +72,7 @@ export class GerdemandeComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  handleCheckIconClick(userId: number, structureId: number, profilId: number, demandeId: number): void {
-    this._demandeservice.validateDemande(userId, structureId, profilId, demandeId)
-      .subscribe(
-        response => {
-          console.log('Validation successful:', response);
-          // Handle successful validation (e.g., display a success message)
-        },
-        error => {
-          console.error('Validation failed:', error);
-          // Handle validation failure (e.g., display an error message)
-        }
-      );
-  }
+ 
 
   toggleSub(): void {
     this.isSubMenu = !this.isSubMenu;
@@ -92,7 +85,7 @@ export class GerdemandeComponent implements OnInit {
           response => {
             console.log('Deletion successful:', response);
             // Reload the demande list or update the table
-            this.getDemande();
+            this.getAllDemandes();
             // Optionally, display a success message
           },
           error => {
@@ -102,11 +95,35 @@ export class GerdemandeComponent implements OnInit {
         );
     }
   }
+  handleCheckIconClick(id: number): void {
+    const userInfo = this.userService.getUserInfo();
 
-  moveRow(rowData: any) {
-    console.log("Moving row:", rowData);
-    this.validation1.sendRowData(rowData);
-  }
+    if (userInfo !== null) {
+        const userId = userInfo.idUser;
+        console.log('Retrieved userId:', userId);
+
+        if (!userId) {
+            console.error('Invalid userId:', userId);
+            return;
+        }
+
+        this._demandeservice.validateDemande(id, userId).subscribe(
+            (response: string) => {
+                console.log('Validation success:', response);
+                this.validationMessage = response;
+            },
+            (error: any) => {
+                console.error('Validation error:', error);
+            }
+        );
+    } else {
+        console.error('User info is null.');
+    }
+}
+
+
+
+ 
 
   isSubMenu: boolean = false;
 }

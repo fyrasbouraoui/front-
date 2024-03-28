@@ -13,4 +13,7 @@ export interface User {
   password: string;
   grade: string;
   token?: string;
+  nomProfil?: string;
+  id: number;
+
 }

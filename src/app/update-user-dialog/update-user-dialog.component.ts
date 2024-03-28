@@ -22,14 +22,17 @@ export class UpdateUserDialogComponent {
       prenom: [data.prenom, Validators.required],
       cin: [data.cin, Validators.required],
       email: [data.email, [Validators.required, Validators.email]],
-      password: [data.password, [Validators.required, Validators.minLength(6)]],
-      mobile: [data.mobile]
+      password: [data.password, Validators.required],
+      mobile: [data.mobile, Validators.required]
     });
   }
 
   onSubmit() {
     if (this.userForm.valid) {
-      this.dialogRef.close(this.userForm.value); // Pass the updated user data
+      this.userService.updateUser(this.data.idUser, this.userForm.value)
+        .subscribe(updatedUser => {
+          this.dialogRef.close(updatedUser); 
+        });
     }
   }  
   onCancelClick(): void {

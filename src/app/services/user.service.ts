@@ -3,15 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../interface/user.model';
 import { tap } from 'rxjs/operators'; 
-
+import { RegisterRequest } from '../interface/registerrequest.model';
+import {AuthenticationResponse} from '../interface/authenticationresponse.model'
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
   private baseUrl = 'http://localhost:8080/api/v1/auth';
-  private idUser: number | null = null;
-  private profilId: number | null = null;
-  private structureId: number | null = null;
+
   private authTokenKey = 'auth_token';
 
   constructor(private http: HttpClient) {}
@@ -24,8 +23,8 @@ export class UserService {
     return this.http.get<User>(`${this.baseUrl}/${id}`);
   }
 
-  createUser(user: User): Observable<User> {
-    return this.http.post<User>(`${this.baseUrl}/register`, user);
+  createUser(request: RegisterRequest, profileName: string): Observable<AuthenticationResponse> {
+    return this.http.post<AuthenticationResponse>(`${this.baseUrl}/register?profileName=${profileName}`, request);
   }
   
   updateUser(idUser: number, userData: any) {
@@ -36,18 +35,22 @@ export class UserService {
   deleteUser(idUser: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${idUser}`);
   }
+  
   authenticate(email: string, password: string): Observable<User> {
-    return this.http.post<User>(`${this.baseUrl}/authenticate`, { email, password }).pipe(
-      tap((response: User | undefined) => {
-        if (response && response.token) {
+    return this.http.post<any>(`${this.baseUrl}/authenticate`, { email, password }).pipe(
+      tap((response) => {
+        if (response && response.token && response.nomProfil) {
           localStorage.setItem(this.authTokenKey, response.token);
+          // Store user's profile name
+          localStorage.setItem('user_profile', response.nomProfil);
         } else {
-          // Handle the case where the response or token is undefined
-          console.error('Response or token is undefined');
+          // Handle the case where the response, token, or profile name is missing
+          console.error('Token or profile name is missing in the response');
         }
-      }) as any // Type assertion
+      })
     );
   }
+  
 
   logout(): Observable<string> {
     // Remove the authentication token from localStorage
@@ -64,13 +67,26 @@ export class UserService {
     // Check if the user is logged in by verifying the presence of the authentication token
     return !!this.getToken();
   }
-  setUserInfo(userId: number, profilId: number, structureId: number): void {
-    this.idUser = userId;
-    this.profilId = profilId;
-    this.structureId = structureId;
+  setUserInfo(userId: number, profileId: number, structureId: number): void {
+    const userInfo = { userId, profileId, structureId };
+    localStorage.setItem('userInfo', JSON.stringify(userInfo));
   }
 
-  getUserInfo(): { userId: number | null, profilId: number | null, structureId: number | null } {
-    return { userId: this.idUser ?? null, profilId: this.profilId ?? null, structureId: this.structureId ?? null };
+  getUserInfo(): { email: string, idUser: number, profileId: number, profileName: string, structureId: number, token: string } | null {
+    const currentUserString = localStorage.getItem('currentUser');
+    if (currentUserString) {
+      return JSON.parse(currentUserString);
+    } else {
+      return null;
+    }
+  }
+  getUserId(): number | null {
+    const userInfoString = localStorage.getItem('userInfo');
+    if (userInfoString) {
+      const userInfo = JSON.parse(userInfoString);
+      return userInfo.userId;
+    } else {
+      return null;
+    }
   }
 }

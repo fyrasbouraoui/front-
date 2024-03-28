@@ -33,6 +33,7 @@ import { Validation1Component } from './validation1/validation1.component';
 import { UpdateUserDialogComponent } from './update-user-dialog/update-user-dialog.component'; // Import FormsModule
 import { InscriptionComponent } from './inscription/inscription.component';
 import { RouterModule } from '@angular/router';
+import { AuthGuard } from './services/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,7 @@ import { RouterModule } from '@angular/router';
     FormsModule,
     RouterModule.forRoot([])
   ],
-  providers: [Validation1Service],
+  providers: [Validation1Service, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { 

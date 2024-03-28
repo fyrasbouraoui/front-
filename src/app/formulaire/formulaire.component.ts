@@ -41,27 +41,33 @@ export class FormulaireComponent {
   FormSubmit() {
     if (this.demandeform.valid) {
       // Get the user information from the service
-      const userInfo = this.userService.getUserInfo() as { userId: number, profilId: number, structureId: number };
-  
-      // Create an object containing the demand data along with the user information
-      const demandData = {
-        ...this.demandeform.value,
-        userId: userInfo.userId,
-        profilId: userInfo.profilId,
-        structureId: userInfo.structureId
-      };
-  
-      // Make the HTTP request to create the demand with the user information
-      this._demandeservice.createDemande(demandData, userInfo.structureId, userInfo.userId, userInfo.profilId).subscribe({
-        next: (val: any) => {
-          alert('Ajouter avec succès');
-        },
-        error: (err: any) => {
-          console.error(err);
-        }
-      });
+      const userInfo = this.userService.getUserInfo();
+
+      // Check if userInfo is not null
+      if (userInfo) {
+        // Create an object containing the demand data along with the user information
+        const demandData = {
+          ...this.demandeform.value,
+          userId: userInfo.idUser,
+          profilId: userInfo.profileId,
+          structureId: userInfo.structureId
+        };
+
+        // Make the HTTP request to create the demand with the user information
+        this._demandeservice.createDemande(demandData, userInfo.structureId, userInfo.idUser, userInfo.profileId).subscribe({
+          next: (val: any) => {
+            alert('Ajouter avec succès');
+          },
+          error: (err: any) => {
+            console.error(err);
+          }
+        });
+      } else {
+        console.error('User information is null');
+      }
     }
   }
+
   
 
   toggleSubMenu() {

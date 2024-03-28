@@ -10,24 +10,22 @@
             <a  class="brand-logo"><i class=""></i> <span>Nom projet</span></a>
         </header>
         <nav class="dashboard-nav-list">
-            <a href="acceuil" class="dashboard-nav-item"><i class="fas fa-home"></i> Acceuil </a>
-            <a href="#" class="dashboard-nav-item "><i class="fas fa-tachometer-alt"></i> dashboard</a>
-            <a href="form" class="dashboard-nav-item "><i class="fas fa-file-upload"></i> Demande API </a>
-            
-            <a href="liste" class="dashboard-nav-item active"><i class="fas fa-file-upload"></i> Liste APIs            </a>
-            <button (click)="toggleSubMenu()" class="dashboard-nav-item active"><i class=""></i> Admin </button>
-      <div *ngIf="isSubMenuVisible" id="admin-submenu" class="dashboard-nav-liste">
+          <a href="acceuil" class="dashboard-nav-item"><i class="fas fa-home"></i> Acceuil </a>
+          <a href="#" class="dashboard-nav-item "><i class="fas fa-tachometer-alt"></i> dashboard</a>
+          <a href="form" class="dashboard-nav-item "><i class="fas fa-file-upload"></i> Demande API </a>
+            <button onclick="toggleSubMenu()" class="dashboard-nav-item active"><i class=""></i> Admin </button>
+      <div id="admin-submenu" class="dashboard-nav-liste">
         <a href="user" class="dashboard-nav-item">Liste utilisateur</a>
-        <a href="demande" class="dashboard-nav-item">Liste demande</a>
+        <a href="liste" class="dashboard-nav-item active">Liste APIs</a>
       </div>
       <button (click)="toggleSub()" class="dashboard-nav-item active"><i class=""></i> Data Owner </button>
-      <div *ngIf="isSubMenu" id="admin-submenu" class="dashboard-nav-liste">
-        <a href="validation1" class="dashboard-nav-item">1er Validateur</a>
-        <a href="" class="dashboard-nav-item">2eme Validateur</a>
-      </div>
-            <a href="profile" class="dashboard-nav-item"><i class="fas fa-user"></i> Profile </a>
-            <div class="nav-item-divider"></div>
-        </nav>
+    <div *ngIf="isSubMenu" id="admin-submenu" class="dashboard-nav-liste">
+      <a href="demande" class="dashboard-nav-item">1er Validateur</a>
+      <a href="" class="dashboard-nav-item">2eme Validateur</a>
+    </div>
+          <a href="profile" class="dashboard-nav-item"><i class="fas fa-user"></i> Profile </a>
+          <div class="nav-item-divider"></div>
+      </nav>
         <nav class="dashboard-nav-liste">
         <a href="#" class="dashboard-nav-item1"><i class="fas fa-sign-out-alt"></i> Se deconnecter </a> </nav>
     </div>
@@ -63,7 +61,6 @@
                                     <th>input</th>
                                     <th>output</th>
                                     <th>cadre d'utilisation</th>
-                                    <th>mode</th>
                                     <th>action</th>
                                   </tr>
                                 </thead>
@@ -82,7 +79,6 @@
                                     <td>{{ row.input }}</td>
                                     <td>{{ row.output }}</td>
                                     <td>{{ row.cadreUtilisation }}</td>
-                                    <td>{{ row.mode }}</td>
                                     <td>
                                       <a  class="edit" (click)="editRow(row)"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                                       <a  class="delete" (click)="deleteRow(row)"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>

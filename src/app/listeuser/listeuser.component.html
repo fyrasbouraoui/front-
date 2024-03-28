@@ -13,16 +13,14 @@
             <a href="acceuil" class="dashboard-nav-item"><i class="fas fa-home"></i> Acceuil </a>
             <a href="#" class="dashboard-nav-item "><i class="fas fa-tachometer-alt"></i> dashboard</a>
             <a href="form" class="dashboard-nav-item "><i class="fas fa-file-upload"></i> Demande API </a>
-            
-            <a href="liste" class="dashboard-nav-item"><i class="fas fa-file-upload"></i> Liste APIs            </a>
-            <button onclick="toggleSubMenu()" class="dashboard-nav-item active "><i class=""></i> Admin </button>
+              <button onclick="toggleSubMenu()" class="dashboard-nav-item active"><i class=""></i> Admin </button>
         <div id="admin-submenu" class="dashboard-nav-liste">
           <a href="user" class="dashboard-nav-item active">Liste utilisateur</a>
-          <a href="demande" class="dashboard-nav-item">Liste demande</a>
+          <a href="liste" class="dashboard-nav-item ">Liste APIs</a>
         </div>
         <button (click)="toggleSub()" class="dashboard-nav-item active"><i class=""></i> Data Owner </button>
       <div *ngIf="isSubMenu" id="admin-submenu" class="dashboard-nav-liste">
-        <a href="validation1" class="dashboard-nav-item">1er Validateur</a>
+        <a href="demande" class="dashboard-nav-item">1er Validateur</a>
         <a href="" class="dashboard-nav-item">2eme Validateur</a>
       </div>
             <a href="profile" class="dashboard-nav-item"><i class="fas fa-user"></i> Profile </a>
@@ -86,7 +84,6 @@
                                 <p><strong>Email:</strong> {{ selectedUser.email }}</p>
                                 <p><strong>CIN:</strong> {{ selectedUser.cin }}</p>
                                 <p><strong>Mobile:</strong> {{ selectedUser.mobile }}</p>
-                                <p><strong>Mot de passe:</strong> {{ selectedUser.password }}</p>
                             </div>
                             
                             

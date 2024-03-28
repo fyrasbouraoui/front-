@@ -1,3 +1,4 @@
+// inscription.component.ts
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../services/user.service';
@@ -19,32 +20,24 @@ export class InscriptionComponent {
     public dialogRef: MatDialogRef<InscriptionComponent>
   ) {
     this.userForm = this.fb.group({
-      prenom: ['', Validators.required],
+      lastname: ['', Validators.required],
       cin: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      mobile: [''],
-      nomProfil: ['']
+      mobile: ['', Validators.required],
+      nomProfil: ['', Validators.required]
     });
   }
 
   onSubmit() {
     if (this.userForm.valid) {
       const userData = this.userForm.value;
-      this.userService.createUser(userData).subscribe({
-        next: (user) => {
-          // Create a profile object with the received nomProfil and a dummy code (you might need to adjust this)
-          const profilData = { code: 0, nomProfil: userData.nomProfil };
-          this.profileService.createProfile(profilData).subscribe({
-            next: () => {
-              alert('User registered successfully');
-              this.dialogRef.close();
-            },
-            error: (err) => {
-              console.error('Failed to create profile:', err);
-              alert('Failed to create profile. Please try again.');
-            }
-          });
+      const profileName = userData.nomProfil;
+      
+      this.userService.createUser(userData, profileName).subscribe({
+        next: (response) => {
+          alert('User registered successfully');
+          this.dialogRef.close();
         },
         error: (err) => {
           console.error('User registration failed:', err);

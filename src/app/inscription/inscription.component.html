@@ -1,29 +1,34 @@
 <div class="container">
   <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
-      <label for="first-name">Entrez votre Prenom</label>
-      <input type="text" id="first-name" placeholder="Votre prenom" formControlName="prenom">
+      <label for="first-name">Entrez le Prenom</label>
+      <input type="text" id="first-name" placeholder="Votre prenom" formControlName="lastname">
     </div>
     <div class="form-group">
-      <label for="cin-number">Entrez votre Numero CIN</label>
+      <label for="cin-number">Entrez le Numero CIN</label>
       <input type="text" id="cin-number" placeholder="Votre numero CIN" formControlName="cin" >
     </div>
     <div class="form-group">
-      <label for="email">Entrez votre Email</label>
+      <label for="email">Entrez l'email</label>
       <input type="email" id="email" placeholder="Votre email" formControlName="email">
     </div>
     
     <div class="form-group">
-      <label for="password">Entrez votre Mot de passe</label>
+      <label for="password">Entrez le Mot de passe</label>
       <input type="password" id="password" placeholder="Votre mot de passe" formControlName="password" >
     </div>
     <div class="form-group">
-      <label for="mobile-number">Entrez votre Numero mobile</label>
-      <input type="tel" id="mobile-number" placeholder="Votre numero mobile" formControlName="mobile">
+      <label for="mobile-number">Entrez le Numero mobile</label>
+      <input type="tel" id="mobile" placeholder="Votre numero mobile" formControlName="mobile">
     </div>
     <div class="form-group">
-      <label for="profil-name">Entrez votre Nom de Profil</label>
-      <input type="text" id="profil-name" placeholder="Votre nom de profil" formControlName="nomProfil">
+      <label for="profil-name">Choisissez le Profil</label>
+      <select id="profil-name" formControlName="nomProfil">
+        <option value="admin">Admin</option>
+        <option value="1er validateur">1er validateur</option>
+        <option value="2eme validateur">2eme validateur</option>
+        <option value="consommateur">Consommateur</option>
+      </select>
     </div>
     <div class="form-group">
       <button type="submit" [disabled]="!userForm.valid">Ajouter</button>
