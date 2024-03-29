@@ -1,19 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DemandeServiceService } from '../services/demande-service.service';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router'; 
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-formulaire',
   templateUrl: './formulaire.component.html',
   styleUrls: ['./formulaire.component.scss']
 })
-export class FormulaireComponent {
+export class FormulaireComponent implements OnInit{
   demandeform: FormGroup;
   isSubMenuVisible: boolean = false;
+  apis: any[] = [];
 
+  ngOnInit(): void {
+    this.getApis();
+  }
+  getApis(): void {
+    this.apiService.getApis()
+      .subscribe(apis => this.apis = apis);
+  }
   constructor(
+    private apiService: ApiService,
     private _fb: FormBuilder, 
     private _demandeservice: DemandeServiceService,
     private userService: UserService, // Inject the UserService 

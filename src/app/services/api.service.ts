@@ -11,7 +11,7 @@ export class ApiService {
   addApi(data: any): Observable<any> {
     return this._http.post('http://localhost:8080/apis', data);
   }
-  getApi(): Observable<any> {
+  getApis(): Observable<any> {
     return this._http.get('http://localhost:8080/apis');
   }
 }

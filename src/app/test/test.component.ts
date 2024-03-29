@@ -29,7 +29,7 @@ ngOnInit(): void {
   }
 
     getapi() {
-      this._apiservice.getApi().subscribe({
+      this._apiservice.getApis().subscribe({
         next: (res) => {
           console.log(res); // Log the received data
           this.dataSource = new MatTableDataSource(res);

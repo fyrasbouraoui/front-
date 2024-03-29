@@ -35,7 +35,12 @@
             <div class="container">
                 <h1>Demande de consommation d'un web service</h1>
                 <form [formGroup]="demandeform" (ngSubmit)="FormSubmit()">
-
+                  <div class="form-group">
+                    <label for="nomAPI">Select Api</label>
+                    <select class="form-control" formControlName="nomApp" required>
+                      <option *ngFor="let api of apis" [value]="api.nom">{{ api.nom }}</option>
+                    </select>
+                  </div>
                   
                   <div class="form-group">
                     <label for="etablissementDemandeur">Etablissement demandeur du web service:</label>

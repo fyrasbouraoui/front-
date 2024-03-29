@@ -22,7 +22,7 @@ export class ListeComponent {
         this.isSubMenu = !this.isSubMenu;
 
     }
-    displayedColumns: string[] = ['idApi', 'nom', 'code', 'description', 'input', 'output', 'cadreUtilisation','action']
+    displayedColumns: string[] = ['nom', 'code', 'description', 'input', 'output', 'cadreUtilisation','action']
   dataSource!: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -30,15 +30,15 @@ export class ListeComponent {
 
 constructor(private _dialog:MatDialog , private _apiservice: ApiService){}
 ngOnInit(): void {
-  this.getapi(); 
+  this.getapis(); 
   
 }
   openAddEditEmpForm() {
     this._dialog.open(DialogComponentComponent);
   }
 
-    getapi() {
-      this._apiservice.getApi().subscribe({
+    getapis() {
+      this._apiservice.getApis().subscribe({
         next: (res) => {
           console.log(res); // Log the received data
           this.dataSource = new MatTableDataSource(res);
