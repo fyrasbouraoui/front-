@@ -1,3 +1,4 @@
+// demande.model.ts
 import { Profil } from "./profil.model";
 import { Status } from "./status.model";
 import { Structure } from "./structure.model";
@@ -5,11 +6,11 @@ import { TraceDemande } from "./trace.model";
 import { User } from "./user.model";
 
 export interface Demande {
-    idDemande?: number;
+    idDemande?: number; // Add the id property
     user?: User;
     structure?: Structure;
     profil?: Profil;
-    status?: Status[];
+    statuses?: Status[]; // Change nomStatus to statuses
     traces?: TraceDemande[];
     reference: number;
     description: string;
@@ -27,4 +28,4 @@ export interface Demande {
     raisonInMasse: string;
     dateCreation: Date;
     dateModification: Date;
-  }
+}

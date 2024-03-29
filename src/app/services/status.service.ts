@@ -7,7 +7,7 @@ import { Status } from '../interface/status.model';
   providedIn: 'root'
 })
 export class StatusService {
-  private baseUrl = 'http://localhost:8080/status'; // Replace this with your backend API URL
+  private baseUrl = 'http://localhost:8080/status';
 
   constructor(private http: HttpClient) {}
 
@@ -24,7 +24,6 @@ export class StatusService {
   }
 
   updateStatus(id: number, status: Status): Observable<Status> {
-    // Assuming your API endpoint for updating status is 'api/updateStatus/{id}'
     return this.http.put<Status>(`${this.baseUrl}/${id}`, status);
   }
 

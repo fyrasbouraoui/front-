@@ -21,7 +21,6 @@ import { DialogComponentComponent } from './Ajoutapi/dialog-component.component'
 import { HttpClientModule } from '@angular/common/http';
 import {MatTableModule} from '@angular/material/table';
 import { PrmiereValidationComponent } from './prmierevalidation/prmierevalidation.component';
-import { Validation1Service } from './services/validation1.service';
 import { EditdialogComponent } from './editapi/editdialog.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -34,6 +33,7 @@ import { UpdateUserDialogComponent } from './update-user-dialog/update-user-dial
 import { InscriptionComponent } from './inscription/inscription.component';
 import { RouterModule } from '@angular/router';
 import { AuthGuard } from './services/auth-guard.service';
+import { Validation2Component } from './validation2/validation2.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +52,8 @@ import { AuthGuard } from './services/auth-guard.service';
     InscriptionComponent,
     ConnectionComponent,
     Validation1Component,
-    UpdateUserDialogComponent  ],
+    UpdateUserDialogComponent,
+    Validation2Component  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -72,7 +73,7 @@ import { AuthGuard } from './services/auth-guard.service';
     FormsModule,
     RouterModule.forRoot([])
   ],
-  providers: [Validation1Service, AuthGuard],
+  providers: [ AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { 

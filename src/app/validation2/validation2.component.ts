@@ -6,11 +6,11 @@ import { StatusService } from '../services/status.service';
 import { UserService } from '../services/user.service';
 
 @Component({
-  selector: 'app-validation1',
-  templateUrl: './validation1.component.html',
-  styleUrls: ['./validation1.component.scss']
+  selector: 'app-validation2',
+  templateUrl: './validation2.component.html',
+  styleUrls: ['./validation2.component.scss']
 })
-export class Validation1Component implements OnInit {
+export class Validation2Component implements OnInit {
   demandes: Demande[] = [];
   isSubMenu: boolean = false;
   validationMessage: string = '';
@@ -32,7 +32,7 @@ export class Validation1Component implements OnInit {
 
   fetchDemandes() {
     // Fetch demandes from the service
-    this.demandeService.getDemandesByStatus('En attente de 1ere validation').subscribe(
+    this.demandeService.getDemandesByStatus('En attente de 2eme validation').subscribe(
       (demandes: Demande[]) => {
         this.demandes = demandes;
         // Iterate through each demand and fetch its status

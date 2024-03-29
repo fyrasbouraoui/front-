@@ -1,91 +1,80 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DemandeServiceService } from '../services/demande-service.service';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { StatusService } from '../services/status.service';
+import { Demande } from '../interface/demande.model';
 import { Status } from '../interface/status.model';
-import { Validation1Service } from '../services/validation1.service';
+import { StatusService } from '../services/status.service';
 import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-gerdemande',
   templateUrl: './gerdemande.component.html',
-  styleUrls: ['./gerdemande.component.scss'],
+  styleUrls: ['./gerdemande.component.scss']
 })
 export class GerdemandeComponent implements OnInit {
-  displayedColumns: string[] = ['description', 'nomApp', 'status', 'action'];
-  dataSource!: MatTableDataSource<any>;
+  demandes: Demande[] = [];
+  isSubMenu: boolean = false;
   validationMessage: string = '';
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
-    private _demandeservice: DemandeServiceService,
+    private demandeService: DemandeServiceService,
     private statusService: StatusService,
-    private validation1: Validation1Service,
-    private userService: UserService // Inject the UserService
-
+    private userService: UserService
   ) {}
 
-  ngOnInit(): void {
-    this.getAllDemandes();  }
-
-    getAllDemandes() {
-      this._demandeservice.getAllDemandes().subscribe({ // Use getAllDemandes
-        next: (res: any[]) => { // Use array type any[]
-          console.log(res); // Log the received data
-          
-  
-          // Assign unique identifiers to each row
-          res.forEach((item: any, index: number) => {
-            item.id = index + 1; // Assuming index + 1 as the unique identifier
-          });
-  
-          // Fetch status data for each demande
-          this.fetchStatusForDemandes(res);
-        },
-        error: console.error,
-      });
-    }
-    
-  
-
-  fetchStatusForDemandes(demandes: any[]): void {
-    demandes.forEach((demande: any) => {
-      // Check if the demande has status data
-      if (demande.status && demande.status.length > 0) {
-        // Assuming there's only one status per demande, you can directly access the first status object
-        demande.nomStatus = demande.status[0].nomStatus;
-      }
-    });
-    // After processing all demandes, update the data source
-    this.updateDataSource(demandes);
-  }
-  
-  
-  
-
-  updateDataSource(data: any[]): void {
-    this.dataSource = new MatTableDataSource(data);
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
+  ngOnInit() {
+    // Fetch demandes upon component initialization
+    this.fetchDemandes();
   }
 
- 
-
-  toggleSub(): void {
+  toggleSub() {
+    // Toggle the submenu
     this.isSubMenu = !this.isSubMenu;
   }
 
-  handleDeleteIconClick(id: number): void {
+  fetchDemandes() {
+    // Fetch demandes from the service
+    this.demandeService.getAllDemandes().subscribe(
+      (demandes: Demande[]) => {
+        this.demandes = demandes;
+        // Iterate through each demand and fetch its status
+        this.demandes.forEach(demande => {
+          this.getStatusForDemande(demande);
+        });
+      },
+      (error) => {
+        console.error('Error fetching demandes:', error);
+        // Handle error, show error message, etc.
+      }
+    );
+  }
+
+  getStatusForDemande(demande: Demande) {
+    // Check if idDemande is defined before passing it to getStatusByDemandeId
+    if (demande.idDemande !== undefined) {
+        this.statusService.getStatusByDemandeId(demande.idDemande).subscribe(
+            (statuses: Status[]) => {
+                demande.statuses = statuses; // Assign the statuses to the demand
+            },
+            (error) => {
+                console.error('Error fetching status for demande:', error);
+                // Handle error, show error message, etc.
+            }
+        );
+    } else {
+        console.error('Cannot get status for demande: idDemande is undefined');
+        // Handle error, show error message, etc.
+    }
+}
+handleDeleteIconClick(id: number | undefined): void {
+  // Check if the ID is defined before proceeding
+  if (id !== undefined) {
     if (confirm('Are you sure you want to delete this demande?')) {
-      this._demandeservice.deleteDemande(id)
+      this.demandeService.deleteDemande(id)
         .subscribe(
           response => {
             console.log('Deletion successful:', response);
             // Reload the demande list or update the table
-            this.getAllDemandes();
+            this.fetchDemandes();
             // Optionally, display a success message
           },
           error => {
@@ -94,36 +83,35 @@ export class GerdemandeComponent implements OnInit {
           }
         );
     }
+  } else {
+    console.error('ID is undefined.');
+    // Optionally, handle the case where ID is undefined
   }
-  handleCheckIconClick(id: number): void {
-    const userInfo = this.userService.getUserInfo();
-
-    if (userInfo !== null) {
-        const userId = userInfo.idUser;
-        console.log('Retrieved userId:', userId);
-
-        if (!userId) {
-            console.error('Invalid userId:', userId);
-            return;
-        }
-
-        this._demandeservice.validateDemande(id, userId).subscribe(
-            (response: string) => {
-                console.log('Validation success:', response);
-                this.validationMessage = response;
-            },
-            (error: any) => {
-                console.error('Validation error:', error);
-            }
-        );
-    } else {
-        console.error('User info is null.');
-    }
 }
+handleCheckIconClick(id: number): void {
+  const userInfo = this.userService.getUserInfo();
 
+  if (userInfo !== null) {
+      const userId = userInfo.idUser;
+      console.log('Retrieved userId:', userId);
 
+      if (!userId) {
+          console.error('Invalid userId:', userId);
+          return;
+      }
 
- 
+      this.demandeService.validateDemande(id, userId).subscribe(
+          (response: string) => {
+              console.log('Validation success:', response);
+              this.validationMessage = response;
+          },
+          (error: any) => {
+              console.error('Validation error:', error);
+          }
+      );
+  } else {
+      console.error('User info is null.');
+  }
 
-  isSubMenu: boolean = false;
+}
 }
