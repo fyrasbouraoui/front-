@@ -6,12 +6,27 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ApiService {
-  constructor(private _http: HttpClient) {}
+  private apiUrl = 'http://localhost:8080/apis';
 
-  addApi(data: any): Observable<any> {
-    return this._http.post('http://localhost:8080/apis', data);
+  constructor(private httpClient: HttpClient) {}
+
+  getAllApis(): Observable<any> {
+    return this.httpClient.get(this.apiUrl);
   }
-  getApis(): Observable<any> {
-    return this._http.get('http://localhost:8080/apis');
+
+  getApiById(id: number): Observable<any> {
+    return this.httpClient.get(`${this.apiUrl}/${id}`);
+  }
+
+  createApi(apiData: any): Observable<any> {
+    return this.httpClient.post(this.apiUrl, apiData);
+  }
+
+  updateApi(id: number, apiData: any): Observable<any> {
+    return this.httpClient.put(`${this.apiUrl}/${id}`, apiData);
+  }
+
+  deleteApi(id: number): Observable<any> {
+    return this.httpClient.delete(`${this.apiUrl}/${id}`);
   }
 }

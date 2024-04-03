@@ -4,13 +4,15 @@ import { Demande } from '../interface/demande.model';
 import { Status } from '../interface/status.model';
 import { StatusService } from '../services/status.service';
 import { UserService } from '../services/user.service';
-
+import { Router } from '@angular/router'; 
 @Component({
   selector: 'app-validation1',
   templateUrl: './validation1.component.html',
   styleUrls: ['./validation1.component.scss']
 })
 export class Validation1Component implements OnInit {
+  userName: string = '';
+  profileName: string = '';
   demandes: Demande[] = [];
   isSubMenu: boolean = false;
   validationMessage: string = '';
@@ -18,11 +20,54 @@ export class Validation1Component implements OnInit {
   constructor(private demandeService: DemandeServiceService,
     private statusService: StatusService,
     private userService: UserService,
+    private router: Router
   ) {}
 
   ngOnInit() {
-    // Fetch demandes upon component initialization
     this.fetchDemandes();
+    this.getUserDetails();
+    const arrow = document.querySelectorAll(".arrow");
+    arrow.forEach(arrowItem => {
+      arrowItem.addEventListener("click", (e) => {
+        const arrowParent = (e.target as HTMLElement).parentElement?.parentElement;
+        if (arrowParent) {
+          arrowParent.classList.toggle("showMenu");
+        }
+      });
+    });
+
+    const sidebar = document.querySelector(".sidebar");
+    const sidebarBtn = document.querySelector(".bx-menu") as HTMLElement;
+
+    if (sidebar) {
+      // Remove 'close' class to expand the sidebar by default
+      sidebar.classList.remove("close");
+    }
+
+    if (sidebarBtn && sidebar) {
+      sidebarBtn.addEventListener("click", () => {
+        sidebar.classList.toggle("close");
+      });
+    }
+  }
+  getUserDetails() {
+    // Fetch user details from the UserService
+    const userInfo = this.userService.getUserInfo(); // Assuming this method returns user information
+    if (userInfo) {
+      this.userName = userInfo.prenom; // Update 'prenom' with the actual property name for the user's name
+      this.profileName = userInfo.profileName; // Update 'profileName' with the actual property name for the profile name
+    }
+  }
+  logout() {
+    this.userService.logout().subscribe(
+      () => {
+        // Redirect to the '/connect' page after successful logout
+        this.router.navigate(['/connect']);
+      },
+      (error) => {
+        console.error('Logout failed:', error);
+      }
+    );
   }
 
   toggleSub() {

@@ -33,7 +33,7 @@ export class DialogComponentComponent {
   }
   FormSubmit(){
     if(this.addform.valid){
-      this._apiservice.addApi(this.addform.value).subscribe({
+      this._apiservice.createApi(this.addform.value).subscribe({
         next: (val: any) => {
           alert('Ajouter avec succes');
           this._dialogRef.close();

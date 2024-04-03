@@ -55,9 +55,9 @@ export class UserService {
   logout(): Observable<string> {
     // Remove the authentication token from localStorage
     localStorage.removeItem(this.authTokenKey);
-    return this.http.delete<string>(`${this.baseUrl}/logout`);
+    // Specify responseType as 'text'
+    return this.http.post<string>(`${this.baseUrl}/logout`, null, { responseType: 'text' as 'json' });
   }
-
   getToken(): string | null {
     // Retrieve the authentication token from localStorage
     return localStorage.getItem(this.authTokenKey);
@@ -72,7 +72,7 @@ export class UserService {
     localStorage.setItem('userInfo', JSON.stringify(userInfo));
   }
 
-  getUserInfo(): { email: string, idUser: number, profileId: number, profileName: string, structureId: number, token: string } | null {
+  getUserInfo(): { prenom: string,email: string, idUser: number, profileId: number, profileName: string, structureId: number, token: string } | null {
     const currentUserString = localStorage.getItem('currentUser');
     if (currentUserString) {
       return JSON.parse(currentUserString);

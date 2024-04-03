@@ -4,13 +4,15 @@ import { User } from '../interface/user.model';
 import { MatDialog } from '@angular/material/dialog';
 import { UpdateUserDialogComponent } from '../update-user-dialog/update-user-dialog.component';
 import { InscriptionComponent } from '../inscription/inscription.component';
-
+import { Router } from '@angular/router'; 
 @Component({
   selector: 'app-listeuser',
   templateUrl: './listeuser.component.html',
   styleUrls: ['./listeuser.component.scss']
 })
 export class ListeuserComponent implements OnInit {
+  userName: string = '';
+  profileName: string = '';
   selectedUser: User | null = null; // Property to store the selected user
 
   isSubMenuVisible: boolean = false;
@@ -19,7 +21,7 @@ export class ListeuserComponent implements OnInit {
   }
   registeredUsers: User[] = []; // Declare the registeredUsers property
 
-  constructor(private userService: UserService,private dialog: MatDialog) {}
+  constructor(private router: Router,private userService: UserService,private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.getAllUsers(); // Call the method to fetch all users when the component initializes
@@ -36,6 +38,49 @@ export class ListeuserComponent implements OnInit {
         // Optionally, display an error message to the user
       }
     });
+    this.getUserDetails();
+    const arrow = document.querySelectorAll(".arrow");
+    arrow.forEach(arrowItem => {
+      arrowItem.addEventListener("click", (e) => {
+        const arrowParent = (e.target as HTMLElement).parentElement?.parentElement;
+        if (arrowParent) {
+          arrowParent.classList.toggle("showMenu");
+        }
+      });
+    });
+
+    const sidebar = document.querySelector(".sidebar");
+    const sidebarBtn = document.querySelector(".bx-menu") as HTMLElement;
+
+    if (sidebar) {
+      // Remove 'close' class to expand the sidebar by default
+      sidebar.classList.remove("close");
+    }
+
+    if (sidebarBtn && sidebar) {
+      sidebarBtn.addEventListener("click", () => {
+        sidebar.classList.toggle("close");
+      });
+    }
+  }
+  getUserDetails() {
+    // Fetch user details from the UserService
+    const userInfo = this.userService.getUserInfo(); // Assuming this method returns user information
+    if (userInfo) {
+      this.userName = userInfo.prenom; // Update 'prenom' with the actual property name for the user's name
+      this.profileName = userInfo.profileName; // Update 'profileName' with the actual property name for the profile name
+    }
+  }
+  logout() {
+    this.userService.logout().subscribe(
+      () => {
+        // Redirect to the '/connect' page after successful logout
+        this.router.navigate(['/connect']);
+      },
+      (error) => {
+        console.error('Logout failed:', error);
+      }
+    );
   }
   isSubMenu: boolean = false;
 

@@ -1,35 +1,99 @@
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="gerdemande.component.scss">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-
-<div class='dashboard'>
-    <div class="dashboard-nav">
-        <header>
-            <a  class="menu-toggle"><i class="fas fa-bars"></i></a>
-            <a  class="brand-logo"><i class=""></i> <span>Nom projet</span></a>
-        </header>
-        <nav class="dashboard-nav-list">
-            <a href="acceuil" class="dashboard-nav-item"><i class="fas fa-home"></i> Acceuil </a>
-            <a href="#" class="dashboard-nav-item "><i class="fas fa-tachometer-alt"></i> dashboard</a>
-            <a href="form" class="dashboard-nav-item "><i class="fas fa-file-upload"></i> Demande API </a>
-              <button onclick="toggleSubMenu()" class="dashboard-nav-item active"><i class=""></i> Admin </button>
-        <div id="admin-submenu" class="dashboard-nav-liste">
-          <a href="user" class="dashboard-nav-item active">Liste utilisateur</a>
-          <a href="liste" class="dashboard-nav-item ">Liste APIs</a>
-          <a href="demande" class="dashboard-nav-item ">Liste demande</a>
-        </div>
-        <button (click)="toggleSub()" class="dashboard-nav-item active"><i class=""></i> Data Owner </button>
-      <div *ngIf="isSubMenu" id="admin-submenu" class="dashboard-nav-liste">
-        <a href="validation1" class="dashboard-nav-item">1er Validateur</a>
-        <a href="validation2" class="dashboard-nav-item">2eme Validateur</a>
-      </div>
-            <a href="profile" class="dashboard-nav-item"><i class="fas fa-user"></i> Profile </a>
-            <div class="nav-item-divider"></div>
-        </nav>
-        <nav class="dashboard-nav-liste">
-        <a href="#" class="dashboard-nav-item1"><i class="fas fa-sign-out-alt"></i> Se deconnecter </a> </nav>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+<body>
+  <div class="sidebar close">
+    <div class="logo-details">
+      <i class='bx bx-menu' ></i>
+      <span class="logo_name">Nom Projet</span>
     </div>
+    <ul class="nav-links">
+      <li>
+        <a href="acceuil">
+          <i class='bx bx-compass' ></i>
+          <span class="link_name">Acceuil</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="#">Acceuil</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">
+          <i class='bx bx-grid-alt' ></i>
+          <span class="link_name">Dashboard</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="#">Dashboard</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="form">
+          <i class='bx bx-plug' ></i>
+          <span class="link_name">Demande API</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="#">Demande API</a></li>
+        </ul>
+      </li>
+      <li>
+        <div class="iocn-link">
+          <a >
+            <i class='bx bx-collection' ></i>
+            <span class="link_name">Admin</span>
+          </a>
+          <i class='bx bxs-chevron-down arrow' ></i>
+        </div>
+        <ul class="sub-menu">
+          <li><a class="link_name" href="#">Admin</a></li>
+          <li><a href="liste">Liste APIs</a></li>
+          <li><a href="user">Liste Utilisateur</a></li>
+          <li><a href="demande">Liste Demande</a></li>
+        </ul>
+      </li>
+      <li>
+        <div class="iocn-link">
+          <a >
+            <i class='bx bx-book-alt' ></i>
+            <span class="link_name">Data Owner</span>
+          </a>
+          <i class='bx bxs-chevron-down arrow' ></i>
+        </div>
+        <ul class="sub-menu">
+          <li><a class="link_name" >DataOwner</a></li>
+          <li><a href="validation1">1er validateur</a></li>
+          <li><a href="validation2">2eme validateur</a></li>
+        </ul>
+      </li>
+      <li>
+      <li>
+        <a href="profile">
+          <i class='bx bx-cog' ></i>
+          <span class="link_name">Profile</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="profile">Profile</a></li>
+        </ul>
+      </li>
+      <li>
+    <div class="profile-details">
+      <div class="profile-content">
+      </div>
+      <div class="name-job">
+        <div class="profile_name">{{ userName }}</div>
+        <div class="job">{{ profileName }}</div>
+      </div>
+      <i class='bx bx-log-out' (click)="logout()"></i>
+    </div>
+  </li>
+</ul>
+  </div>
     <div class='dashboard-app'>
         <div class='dashboard-content'>
             <div class='container'>
@@ -56,8 +120,8 @@
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let demande of demandes; let i = index" [attr.id]="'demande-row-' + i">
-                                        <td>{{ demande.description }}</td>
-                                        <td>{{ demande.nomApp }}</td>
+                                        <td>{{ demande.descriptionAPI }}</td>
+                                        <td>{{ demande.nomAPI }}</td>
                                         <td>
                                             <ng-container *ngFor="let status of demande.statuses">
                                                 {{ status.nomStatus }}

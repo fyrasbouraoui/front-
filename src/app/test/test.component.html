@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="test.component.scss">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+<body>
+  <div class="sidebar close">
+    <div class="logo-details">
+      <i class='bx bx-menu' ></i>
+      <span class="logo_name">Nom Projet</span>
+    </div>
+    <ul class="nav-links">
+      <li>
+        <a href="acceuil">
+          <i class='bx bx-compass' ></i>
+          <span class="link_name">Acceuil</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="#">Acceuil</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">
+          <i class='bx bx-grid-alt' ></i>
+          <span class="link_name">Dashboard</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="#">Dashboard</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="form">
+          <i class='bx bx-plug' ></i>
+          <span class="link_name">Demande API</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="#">Demande API</a></li>
+        </ul>
+      </li>
+      <li>
+        <div class="iocn-link">
+          <a >
+            <i class='bx bx-collection' ></i>
+            <span class="link_name">Admin</span>
+          </a>
+          <i class='bx bxs-chevron-down arrow' ></i>
+        </div>
+        <ul class="sub-menu">
+          <li><a class="link_name" href="#">Admin</a></li>
+          <li><a href="liste">Liste APIs</a></li>
+          <li><a href="user">Liste Utilisateur</a></li>
+          <li><a href="demande">Liste Demande</a></li>
+        </ul>
+      </li>
+      <li>
+        <div class="iocn-link">
+          <a >
+            <i class='bx bx-book-alt' ></i>
+            <span class="link_name">Data Owner</span>
+          </a>
+          <i class='bx bxs-chevron-down arrow' ></i>
+        </div>
+        <ul class="sub-menu">
+          <li><a class="link_name" >DataOwner</a></li>
+          <li><a href="validation1">1er validateur</a></li>
+          <li><a href="validation2">2eme validateur</a></li>
+        </ul>
+      </li>
+      <li>
+      <li>
+        <a href="profile">
+          <i class='bx bx-cog' ></i>
+          <span class="link_name">Profile</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="profile">Profile</a></li>
+        </ul>
+      </li>
+      <li>
+    <div class="profile-details">
+      <div class="profile-content">
+      </div>
+      <div class="name-job">
+        <div class="profile_name">{{ userName }}</div>
+        <div class="job">{{ profileName }}</div>
+      </div>
+      <i class='bx bx-log-out' (click)="logout()"></i>
+    </div>
+  </li>
+</ul>
+  </div>
+  <div class="container">
+    <form class="container" [formGroup]="demandeform" (ngSubmit)="FormSubmit($event)">
+
+    <div class="card">
+        <div class="form">
+            <div class="left-side">
+                <div class="left-heading">
+                    <h3>Creation De Demande</h3>
+                </div>
+                <div class="steps-content">
+                    <h3>Etape <span class="step-number">1</span></h3>
+                    <p class="step-number-content active"></p>
+                    <p class="step-number-content d-none"></p>
+                    <p class="step-number-content d-none"></p>
+                    <p class="step-number-content d-none"></p>
+                </div>
+                <ul class="progress-bar">
+                    <li class="active">Informations sur l'API </li>
+                    <li>Informations sur l'application consommant l'API</li>
+                    <li>Type de consommation</li>
+                    <li>Informations sur le vis-à-vis avec le CNI</li>
+                    <li>Informations sur le responsable</li>
+                    <li>Confirm</li>
+
+                </ul>
+                
+
+                
+            </div>
+            
+            <div class="right-side">
+                <div class="main active">
+
+                    <div class="text">
+                        <h2>Choisir votre API</h2>
+                    </div>
+                    
+                    
+                    <div class="input-text">
+                        <div class="input-div" >
+                            <input type="text"  formControlName="etablissementDemandeur">
+                            <span>Etablissement demandeur du web service</span>
+                        </div>
+                        <div class="input-div"> 
+                            <input type="text" formControlName="etablissementFournisseur">
+                            <span>Etablissement fournisseur du web service</span>
+                        </div>
+                      </div>
+                    
+                    <div class="input-text">
+                        <div class="input-div">
+                          <p>liste Apis</p>
+                          <select class="form-control" >
+                            <option *ngFor="let api of apis" [value]="api.nom">{{ api.nom }}</option>
+                          </select>
+                         
+                        
+                        </div>
+                        
+                    </div>
+                    <div class="buttons">
+                        <button type="button" class="next_button"  (click)="nextStep(); contentChange()">Suivant</button>
+                    </div>
+                </div>
+                <div class="main">
+                  <div class="text">
+                      <h2>Informations sur l'application consommant l'API</h2>
+                      <p></p>
+                  </div>
+                  <div class="input-text">
+                      <div class="input-div">
+                          <input type="text" formControlName="nomHebergeur">
+                          <span>Nom de l'hébergeur                          </span>
+                      </div>
+                      <div class="input-div"> 
+                          <input type="text" >
+                          <span>Hébergeur situé en Tunisie</span>
+                      </div>
+                  </div>
+                  <div class="input-text">
+                      <div class="input-div">
+                          <input type="text"  >
+                          <span>Application publié sur Internet</span>
+                      </div>
+                  </div>
+                  <div class="input-text">
+                      <div class="input-div">
+                          <select>
+                              <option>Select Course</option>
+                              <option>BCA</option>
+                              <option>B-TECH</option>
+                              <option>BA</option>
+                              <option>B-COM</option>
+                              <option>B-SC</option>
+                              <option>MBA</option>
+                              <option>MCA</option>
+                              <option>M-COM</option>
+                              <option>M-TECH</option>
+                          </select>
+                      </div>
+                  </div>
+                  <div class="input-text">
+                    <div class="input-div">
+                        <input type="text" formControlName="nomDomaineApplication">
+                        <span>Le nom de domaine de l'application            </span>
+                    </div>
+                </div>
+                <div class="input-text">
+                  <div class="input-div">
+                      <input type="text" formControlName="adressesIPServeurs">
+                      <span>Adresses IP des serveurs:       </span>
+                  </div>
+              </div>
+              <div class="input-text">
+                <div class="input-div">
+                    <input type="text" formControlName="typeConnexionCNI">
+                    <span>Type de connexion au CNI (RNIA,VPN…)          </span>
+                </div>
+            </div>
+                  <div class="buttons button_space">
+                      <button class="back_button">Back</button>
+                      <button type="button" class="next_button" (click)="nextStep(); contentChange()">Suivant</button>
+                  </div>
+              </div>
+                <div class="main">
+                    <div class="text">
+                        <h2>Connection</h2>
+                        <p>Informer votre type de connection</p>
+                    </div>
+                    <div class="input-text">
+                        <div class="input-div">
+                            <input type="text" formControlName="nombreEstimeAppelsAn">
+                            <span>Le nombre estimé d'appels par an                            </span>
+                        </div>
+                        <div class="input-div"> 
+                            <input type="text" formControlName="nombreEstimeAppelsMin">
+                            <span>Le nombre estimé d'appels par minute                            </span>
+                        </div>
+                    </div>
+                    <div class="input-text">
+                        <div class="input-div">
+                            <input type="text" >
+                            <span>Avez-vous besoin d'invoquer l'API en masse:
+                            </span>
+                        </div>
+                    </div>
+                    <div class="input-text">
+                        <div class="input-div">
+                            <select>
+                                <option>Select Course</option>
+                                <option>BCA</option>
+                                <option>B-TECH</option>
+                                <option>BA</option>
+                                <option>B-COM</option>
+                                <option>B-SC</option>
+                                <option>MBA</option>
+                                <option>MCA</option>
+                                <option>M-COM</option>
+                                <option>M-TECH</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="buttons button_space">
+                        <button class="back_button">Back</button>
+                        <button type="button" class="next_button" (click)="nextStep(); contentChange()">Suivant</button>
+                    </div>
+                </div>
+                <div class="main">
+                    <div class="text">
+                        <h2>Informations sur le vis-à-vis avec le CNI</h2>
+                        <p></p>
+                    </div>
+                    <div class="input-text">
+                      <div class="input-div">
+                          <input type="text" formControlName="nomResponsableCNI">
+                          <span>Nom, Prénom et qualité</span>
+                      </div>
+                      
+                  </div>
+                  <div class="input-text">
+                    <div class="input-div">
+                        <input type="text" formControlName="adresseMailProfessionnelleResponsableCNI">
+                        <span>Adresse mail professionnelle</span>
+                    </div>
+                    
+                </div>
+                    <div class="input-text">
+                        <div class="input-div">
+                            <input type="text" formControlName="numeroTelephoneResponsableCNI">
+                            <span>Numéro du téléphone</span>
+                        </div>
+                        
+                    </div>
+                    <div class="buttons button_space">
+                        <button class="back_button">Back</button>
+                        <button type="button" class="next_button" (click)="nextStep(); contentChange()">Suivant</button>
+                    </div>
+                </div>
+                <div class="main">
+                  <div class="text">
+                      <h2>Informations sur le responsable</h2>
+                      <p></p>
+                  </div>
+                  <div class="input-text">
+                    <div class="input-div">
+                        <input type="text" formControlName="nomResponsable">
+                        <span>Nom, Prénom et qualité</span>
+                    </div>
+                    
+                </div>
+                <div class="input-text">
+                  <div class="input-div">
+                      <input type="text" formControlName="adresseMailProfessionnelleResponsable">
+                      <span>Adresse mail professionnelle</span>
+                  </div>
+                  
+              </div>
+                  <div class="input-text">
+                      <div class="input-div">
+                          <input type="text" formControlName="numeroTelephoneResponsable">
+                          <span>Numéro du téléphone</span>
+                      </div>
+                      
+                  </div>
+                  <div class="buttons button_space">
+                      <button class="back_button">Back</button>
+                      <button type="submit"  (click)="nextStep(); contentChange()">Confirmer</button>
+                    </div>
+              </div>
+                
+                
+                
+                
+                 <div class="main">
+                     <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                         <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+                        <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                    </svg>
+                     
+                    <div class="text congrats">
+                        <h2>Congratulations!</h2>
+                        <p>Merci Mr./Mrs. <span class="shown_name"></span> your information have been submitted successfully for the future reference we will contact you soon.</p>
+                    </div>
+                </div>
+                
+            
+              
+
+            
+
+            </div>
+        </div>
+    </div>
+    </form>
+</div>

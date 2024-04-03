@@ -37,49 +37,49 @@
                 <form [formGroup]="demandeform" (ngSubmit)="FormSubmit()">
                   <div class="form-group">
                     <label for="nomAPI">Select Api</label>
-                    <select class="form-control" formControlName="nomApp" required>
+                    <select class="form-control" >
                       <option *ngFor="let api of apis" [value]="api.nom">{{ api.nom }}</option>
                     </select>
                   </div>
                   
                   <div class="form-group">
                     <label for="etablissementDemandeur">Etablissement demandeur du web service:</label>
-                    <input type="text" class="form-control"   placeholder="" required>
+                    <input type="text" class="form-control" formControlName="etablissementDemandeur" placeholder="" required>
                   </div>
                   <div class="form-group">
                     <label for="etablissementFournisseur">Etablissement fournisseur du web service:</label>
-                    <input type="text" class="form-control"  placeholder="" required>
+                    <input type="text" class="form-control" formControlName="etablissementFournisseur" placeholder="" required>
                   </div>
                   <div class="form-group">
                     <label for="etablissementProprietaire">Etablissement propriétaire des données:</label>
-                    <input type="text" class="form-control"  placeholder="" required>
+                    <input type="text" class="form-control" formControlName="etablissementProprietaire" placeholder="" required>
                   </div>
             
             
                   <h2>1-Informations sur l'API demandée :</h2>
                   <div class="form-group">
                     <label for="nomAPI">Nom API</label>
-                    <input type="text" class="form-control" formControlName="nomApp" placeholder="" required>
+                    <input type="text" class="form-control" formControlName="nomAPI" placeholder="" required>
                   </div>
                   <div class="form-group">
                     <label for="descriptionAPI">Description de l'API:</label>
-                    <textarea class="form-control" formControlName="description" rows="3"></textarea>
+                    <textarea class="form-control" formControlName="descriptionAPI" rows="3"></textarea>
                   </div>
                   <div class="form-group">
                     <label for="cadreAPI">Le cadre d'utilisation:</label>
-                    <input type="text" class="form-control"  placeholder="" required>
+                    <input type="text" class="form-control" formControlName="cadreAPI" placeholder="" required>
                   </div>
                   <div class="form-group">
                     <label for="donneesEntree">Donnees d'entree:</label>
-                    <input type="text" class="form-control"  placeholder="" required>
+                    <input type="text" class="form-control" formControlName="donneesEntree" placeholder="" required>
                   </div>
                   <div class="form-group">
                     <label for="donneedeSortie">Donnees de Sortie:</label>
-                    <input type="text" class="form-control" placeholder="" required>
+                    <input type="text" class="form-control" formControlName="donneesSortie" placeholder="" required>
                   </div>
                   <div class="form-group">
                     <label for="impact">L'impact Attendu:</label>
-                    <textarea class="form-control"  rows="3"></textarea>
+                    <textarea class="form-control" formControlName="impact" rows="3"></textarea>
                   </div>
             
             
@@ -87,38 +87,40 @@
                   <h2>2-Informations sur l'application consommant l'API:</h2>
                   <div class="form-group">
                     <label >Nom de l'hébergeur</label>
-                    <input type="text" class="form-control"  placeholder="" required>
+                    <input type="text" class="form-control" formControlName="nomHebergeur" placeholder="" required>
                   </div>
                   <div class="form-group">
-                    <label >Hébergeur situé en Tunisie </label><div class="checkbox-container" >
+                    <label >Hébergeur situé en Tunisie </label>
+                    <div class="checkbox-container">
                       <label for="oui">Oui</label>
-                      <input type="checkbox" id="oui"  formControlName="paysHebergeur">
+                      <input type="checkbox" id="oui" formControlName="hebergeurSitueTunisie">
                       <label for="non">Non</label>
-                      <input type="checkbox" id="non" formControlName="paysHebergeur">
+                      <input type="checkbox" id="non" formControlName="hebergeurSitueTunisie">
+                    </div>
+                    <textarea class="form-control" id="situé" rows="3" formControlName="paysHebergeur" placeholder="Si non, veuillez spécifier le pays."></textarea>
                   </div>
-                    <textarea class="form-control" id="situé" rows="3" placeholder="Si non, veuillez spécifier le pays."></textarea>
-                       
-                  </div>
+                
                   <div class="form-group">
-                    <label>Application publié sur Internet</label>
-                    <div class="checkbox-container" >
-                        <label for="oui">Oui</label>
-                        <input type="checkbox" id="oui" >
-                        <label for="non">Non</label>
-                        <input type="checkbox" id="non" >
+                    <label >Application publié sur Internet</label>
+                    <div class="checkbox-container">
+                      <label for="oui">Oui</label>
+                      <input type="checkbox" id="oui" formControlName="applicationPublieInternet">
+                      <label for="non">Non</label>
+                      <input type="checkbox" id="non" formControlName="applicationPublieInternet">
                     </div>
                   </div>
+                  
                   <div class="form-group">
                     <label >Le nom de domaine de l'application</label>
-                    <input type="text" class="form-control" formControlName="nomDomaineApp" placeholder="">
+                    <input type="text" class="form-control" id="domaine" placeholder="">
                   </div>
                   <div class="form-group">
                     <label >Adresses IP des serveurs:</label>
-                    <input type="text" class="form-control" formControlName="adresseIpApp" placeholder="">
+                    <input type="text" class="form-control" id="addresseIP" placeholder="">
                   </div>
                   <div class="form-group">
                     <label >Type de connexion au CNI (RNIA,VPN…)</label>
-                    <input type="text" class="form-control" formControlName="typeConnexion" placeholder="">
+                    <input type="text" class="form-control" id="typeCnx" placeholder="">
                   </div>
             
             
@@ -126,15 +128,15 @@
                   <h2>3-Type de consommation:</h2>
                   <div class="form-group">
                     <label >Le nombre estimé d'appels par an</label>
-                    <input type="text" class="form-control" formControlName="nombreAppelAn" placeholder="">
+                    <input type="text" class="form-control" formControlName="nombreEstimeAppelsAn" id="nbrappelan" placeholder="">
                   </div>
                   <div class="form-group">
                     <label >Le nombre estimé d'appels par minute</label>
-                    <input type="text" class="form-control" formControlName="nombreAppelMin" placeholder="">
+                    <input type="text" class="form-control"  formControlName="nombreEstimeAppelsMin" id="nbrappelmin" placeholder="">
                   </div>
                   <div class="form-group">
                     <label >Avez-vous besoin d'invoquer l'API en masse: </label>
-                    <input type="text" class="form-control"  placeholder="">
+                    <input type="text" class="form-control" id="cadreAPI" placeholder="">
                   </div>
             
             
@@ -159,13 +161,12 @@
                   </div>
                   <div class="form-group">
                     <label >Adresse mail professionnelle</label>
-                    <input type="text" class="form-control" placeholder="">
+                    <input type="text" class="form-control"  placeholder="">
                   </div>
                   <div class="form-group">
                     <label >Numéro du téléphone </label>
                     <input type="text" class="form-control"  placeholder="">
                   </div>
-                  
             
                   
                   <button type="submit" class="btn btn-primary">Suivant</button>

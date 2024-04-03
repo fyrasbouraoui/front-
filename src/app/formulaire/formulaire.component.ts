@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup , Validators } from '@angular/forms';
 import { DemandeServiceService } from '../services/demande-service.service';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router'; 
@@ -19,7 +19,7 @@ export class FormulaireComponent implements OnInit{
     this.getApis();
   }
   getApis(): void {
-    this.apiService.getApis()
+    this.apiService.getAllApis()
       .subscribe(apis => this.apis = apis);
   }
   constructor(
@@ -30,21 +30,31 @@ export class FormulaireComponent implements OnInit{
     private router: Router
   ) {
     this.demandeform = this._fb.group({
-      description: '',
-      nomApp: '',
-      hebergeurApp: '',
-      publie: '',
-      nomDomaineApp: '',
-      adresseIpApp: '',
-      typeConnexion: '',
-      nombreAppelAn: '',
-      nombreAppelMin: '',
-      invoMasse: '',
-      paysHebergeur: '',
-      dateInvMasse: '',
-      raisonInMasse: '',
-      dateCreation: '',
-      dateModification: '',
+      etablissementDemandeur: ['', Validators.required],
+      etablissementFournisseur: ['', Validators.required],
+      etablissementProprietaire: ['', Validators.required],
+      nomAPI: ['', Validators.required],
+      descriptionAPI: ['', Validators.required],
+      cadreAPI: ['', Validators.required],
+      donneesEntree: ['', Validators.required],
+      donneesSortie: ['', Validators.required],
+      impact: ['', Validators.required],
+      nomHebergeur: ['', Validators.required],
+      hebergeurSitueTunisie: [''],
+      paysHebergeur: [''],
+      applicationPublieInternet: [''],
+      nomDomaineApplication: [''],
+      adressesIPServeurs: [''],
+      typeConnexionCNI: [''],
+      nombreEstimeAppelsAn: ['', Validators.required],
+      nombreEstimeAppelsMin: ['', Validators.required],
+      besoinInvoquerAPIEnMasse: [''],
+      nomResponsableCNI: [''],
+      adresseMailProfessionnelleResponsableCNI: [''],
+      numeroTelephoneResponsableCNI: [''],
+      nomResponsable: [''],
+      adresseMailProfessionnelleResponsable: [''],
+      numeroTelephoneResponsable: ['']
     });
   }
 
