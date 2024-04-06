@@ -145,12 +145,12 @@
                     
                     <div class="input-text">
                         <div class="input-div">
-                          <p>liste Apis</p>
-                          <select class="form-control" >
-                            <option *ngFor="let api of apis" [value]="api.nom">{{ api.nom }}</option>
-                          </select>
-                         
-                        
+                          <div class="form-group">
+                            <label for="nomAPI">Select Api</label>
+                            <select class="form-control" formControlName="nomAPI">
+                              <option *ngFor="let api of apis" [value]="api.idApi">{{ api.nom }}</option>
+                            </select>
+                          </div>
                         </div>
                         
                     </div>
@@ -179,22 +179,7 @@
                           <span>Application publié sur Internet</span>
                       </div>
                   </div>
-                  <div class="input-text">
-                      <div class="input-div">
-                          <select>
-                              <option>Select Course</option>
-                              <option>BCA</option>
-                              <option>B-TECH</option>
-                              <option>BA</option>
-                              <option>B-COM</option>
-                              <option>B-SC</option>
-                              <option>MBA</option>
-                              <option>MCA</option>
-                              <option>M-COM</option>
-                              <option>M-TECH</option>
-                          </select>
-                      </div>
-                  </div>
+                  
                   <div class="input-text">
                     <div class="input-div">
                         <input type="text" formControlName="nomDomaineApplication">
@@ -214,7 +199,7 @@
                 </div>
             </div>
                   <div class="buttons button_space">
-                      <button class="back_button">Back</button>
+                      <button class="back_button" (click)="prevStep();">Back</button>
                       <button type="button" class="next_button" (click)="nextStep(); contentChange()">Suivant</button>
                   </div>
               </div>
@@ -334,8 +319,8 @@
                     </svg>
                      
                     <div class="text congrats">
-                        <h2>Congratulations!</h2>
-                        <p>Merci Mr./Mrs. <span class="shown_name"></span> your information have been submitted successfully for the future reference we will contact you soon.</p>
+                        <h2>félicitations!</h2>
+                        <p>Merci Mr./Mrs. <span class="shown_name"></span> vos informations ont été soumises avec succès.</p>
                     </div>
                 </div>
                 

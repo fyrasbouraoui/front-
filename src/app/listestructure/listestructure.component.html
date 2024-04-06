@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="liste.component.scss">
+    <link rel="stylesheet" href="listestructure.component.html">
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
@@ -103,42 +103,51 @@
                             <div class="table-title">
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <h2>Liste <b>APIs</b></h2>
+                                        <h2>Liste <b>Utilisateur</b></h2>
                                     </div>
                                     <div class="col-sm-6">
-                                      <a class="btn btn-success" (click)="openAddEditEmpForm()"><i class="material-icons">&#xE147;</i> <span>Ajouter </span></a>
+                                        <button type="button" class="btn btn-primary" (click)="openAddUserModal()">Ajouter</button>
                                     </div>
                                 </div>
                             </div>
                             <table class="table table-striped table-hover">
                                 <thead>
-                                  <tr>
-                                    <th>Nom</th>
-                                    <th>code</th>
-                                    <th>description</th>
-                                    <th>input</th>
-                                    <th>output</th>
-                                    <th>cadre d'utilisation</th>
-                                    <th>action</th>
-                                  </tr>
+                                    <tr>
+                                        <th>
+                                            <span class="custom-checkbox">
+                                                <input type="checkbox" id="selectAll">
+                                                <label for="selectAll"></label>
+                                            </span>
+                                        </th>
+                                        <th>code</th>
+                                        <th>Email</th>
+                                        <th>adress</th>
+                                        <th>role</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                  <tr *ngFor="let row of dataSource.data">
-
-                                    <td>{{ row.nom }}</td>
-                                    <td>{{ row.code }}</td>
-                                    <td>{{ row.description }}</td>
-                                    <td>{{ row.input }}</td>
-                                    <td>{{ row.output }}</td>
-                                    <td>{{ row.cadreUtilisation }}</td>
-                                    <td>
-                                      <a  class="edit" (click)="editRow(row)"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                      <a class="delete" (click)="deleteApi(row.idApi)"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                                    </td>
-                                  </tr>
+                                    <tr *ngFor="let structure of structures; let i = index" [attr.id]="'structure-row-' + i">
+                                        <td>
+                                            <span class="custom-checkbox">
+                                                <input type="checkbox" id="checkbox{{structure.idstr}}" name="options[]" [value]="structure.idstr">
+                                                <label for="checkbox{{structure.idstr}}"></label>
+                                            </span>
+                                        </td>
+                                        <td>{{ structure.code }}</td>
+                                        <td>{{ structure.email }}</td>
+                                        <td>{{ structure.telStr }}</td>
+                                        <td>{{ structure.adresse }}</td>
+                                        <td>{{ structure.role }}</td>
+                                        <td>
+                                            <a class="edit" ><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                                            <a class="delete" ><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                            <button class="details-button" >Details</button>
+                                        </td>
+                                    </tr>
                                 </tbody>
-                              </table>
-                              
+                            </table>
+                        
+                            
                             <div class="clearfix">
                                 <div class="hint-text">Page <b>1</b> de <b>25</b> autres</div>
                                 <ul class="pagination">
@@ -160,5 +169,4 @@
                 </div>
             </div>
         </div>
-    
     

@@ -5,6 +5,7 @@ import { User } from '../interface/user.model';
 import { tap } from 'rxjs/operators'; 
 import { RegisterRequest } from '../interface/registerrequest.model';
 import {AuthenticationResponse} from '../interface/authenticationresponse.model'
+import { RegisterStructureRequest } from '../interface/registerstructurerequest.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -25,6 +26,9 @@ export class UserService {
 
   createUser(request: RegisterRequest, profileName: string): Observable<AuthenticationResponse> {
     return this.http.post<AuthenticationResponse>(`${this.baseUrl}/register?profileName=${profileName}`, request);
+  }
+   registerStructure(request: RegisterStructureRequest, profileName: string): Observable<AuthenticationResponse> {
+    return this.http.post<AuthenticationResponse>(`${this.baseUrl}/registerStructure?profileName=${profileName}`, request);
   }
   
   updateUser(idUser: number, userData: any) {
@@ -53,18 +57,14 @@ export class UserService {
   
 
   logout(): Observable<string> {
-    // Remove the authentication token from localStorage
     localStorage.removeItem(this.authTokenKey);
-    // Specify responseType as 'text'
     return this.http.post<string>(`${this.baseUrl}/logout`, null, { responseType: 'text' as 'json' });
   }
   getToken(): string | null {
-    // Retrieve the authentication token from localStorage
     return localStorage.getItem(this.authTokenKey);
   }
 
   isLoggedIn(): boolean {
-    // Check if the user is logged in by verifying the presence of the authentication token
     return !!this.getToken();
   }
   setUserInfo(userId: number, profileId: number, structureId: number): void {
@@ -76,15 +76,6 @@ export class UserService {
     const currentUserString = localStorage.getItem('currentUser');
     if (currentUserString) {
       return JSON.parse(currentUserString);
-    } else {
-      return null;
-    }
-  }
-  getUserId(): number | null {
-    const userInfoString = localStorage.getItem('userInfo');
-    if (userInfoString) {
-      const userInfo = JSON.parse(userInfoString);
-      return userInfo.userId;
     } else {
       return null;
     }

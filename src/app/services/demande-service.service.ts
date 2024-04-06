@@ -39,12 +39,14 @@ export class DemandeServiceService {
   validateDemande(id: number, userId: number): Observable<string> {
     return this._http.post<string>(`${this.baseUrl}/${id}/validation?userId=${userId}`, {});
   }
-  createDemande(demande: any, structureId: number | null, userId: number | null, profileId: number | null): Observable<any> {
+  createDemande(demande: any, structureId: number | null, userId: number | null, profileId: number | null, apiId:number): Observable<any> {
     console.log('structureId:', structureId);
     console.log('userId:', userId);
     console.log('profilId:', profileId);
+    console.log('apiId', apiId);
+
   
-      return this._http.post<Demande>(`${this.baseUrl}/create?structureId=${structureId}&userId=${userId}&profilId=${profileId}`, demande);
+      return this._http.post<Demande>(`${this.baseUrl}/create?structureId=${structureId}&userId=${userId}&profilId=${profileId}&apiId=${apiId}`, demande);
     }
   
   

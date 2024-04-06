@@ -26,7 +26,7 @@ export class ListeComponent {
         this.isSubMenu = !this.isSubMenu;
 
     }
-    displayedColumns: string[] = ['nom', 'code', 'description', 'input', 'output', 'cadreUtilisation','action']
+    displayedColumns: string[] = ['id','nom', 'code', 'description', 'input', 'output', 'cadreUtilisation','action']
   dataSource!: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -113,19 +113,17 @@ ngOnInit(): void {
       }
     
     
-     deleteRow(row: any) {
-    const id = row.id; // Assuming 'id' is the property containing the unique identifier of the row
-    this._apiservice.deleteApi(id).subscribe(
-      () => {
-        console.log('Row deleted successfully:', row);
-        // Optionally, remove the row from the table after successful deletion
-        const index = this.dataSource.data.indexOf(row);
-        this.dataSource.data.splice(index, 1);
-        this.dataSource._updateChangeSubscription();
-      },
-      (error) => {
-        console.error('Error deleting row:', error);
+      deleteApi(idApi: number): void {
+        // Call the delete API service method
+        this._apiservice.deleteApi(idApi).subscribe({
+          next: () => {
+            // Remove the deleted item from the data source
+            this.dataSource.data = this.dataSource.data.filter((item: any) => item.idApi !== idApi);
+            console.log('API deleted successfully');
+          },
+          error: (error: any) => {
+            console.error('Error deleting API:', error);
+          }
+        });
       }
-    );
-  }
 }

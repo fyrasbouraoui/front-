@@ -2,7 +2,6 @@ import { Demande } from "./demande.model";
 import { Profil } from "./profil.model";
 import { User } from "./user.model";
 
-// structure.model.ts
 export interface Structure {
     idstr?: number;
     code: number;

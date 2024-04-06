@@ -32,7 +32,7 @@ export class TestComponent implements OnInit {
         etablissementDemandeur: [''],
         etablissementFournisseur: [''],
         etablissementProprietaire: [''],
-        nomAPI: [''],
+        nomAPI: ['', Validators.required],
         descriptionAPI: [''],
         cadreAPI: [''],
         donneesEntree: [''],
@@ -76,11 +76,13 @@ export class TestComponent implements OnInit {
             ...this.demandeform.value,
             userId: userInfo.idUser,
             profilId: userInfo.profileId,
-            structureId: userInfo.structureId
+            structureId: userInfo.structureId,
+            apiId: this.demandeform.value.nomAPI
+
           };
   
           // Make the HTTP request to create the demand with the user information
-          this._demandeservice.createDemande(demandData, userInfo.structureId, userInfo.idUser, userInfo.profileId).subscribe({
+        this._demandeservice.createDemande(demandData, userInfo.structureId, userInfo.idUser, userInfo.profileId,demandData.apiId).subscribe({
             next: (val: any) => {
               console.log('Demande created successfully:', val);
               alert('Ajouter avec succès');
@@ -152,28 +154,22 @@ export class TestComponent implements OnInit {
       return;
     }
 
-    // Hide the current step
     const currentStep = document.querySelector('.main.active');
     if (currentStep) {
       currentStep.classList.remove('active');
     }
 
-    // Show the next step
     const nextStep = document.querySelector('.main:nth-child(' + (this.formnumber + 2) + ')');
     if (nextStep) {
       nextStep.classList.add('active');
     }
 
-    // Increment the form number
     this.formnumber++;
 
-    // Update the step number in the progress bar
     this.num.innerHTML = (this.formnumber + 1).toString();
 
-    // Update the progress bar
     this.progressForward();
 
-    // Update the step content indicator
     this.contentChange();
 }
 

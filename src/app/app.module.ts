@@ -34,6 +34,8 @@ import { InscriptionComponent } from './inscription/inscription.component';
 import { RouterModule } from '@angular/router';
 import { AuthGuard } from './services/auth-guard.service';
 import { Validation2Component } from './validation2/validation2.component';
+import { ListestructureComponent } from './listestructure/listestructure.component';
+import { InscriptionstrComponent } from './inscriptionstr/inscriptionstr.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,9 @@ import { Validation2Component } from './validation2/validation2.component';
     ConnectionComponent,
     Validation1Component,
     UpdateUserDialogComponent,
-    Validation2Component  ],
+    Validation2Component,
+    ListestructureComponent,
+    InscriptionstrComponent  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

@@ -13,6 +13,7 @@ import { ConnectionComponent } from './connection/connection.component';
 import { Validation1Component } from './validation1/validation1.component';
 import { InscriptionComponent } from './inscription/inscription.component';
 import { Validation2Component } from './validation2/validation2.component';
+import { ListestructureComponent } from './listestructure/listestructure.component';
 
 const routes: Routes = [
   { path: 'form', component: FormulaireComponent },
@@ -28,6 +29,9 @@ const routes: Routes = [
   { path: 'connect', component: ConnectionComponent },
   { path: 'validation1', component: Validation1Component },
   { path: 'validation2', component: Validation2Component },
+  { path: 'str', component: ListestructureComponent },
+
+
 
 
 
