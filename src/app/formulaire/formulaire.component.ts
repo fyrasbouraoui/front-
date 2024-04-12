@@ -68,12 +68,24 @@ export class FormulaireComponent implements OnInit{
         // Get the user information from the service
         const userInfo = this.userService.getUserInfo();
         console.log('Form submitted successfully');
+        const hebergeurSitueTunisieValue = this.demandeform.value.hebergeurSitueTunisie === 'oui';
+        const besoinInvoquerAPIEnMasse = this.demandeform.value.besoinInvoquerAPIEnMasse === 'oui';
+        const applicationPublieInternet = this.demandeform.value.applicationPublieInternet === 'oui';
+
+
+
 
         // Check if userInfo is not null
         if (userInfo) {
           // Create an object containing the demand data along with the user information
           const demandData = {
             ...this.demandeform.value,
+            hebergeurSitueTunisie: hebergeurSitueTunisieValue,
+            besoinInvoquerAPIEnMasse: besoinInvoquerAPIEnMasse,
+            applicationPublieInternet: applicationPublieInternet,
+
+
+
             userId: userInfo.idUser,
             profilId: userInfo.profileId,
             structureId: userInfo.structureId,

@@ -1,0 +1,33 @@
+.dialog-title {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  mat-dialog-content {
+    padding: 20px;
+  }
+  
+  mat-form-field {
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 50%;
+    margin-bottom: 20px;
+  }
+  
+  textarea.mat-input-element {
+    resize: vertical;
+    min-height: 100px;
+  }
+  
+  mat-dialog-actions {
+    justify-content: flex-end;
+    margin-top: 20px;
+  }
+  
+  .cancel-button {
+    margin-right: 10px;
+  }
+  

@@ -126,4 +126,15 @@ ngOnInit(): void {
           }
         });
       }
+      showDetails(row: any) {
+        let detailsMessage = `Details:
+      - Nom: ${row.nom}
+      - Code: ${row.code}
+      - Description: ${row.description}
+      - Input: ${row.input}
+      - Output: ${row.output}
+      - cadreUtilisation: ${row.cadreUtilisation}`;
+      
+        alert(detailsMessage);
+      }
 }

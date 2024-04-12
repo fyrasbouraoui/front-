@@ -25,7 +25,7 @@
         </ul>
       </li>
       <li>
-        <a href="#">
+        <a href="dashboard">
           <i class='bx bx-grid-alt' ></i>
           <span class="link_name">Dashboard</span>
         </a>
@@ -177,11 +177,13 @@
                       </div>
                       
                   </div>
-                  <div class="input-text">
-                      <div class="input-div">
-                          <input type="text"  >
-                          <span>Application publié sur Internet</span>
-                      </div>
+                  
+                  <div class="input-div"> 
+                    <select formControlName="applicationPublieInternet">
+                      <option value="" disabled selected>Application publié sur Internet</option>
+                      <option value="oui">Oui</option>
+                      <option value="non">Non</option>
+                    </select>
                   </div>
                   
                   <div class="input-text">
@@ -223,7 +225,7 @@
                     </div>
                     
                     <div class="input-div"> 
-                      <select formControlName="hebergeurSitueTunisie">
+                      <select formControlName="besoinInvoquerAPIEnMasse">
                         <option value="" disabled selected>Avez-vous besoin d'invoquer l'API en masse</option>
                         <option value="oui">Oui</option>
                         <option value="non">Non</option>

@@ -36,6 +36,7 @@ import { AuthGuard } from './services/auth-guard.service';
 import { Validation2Component } from './validation2/validation2.component';
 import { ListestructureComponent } from './listestructure/listestructure.component';
 import { InscriptionstrComponent } from './inscriptionstr/inscriptionstr.component';
+import { dashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,9 @@ import { InscriptionstrComponent } from './inscriptionstr/inscriptionstr.compone
     UpdateUserDialogComponent,
     Validation2Component,
     ListestructureComponent,
-    InscriptionstrComponent  ],
+    InscriptionstrComponent,
+    dashboardComponent
+      ],
   imports: [
     BrowserModule,
     AppRoutingModule,

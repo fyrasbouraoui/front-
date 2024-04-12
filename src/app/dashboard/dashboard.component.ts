@@ -7,11 +7,11 @@ import { ApiService } from '../services/api.service';
 import { forkJoin } from 'rxjs';
 
 @Component({
-  selector: 'app-test',
-  templateUrl: './test.component.html',
-  styleUrls: ['./test.component.scss']
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.scss']
 })
-export class TestComponent implements OnInit {
+export class dashboardComponent implements OnInit {
   userName: string = '';
   profileName: string = '';
   totalUsers: number = 0;
@@ -74,7 +74,7 @@ export class TestComponent implements OnInit {
     const myChart = new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: ['Users', 'Demands', 'APIs'],
+        labels: ['Utilisateur', 'Demandes', 'APIs'],
         datasets: [{
           label: '',
           data: [this.totalUsers, this.totalDemandes, this.totalAPIs],

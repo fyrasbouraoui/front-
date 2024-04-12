@@ -120,6 +120,7 @@ export class Validation1Component implements OnInit {
   }
 
   handleCheckIconClick(id: number): void {
+    
     const userInfo = this.userService.getUserInfo();
 
     if (userInfo !== null) {
@@ -134,6 +135,8 @@ export class Validation1Component implements OnInit {
       this.demandeService.validateDemande(id, userId).subscribe(
         (response: string) => {
           console.log('Validation success:', response);
+          alert("Validation success")
+
           this.validationMessage = response;
 
           // After successful validation, refetch the demandes
@@ -141,10 +144,41 @@ export class Validation1Component implements OnInit {
         },
         (error: any) => {
           console.error('Validation error:', error);
+          alert("Validation error")
         }
       );
     } else {
       console.error('User info is null.');
     }
+  }
+  showDetails(row: any) {
+    let detailsMessage = `Details:
+  - Établissement Demandeur: ${row.etablissementDemandeur}
+  - Établissement Fournisseur: ${row.etablissementFournisseur}
+  - Établissement Propriétaire: ${row.etablissementProprietaire}
+  - Nom API: ${row.nomAPI}
+  - Description API: ${row.descriptionAPI}
+  - Cadre API: ${row.cadreAPI}
+  - Données Entrée: ${row.donneesEntree}
+  - Données Sortie: ${row.donneesSortie}
+  - Impact: ${row.impact}
+  - Nom Hébergeur: ${row.nomHebergeur}
+  - Hébergeur Situé en Tunisie: ${row.hebergeurSitueTunisie}
+  - Pays Hébergeur: ${row.paysHebergeur}
+  - Application Publiée sur Internet: ${row.applicationPublieInternet}
+  - Nom de Domaine de l'Application: ${row.nomDomaineApplication}
+  - Adresses IP des Serveurs: ${row.adressesIPServeurs}
+  - Type de Connexion CNI: ${row.typeConnexionCNI}
+  - Nombre Estimé d'Appels par An: ${row.nombreEstimeAppelsAn}
+  - Nombre Estimé d'Appels par Minute: ${row.nombreEstimeAppelsMin}
+  - Besoin d'Invoquer l'API en Masse: ${row.besoinInvoquerAPIEnMasse}
+  - Nom Responsable CNI: ${row.nomResponsableCNI}
+  - Adresse Mail Professionnelle du Responsable CNI: ${row.adresseMailProfessionnelleResponsableCNI}
+  - Numéro de Téléphone du Responsable CNI: ${row.numeroTelephoneResponsableCNI}
+  - Nom Responsable: ${row.nomResponsable}
+  - Adresse Mail Professionnelle Responsable: ${row.adresseMailProfessionnelleResponsable}
+  - Numéro de Téléphone Responsable: ${row.numeroTelephoneResponsable}`;
+  
+    alert(detailsMessage);
   }
 }

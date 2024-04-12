@@ -7,7 +7,7 @@ import { User } from '../interface/user.model';
 @Component({
   selector: 'app-update-user-dialog',
   templateUrl: './update-user-dialog.component.html',
-  styleUrl: './update-user-dialog.component.scss'
+  styleUrls: ['./update-user-dialog.component.scss'] // Corrected here
 })
 export class UpdateUserDialogComponent {
   userForm: FormGroup;
@@ -23,18 +23,22 @@ export class UpdateUserDialogComponent {
       cin: [data.cin, Validators.required],
       email: [data.email, [Validators.required, Validators.email]],
       password: [data.password, Validators.required],
-      mobile: [data.mobile, Validators.required]
+      mobile: [data.mobile]
     });
   }
 
   onSubmit() {
+    console.log(this.userForm.value); // Add this line to log form values
     if (this.userForm.valid) {
       this.userService.updateUser(this.data.idUser, this.userForm.value)
-        .subscribe(updatedUser => {
-          this.dialogRef.close(updatedUser); 
+        .subscribe({
+          next: (updatedUser) => this.dialogRef.close(updatedUser),
+          error: (error) => console.error('There was an error updating the user', error)
         });
     }
-  }  
+  }
+  
+
   onCancelClick(): void {
     this.dialogRef.close();
   }

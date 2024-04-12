@@ -1,4 +1,4 @@
-import { Component, NgModule } from '@angular/core';
+import {  NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FormulaireComponent } from './formulaire/formulaire.component';
 import { ListeComponent } from './listeapi/liste.component';
@@ -14,6 +14,7 @@ import { Validation1Component } from './validation1/validation1.component';
 import { InscriptionComponent } from './inscription/inscription.component';
 import { Validation2Component } from './validation2/validation2.component';
 import { ListestructureComponent } from './listestructure/listestructure.component';
+import {dashboardComponent} from './dashboard/dashboard.component';
 
 const routes: Routes = [
   { path: 'form', component: FormulaireComponent },
@@ -30,6 +31,7 @@ const routes: Routes = [
   { path: 'validation1', component: Validation1Component },
   { path: 'validation2', component: Validation2Component },
   { path: 'str', component: ListestructureComponent },
+  { path: 'dashboard', component:dashboardComponent }
 
 
 
