@@ -1,83 +1,50 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #f2f2f2;
-}
-
 .container {
-    width: 400px;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 4px;
-    margin: auto;
-    border-radius: 4px;
-    margin-top: 50px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
-}
-
-.container h1 {
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-
-.form-group input,
-.form-group select {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-.form-group select {
-    height: 44px;
-}
-
-.form-group input:focus,
-.form-group select:focus {
-    outline: none;
-    box-shadow: 0 0 2px 1px #4caf50;
-}
-
-
-.form-group button {
+    max-width: 400px;
+    margin: 5 auto;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="tel"],
+  select {
     width: 100%;
     padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s;
+  }
+  
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="password"]:focus,
+  input[type="tel"]:focus,
+  select:focus {
+    border-color: #007bff;
+  }
+  
+  button[type="submit"] {
+    width: 100%;
+    background-color: #1d1b31;
+    color: #fff;
     border: none;
-    border-radius: 4px;
-    background-color: #85050a;
-    margin-bottom: 10px;
-    /* Ajoutez une marge basse pour séparer les boutons */
-}
-
-/* Vous pouvez également appliquer des styles spécifiques aux boutons ici, comme les couleurs, polices, etc. */
-.btn-cancel {
-    background-color: #e74c3c;
-    /* Couleur de fond rouge pour le bouton Annuler Inscription */
-    color: #fff;
-    /* Couleur du texte blanc */
-}
-
-.btn-submit {
-    background-color: #3498db;
-    /* Couleur de fond bleue pour le bouton Inscrivez-vous */
-    color: #fff;
-    /* Couleur du texte blanc */
-}
-
-
-/* Stylisez les liens (<a>) comme vous le souhaitez */
-a {
-    text-decoration: none;
-    color: inherit;
-}
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #1d1b31;
+  }
+  

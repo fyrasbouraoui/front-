@@ -37,6 +37,9 @@ import { Validation2Component } from './validation2/validation2.component';
 import { ListestructureComponent } from './listestructure/listestructure.component';
 import { InscriptionstrComponent } from './inscriptionstr/inscriptionstr.component';
 import { dashboardComponent } from './dashboard/dashboard.component';
+import { ShowApiDetailComponent } from './show-api-detail/show-api-detail.component';
+import { ShowuserdetailComponent } from './showuserdetail/showuserdetail.component';
+import { ShowDemandeDetailComponent } from './show-demande-detail/show-demande-detail.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +62,10 @@ import { dashboardComponent } from './dashboard/dashboard.component';
     Validation2Component,
     ListestructureComponent,
     InscriptionstrComponent,
-    dashboardComponent
+    dashboardComponent,
+    ShowApiDetailComponent,
+    ShowuserdetailComponent,
+    ShowDemandeDetailComponent
       ],
   imports: [
     BrowserModule,

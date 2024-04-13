@@ -72,15 +72,7 @@
         </ul>
       </li>
       <li>
-      <li>
-        <a href="profile">
-          <i class='bx bx-cog' ></i>
-          <span class="link_name">Profile</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="profile">Profile</a></li>
-        </ul>
-      </li>
+      
       <li>
     <div class="profile-details">
       <div class="profile-content">
@@ -106,7 +98,7 @@
                                         <h2>Liste <b>Utilisateur</b></h2>
                                     </div>
                                     <div class="col-sm-6">
-                                        <button type="button" class="btn btn-primary" (click)="openAddUserModal()">Ajouter</button>
+                                        <button type="button" class="btn btn-primary" (click)="openAddUserModal()"><i class="material-icons">&#xE147;</i><span>Ajouter</span></button>
                                     </div>
                                 </div>
                             </div>
@@ -129,7 +121,7 @@
                                         <td>
                                             <a class="edit" (click)="openUpdateUserDialog(user)"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                                             <a class="delete" (click)="deleteUser(user.idUser!)"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                                            <a class="details" (click)="showDetails(user, i)"><i class="material-icons" title="Details">&#xE88E;</i></a>
+                                            <a class="details" (click)="showDetails(user)"><i class="material-icons" title="Details">&#xE88E;</i></a>
 
                                         </td>
                                         <td>
@@ -137,12 +129,7 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            <div *ngIf="selectedUser" class="details-section">
-                                <p><strong>Prenom:</strong> {{ selectedUser.prenom }}</p>
-                                <p><strong>Email:</strong> {{ selectedUser.email }}</p>
-                                <p><strong>CIN:</strong> {{ selectedUser.cin }}</p>
-                                <p><strong>Mobile:</strong> {{ selectedUser.mobile }}</p>
-                            </div>
+                           
                             
                             
                             <div class="clearfix">

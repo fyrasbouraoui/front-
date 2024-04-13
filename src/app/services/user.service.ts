@@ -45,10 +45,8 @@ export class UserService {
       tap((response) => {
         if (response && response.token && response.nomProfil) {
           localStorage.setItem(this.authTokenKey, response.token);
-          // Store user's profile name
           localStorage.setItem('user_profile', response.nomProfil);
         } else {
-          // Handle the case where the response, token, or profile name is missing
           console.error('Token or profile name is missing in the response');
         }
       })

@@ -5,6 +5,9 @@ import { Status } from '../interface/status.model';
 import { StatusService } from '../services/status.service';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router'; 
+import { ShowDemandeDetailComponent } from '../show-demande-detail/show-demande-detail.component';
+import { MatDialog } from '@angular/material/dialog';
+
 
 
 @Component({
@@ -24,6 +27,7 @@ export class GerdemandeComponent implements OnInit {
     private statusService: StatusService,
     private userService: UserService,
     private router: Router,
+    private dialog:MatDialog 
   ) {}
 
   ngOnInit() {
@@ -163,34 +167,10 @@ handleCheckIconClick(id: number): void {
   }
 }
 showDetails(row: any) {
-  let detailsMessage = `Details:
-- Établissement Demandeur: ${row.etablissementDemandeur}
-- Établissement Fournisseur: ${row.etablissementFournisseur}
-- Établissement Propriétaire: ${row.etablissementProprietaire}
-- Nom API: ${row.nomAPI}
-- Description API: ${row.descriptionAPI}
-- Cadre API: ${row.cadreAPI}
-- Données Entrée: ${row.donneesEntree}
-- Données Sortie: ${row.donneesSortie}
-- Impact: ${row.impact}
-- Nom Hébergeur: ${row.nomHebergeur}
-- Hébergeur Situé en Tunisie: ${row.hebergeurSitueTunisie}
-- Pays Hébergeur: ${row.paysHebergeur}
-- Application Publiée sur Internet: ${row.applicationPublieInternet}
-- Nom de Domaine de l'Application: ${row.nomDomaineApplication}
-- Adresses IP des Serveurs: ${row.adressesIPServeurs}
-- Type de Connexion CNI: ${row.typeConnexionCNI}
-- Nombre Estimé d'Appels par An: ${row.nombreEstimeAppelsAn}
-- Nombre Estimé d'Appels par Minute: ${row.nombreEstimeAppelsMin}
-- Besoin d'Invoquer l'API en Masse: ${row.besoinInvoquerAPIEnMasse}
-- Nom Responsable CNI: ${row.nomResponsableCNI}
-- Adresse Mail Professionnelle du Responsable CNI: ${row.adresseMailProfessionnelleResponsableCNI}
-- Numéro de Téléphone du Responsable CNI: ${row.numeroTelephoneResponsableCNI}
-- Nom Responsable: ${row.nomResponsable}
-- Adresse Mail Professionnelle Responsable: ${row.adresseMailProfessionnelleResponsable}
-- Numéro de Téléphone Responsable: ${row.numeroTelephoneResponsable}`;
+  const dialogRef = this.dialog.open(ShowDemandeDetailComponent, {
+    width: '500px',
+    data: row // Pass the selected row data to the dialog component
+  });
 
-  alert(detailsMessage);
 }
-
 }

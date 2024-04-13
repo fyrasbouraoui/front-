@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { UpdateUserDialogComponent } from '../update-user-dialog/update-user-dialog.component';
 import { InscriptionComponent } from '../inscription/inscription.component';
 import { Router } from '@angular/router'; 
+import { ShowuserdetailComponent } from '../showuserdetail/showuserdetail.component';
 @Component({
   selector: 'app-listeuser',
   templateUrl: './listeuser.component.html',
@@ -128,17 +129,12 @@ export class ListeuserComponent implements OnInit {
         }
       });
     }
-    showDetails(user: User, index: number) {
-      this.selectedUser = user;
-      const rowElement = document.getElementById(`user-row-${index}`);
-      if (rowElement) {
-          const rect = rowElement.getBoundingClientRect();
-          const topOffset = rect.top + window.pageYOffset + rowElement.offsetHeight;
-          const leftOffset = rect.left + window.pageXOffset;
-          const detailsSection = document.querySelector('.details-section') as HTMLElement;
-          detailsSection.style.top = `${topOffset}px`;
-          detailsSection.style.left = `${leftOffset}px`;
-      }
+    showDetails(row: any) {
+      const dialogRef = this.dialog.open(ShowuserdetailComponent, {
+        width: '400px',
+        data: row // Pass the selected row data to the dialog component
+      });
+    
   }
   
 }

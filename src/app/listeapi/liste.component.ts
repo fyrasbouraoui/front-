@@ -8,6 +8,7 @@ import { MatSort } from '@angular/material/sort';
 import { EditdialogComponent } from '../editapi/editdialog.component';
 import { Router } from '@angular/router'; 
 import { UserService } from '../services/user.service';
+import { ShowApiDetailComponent } from '../show-api-detail/show-api-detail.component';
 @Component({
   selector: 'app-liste',
   templateUrl: './liste.component.html',
@@ -17,6 +18,11 @@ export class ListeComponent {
   userName: string = '';
   profileName: string = '';
   isSubMenuVisible: boolean = false;
+  displayedRows: any[] = [];
+  currentPage: number = 1;
+  pageSize: number = 5;
+  totalPages: number = 0;
+  pageNumbers: number[] = [];
   toggleSubMenu() {
     this.isSubMenuVisible = !this.isSubMenuVisible;
   }
@@ -34,7 +40,7 @@ export class ListeComponent {
 
 constructor(private userService: UserService,private _dialog:MatDialog ,private router: Router, private _apiservice: ApiService){}
 ngOnInit(): void {
-  this.getapis(); 
+  this.getApis(); 
   this.getUserDetails();
     const arrow = document.querySelectorAll(".arrow");
     arrow.forEach(arrowItem => {
@@ -50,7 +56,6 @@ ngOnInit(): void {
     const sidebarBtn = document.querySelector(".bx-menu") as HTMLElement;
 
     if (sidebar) {
-      // Remove 'close' class to expand the sidebar by default
       sidebar.classList.remove("close");
     }
 
@@ -61,17 +66,15 @@ ngOnInit(): void {
     }
   }
   getUserDetails() {
-    // Fetch user details from the UserService
-    const userInfo = this.userService.getUserInfo(); // Assuming this method returns user information
+    const userInfo = this.userService.getUserInfo(); 
     if (userInfo) {
-      this.userName = userInfo.prenom; // Update 'prenom' with the actual property name for the user's name
-      this.profileName = userInfo.profileName; // Update 'profileName' with the actual property name for the profile name
+      this.userName = userInfo.prenom; 
+      this.profileName = userInfo.profileName;
     }
   }
   logout() {
     this.userService.logout().subscribe(
       () => {
-        // Redirect to the '/connect' page after successful logout
         this.router.navigate(['/connect']);
       },
       (error) => {
@@ -83,43 +86,43 @@ ngOnInit(): void {
     this._dialog.open(DialogComponentComponent);
   }
 
-    getapis() {
-      this._apiservice.getAllApis().subscribe({
-        next: (res) => {
-          console.log(res); // Log the received data
-          this.dataSource = new MatTableDataSource(res);
-          this.dataSource.sort = this.sort;
-          this.dataSource.paginator = this.paginator;
-        },
-        error: console.log,
-      });}
+  getApis() {
+    this._apiservice.getAllApis().subscribe({
+      next: (res) => {
+        this.dataSource = new MatTableDataSource(res);
+        this.dataSource.sort = this.sort;
+        this.totalPages = Math.ceil(this.dataSource.data.length / this.pageSize);
+        this.updateDisplayedRows();
+      },
+      error: console.log,
+    });
+  }
 
       editRow(row: any) {
-        // Open edit dialogue with the selected row
+        
         const dialogRef = this._dialog.open(EditdialogComponent, {
-          data: { row: { ...row } }, // Pass a copy of the selected row to prevent changes in the table during editing
+          data: { row: { ...row } }, 
         });
     
         dialogRef.afterClosed().subscribe((result) => {
           if (result) {
-            // Update the row in the data source
             const index = this.dataSource.data.indexOf(row);
             this.dataSource.data[index] = result;
-            // Add logic to save the edited data to the backend using your API service
-            // this._apiservice.updateApi(result).subscribe(/* handle success/error */);
-            this.dataSource._updateChangeSubscription(); // Trigger update in the data source
+           
+            this.dataSource._updateChangeSubscription();
+            this.getApis();
+
           }
         });
       }
     
     
       deleteApi(idApi: number): void {
-        // Call the delete API service method
         this._apiservice.deleteApi(idApi).subscribe({
           next: () => {
-            // Remove the deleted item from the data source
             this.dataSource.data = this.dataSource.data.filter((item: any) => item.idApi !== idApi);
             console.log('API deleted successfully');
+              this.getApis();
           },
           error: (error: any) => {
             console.error('Error deleting API:', error);
@@ -127,14 +130,43 @@ ngOnInit(): void {
         });
       }
       showDetails(row: any) {
-        let detailsMessage = `Details:
-      - Nom: ${row.nom}
-      - Code: ${row.code}
-      - Description: ${row.description}
-      - Input: ${row.input}
-      - Output: ${row.output}
-      - cadreUtilisation: ${row.cadreUtilisation}`;
-      
-        alert(detailsMessage);
+        const dialogRef = this._dialog.open(ShowApiDetailComponent, {
+          width: '400px',
+          data: row // Pass the selected row data to the dialog component
+        });
       }
-}
+      previousPage() {
+        if (this.currentPage > 1) {
+          this.currentPage--;
+          this.updateDisplayedRows();
+        }
+      }
+    
+      nextPage() {
+        if (this.currentPage < this.totalPages) {
+          this.currentPage++;
+          this.updateDisplayedRows();
+        }
+      }
+    
+      goToPage(page: number) {
+        if (page >= 1 && page <= this.totalPages) {
+          this.currentPage = page;
+          this.updateDisplayedRows();
+        }
+      }
+    
+      updateDisplayedRows() {
+        const startIndex = (this.currentPage - 1) * this.pageSize;
+        const endIndex = Math.min(startIndex + this.pageSize, this.dataSource.data.length);
+        this.displayedRows = this.dataSource.data.slice(startIndex, endIndex);
+        this.totalPages = Math.ceil(this.dataSource.data.length / this.pageSize);
+        this.updatePageNumbers();
+      }
+      updatePageNumbers() {
+        this.pageNumbers = [];
+        for (let i = 1; i <= this.totalPages; i++) {
+          this.pageNumbers.push(i);
+        }
+      }
+    }

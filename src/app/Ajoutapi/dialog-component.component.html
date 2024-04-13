@@ -1,41 +1,31 @@
-<form [formGroup]="addform" (ngSubmit)="FormSubmit()">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Add </h4>
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      </div>
-      <div class="modal-body">			
-        <div class="form-group">
-          <label>Nom</label>
-          <input type="text" class="form-control" formControlName="nom" required>
-        </div>
-        <div class="form-group">
-          <label>Code</label>
-          <input type="text" class="form-control" formControlName="code" required>
-        </div>
-        <div class="form-group">
-          <label>description</label>
-          <textarea class="form-control" formControlName="description" required></textarea>
-        </div>
-        <div class="form-group">
-          <label>input</label>
-          <input type="text" class="form-control" formControlName="input" required>
-        </div>
-        <div class="form-group">
-          <label>output</label>
-          <input type="email" class="form-control" formControlName="output" required>
-        </div>
-        <div class="form-group">
-          <label>cadre</label>
-          <input type="text" class="form-control" formControlName="cadreUtilisation" required>
-        </div>
-        					
-      </div>
-      <div class="modal-footer">
-        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-        <button mat-raised-button color="primary" type="submit">Add</button>
-      </div>
+<div class="container">
+  <form [formGroup]="addform" (ngSubmit)="FormSubmit()">
+    <div class="form-group">
+      <label for="nom">Nom</label>
+      <input type="text" id="nom" placeholder="Nom" formControlName="nom">
     </div>
-  </div>
-</form>
+    <div class="form-group">
+      <label for="code">Code</label>
+      <input type="text" id="code" placeholder="Code" formControlName="code">
+    </div>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea id="description" placeholder="Description" formControlName="description"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="input">Input</label>
+      <input type="text" id="input" placeholder="Input" formControlName="input">
+    </div>
+    <div class="form-group">
+      <label for="output">Output</label>
+      <input type="email" id="output" placeholder="Output" formControlName="output">
+    </div>
+    <div class="form-group">
+      <label for="cadre-utilisation">Cadre Utilisation</label>
+      <input type="text" id="cadre-utilisation" placeholder="Cadre Utilisation" formControlName="cadreUtilisation">
+    </div>
+    <div class="form-group">
+      <button type="submit" [disabled]="!addform.valid">Ajouter</button>
+    </div>
+  </form>
+</div>
