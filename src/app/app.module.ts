@@ -40,6 +40,7 @@ import { dashboardComponent } from './dashboard/dashboard.component';
 import { ShowApiDetailComponent } from './show-api-detail/show-api-detail.component';
 import { ShowuserdetailComponent } from './showuserdetail/showuserdetail.component';
 import { ShowDemandeDetailComponent } from './show-demande-detail/show-demande-detail.component';
+import { ListedemandeconsommateurComponent } from './listedemandeconsommateur/listedemandeconsommateur.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { ShowDemandeDetailComponent } from './show-demande-detail/show-demande-d
     dashboardComponent,
     ShowApiDetailComponent,
     ShowuserdetailComponent,
-    ShowDemandeDetailComponent
+    ShowDemandeDetailComponent,
+    ListedemandeconsommateurComponent
       ],
   imports: [
     BrowserModule,

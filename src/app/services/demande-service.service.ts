@@ -33,6 +33,9 @@ export class DemandeServiceService {
       })
     );
   }
+  getAllDemandesByUserId(userId: number): Observable<Demande[]> {
+    return this._http.get<Demande[]>(`${this.baseUrl}/user/${userId}`);
+  }
   getDemandeById(id: number): Observable<Demande> {
     return this._http.get<Demande>(`${this.baseUrl}/${id}`);
   }
