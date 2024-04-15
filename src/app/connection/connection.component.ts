@@ -19,7 +19,14 @@ export class ConnectionComponent {
         alert('Login successful');
         localStorage.setItem('currentUser', JSON.stringify(response)); // Store user info in local storage
         console.log('User information saved:', response);
-        this.router.navigate(['/form']); // Navigate to the user page
+        
+        // Check the profileName
+        const profileName = response.profileName;
+        if (profileName === 'consommateur') {
+          this.router.navigate(['/form']);
+        } else if (profileName === 'admin' || profileName === '1er validateur' || profileName === '2eme validateur') {
+          this.router.navigate(['/dashboard']);
+        } 
       },
       error: (err: any) => {
         console.error('Login failed:', err);

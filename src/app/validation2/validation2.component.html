@@ -1,89 +1,98 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="validation2.component.scss">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   </head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <title>Dashboard</title>
+</head>
 <body>
-  <div class="sidebar close">
-    <div class="logo-details">
-      <i class='bx bx-menu' ></i>
-      <span class="logo_name">Nom Projet</span>
-    </div>
-    <ul class="nav-links">
-      <li>
-        <a href="acceuil">
-          <i class='bx bx-compass' ></i>
-          <span class="link_name">Acceuil</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="#">Acceuil</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="dashboard">
-          <i class='bx bx-grid-alt' ></i>
-          <span class="link_name">Dashboard</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="#">Dashboard</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="form">
-          <i class='bx bx-plug' ></i>
-          <span class="link_name">Demande API</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="#">Demande API</a></li>
-        </ul>
-      </li>
-      <li>
-        <div class="iocn-link">
-          <a >
-            <i class='bx bx-collection' ></i>
-            <span class="link_name">Admin</span>
-          </a>
-          <i class='bx bxs-chevron-down arrow' ></i>
+    
+    <section class="main" >
+      <div class="sidebar close">
+        <div class="logo-details">
+          <i class='bx bx-menu' ></i>
+          <span class="logo_name">Nom Projet</span>
         </div>
-        <ul class="sub-menu">
-          <li><a class="link_name" href="#">Admin</a></li>
-          <li><a href="liste">Liste APIs</a></li>
-          <li><a href="user">Liste Utilisateur</a></li>
-          <li><a href="demande">Liste Demande</a></li>
-        </ul>
-      </li>
-      <li>
-        <div class="iocn-link">
-          <a >
-            <i class='bx bx-book-alt' ></i>
-            <span class="link_name">Data Owner</span>
-          </a>
-          <i class='bx bxs-chevron-down arrow' ></i>
+        <ul class="nav-links">
+          
+          <li  [hidden]="profileName !== 'admin' && profileName !== '1er validateur' && profileName !== '2eme validateur'">
+            <a href="dashboard">
+              <i class='bx bx-grid-alt' ></i>
+              <span class="link_name">Dashboard</span>
+            </a>
+            <ul class="sub-menu blank">
+              <li><a class="link_name" href="#">Dashboard</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="">
+              <i class='bx bx-compass' ></i>
+              <span class="link_name">Demande En cours</span>
+            </a>
+            <ul class="sub-menu blank">
+              <li><a class="link_name" href="#">Demande En cours</a></li>
+            </ul>
+          </li>
+          <li [hidden]="profileName !== 'consommateur'">
+            <a href="form">
+              <i class='bx bx-plug' ></i>
+              <span class="link_name">Demande API</span>
+            </a>
+            <ul class="sub-menu blank">
+              <li><a class="link_name" href="#">Demande API</a></li>
+            </ul>
+          </li>
+          <li [hidden]="profileName !== 'admin'">
+            <div  class="iocn-link">
+              <a >
+                <i class='bx bx-collection'></i>
+                <span class="link_name">Admin</span>
+              </a>
+              <i class='bx bxs-chevron-down arrow'></i>
+            </div>
+            <ul class="sub-menu">
+              <li><a class="link_name" href="#">Admin</a></li>
+              <li><a href="liste">Liste APIs</a></li>
+              <li><a href="user">Liste Utilisateur</a></li>
+              <li><a href="demande">Liste Demande</a></li>
+            </ul>
+          </li>
+          <li [hidden]="profileName !== '1er validateur' && profileName !== '2eme validateur'">
+            <div class="iocn-link">
+              <a >
+                <i class='bx bx-book-alt' ></i>
+                <span class="link_name">Data Owner</span>
+              </a>
+              <i class='bx bxs-chevron-down arrow' ></i>
+            </div>
+            <ul class="sub-menu">
+              <li><a class="link_name" >DataOwner</a></li>
+              <li [hidden]="profileName !== '1er validateur'"><a href="validation1">1er validateur</a></li>
+              <li [hidden]="profileName !== '2eme validateur'"><a href="validation2">2eme validateur</a></li>
+            </ul>
+          </li>
+          <li>
+          
+          <li>
+        <div class="profile-details">
+          <div class="profile-content">
+          </div>
+          <div class="name-job">
+            <div class="profile_name">{{ userName }}</div>
+            <div class="job">{{ profileName }}</div>
+          </div>
+          <i class='bx bx-log-out' (click)="logout()"></i>
         </div>
-        <ul class="sub-menu">
-          <li><a class="link_name" >DataOwner</a></li>
-          <li><a href="validation1">1er validateur</a></li>
-          <li><a href="validation2">2eme validateur</a></li>
-        </ul>
       </li>
-      <li>
-      
-      <li>
-    <div class="profile-details">
-      <div class="profile-content">
+    </ul>
       </div>
-      <div class="name-job">
-        <div class="profile_name">{{ userName }}</div>
-        <div class="job">{{ profileName }}</div>
-      </div>
-      <i class='bx bx-log-out' (click)="logout()"></i>
-    </div>
-  </li>
-</ul>
-  </div>
   
     <div class='dashboard-app'>
         <div class='dashboard-content'>

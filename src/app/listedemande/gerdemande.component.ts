@@ -168,7 +168,7 @@ handleCheckIconClick(id: number): void {
 }
 showDetails(row: any) {
   const dialogRef = this.dialog.open(ShowDemandeDetailComponent, {
-    width: '500px',
+    width: '1000px',
     data: row // Pass the selected row data to the dialog component
   });
 

@@ -148,7 +148,6 @@ export class Validation1Component implements OnInit {
         },
         (error: any) => {
           console.error('Validation error:', error);
-          alert("Validation error")
         }
       );
     } else {

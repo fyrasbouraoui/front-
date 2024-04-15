@@ -15,25 +15,9 @@
       <span class="logo_name">Nom Projet</span>
     </div>
     <ul class="nav-links">
-      <li>
-        <a href="acceuil">
-          <i class='bx bx-compass' ></i>
-          <span class="link_name">Acceuil</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="#">Acceuil</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="dashboard">
-          <i class='bx bx-grid-alt' ></i>
-          <span class="link_name">Dashboard</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="#">Dashboard</a></li>
-        </ul>
-      </li>
-      <li>
+      
+      
+      <li [hidden]="profileName !== 'consommateur'">
         <a href="form">
           <i class='bx bx-plug' ></i>
           <span class="link_name">Demande API</span>
@@ -42,33 +26,31 @@
           <li><a class="link_name" href="#">Demande API</a></li>
         </ul>
       </li>
-      <li>
-        <div class="iocn-link">
-          <a >
-            <i class='bx bx-collection' ></i>
-            <span class="link_name">Admin</span>
-          </a>
-          <i class='bx bxs-chevron-down arrow' ></i>
-        </div>
-        <ul class="sub-menu">
-          <li><a class="link_name" href="#">Admin</a></li>
-          <li><a href="liste">Liste APIs</a></li>
-          <li><a href="user">Liste Utilisateur</a></li>
-          <li><a href="demande">Liste Demande</a></li>
+      <li [hidden]="profileName !== 'consommateur'">
+        <a href="">
+          <i class='bx bx-collection' ></i>
+          <span class="link_name">Liste APIs</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="#">Liste APIs</a></li>
         </ul>
       </li>
-      <li>
-        <div class="iocn-link">
-          <a >
-            <i class='bx bx-book-alt' ></i>
-            <span class="link_name">Data Owner</span>
-          </a>
-          <i class='bx bxs-chevron-down arrow' ></i>
-        </div>
-        <ul class="sub-menu">
-          <li><a class="link_name" >DataOwner</a></li>
-          <li><a href="validation1">1er validateur</a></li>
-          <li><a href="validation2">2eme validateur</a></li>
+      <li [hidden]="profileName !== 'consommateur'">
+        <a href="">
+          <i class='bx bx-book-alt' ></i>
+          <span class="link_name">Liste de demande terminée</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="#">Liste de demande terminée</a></li>
+        </ul>
+      </li>
+      <li [hidden]="profileName !== 'consommateur'">
+        <a href="">
+          <i class='bx bx-book-alt' ></i>
+          <span class="link_name">Liste de demande a rectifier</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="#">Liste de demande a rectifier</a></li>
         </ul>
       </li>
       <li>
