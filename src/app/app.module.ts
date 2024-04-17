@@ -41,6 +41,8 @@ import { ShowApiDetailComponent } from './show-api-detail/show-api-detail.compon
 import { ShowuserdetailComponent } from './showuserdetail/showuserdetail.component';
 import { ShowDemandeDetailComponent } from './show-demande-detail/show-demande-detail.component';
 import { ListedemandeconsommateurComponent } from './listedemandeconsommateur/listedemandeconsommateur.component';
+import { ListeapiconsComponent } from './listeapicons/listeapicons.component';
+import { ConfirmRejectComponent } from './confirm-reject/confirm-reject.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +69,9 @@ import { ListedemandeconsommateurComponent } from './listedemandeconsommateur/li
     ShowApiDetailComponent,
     ShowuserdetailComponent,
     ShowDemandeDetailComponent,
-    ListedemandeconsommateurComponent
+    ListedemandeconsommateurComponent,
+    ListeapiconsComponent,
+    ConfirmRejectComponent
       ],
   imports: [
     BrowserModule,

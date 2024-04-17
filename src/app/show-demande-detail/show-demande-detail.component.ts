@@ -7,6 +7,11 @@ import { Inject } from '@angular/core';
   styleUrl: './show-demande-detail.component.scss'
 })
 export class ShowDemandeDetailComponent {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
+  rejectionMessage: string;
+
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) { 
+    this.rejectionMessage = data.rejectionMessage || '';
+
+  }
 
 }

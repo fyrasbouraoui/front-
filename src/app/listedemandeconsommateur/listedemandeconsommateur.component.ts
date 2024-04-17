@@ -87,21 +87,20 @@ export class ListedemandeconsommateurComponent  implements OnInit {
 
   fetchDemandes(userId: number) {
     // Fetch demandes from the service for a specific user
-    const userInfo = this.userService.getUserInfo();
-    if (userInfo) {
-      this.demandeService.getDemandeById(userId).subscribe(
-        (demande: Demande) => {
-          console.log('Demande fetched successfully:', demande);
-          this.demandes = [demande]; // Assuming you want to display only one demand
-          // Fetch status for the demand
+    this.demandeService.getAllDemandesByUserId(userId).subscribe(
+      (demandes: Demande[]) => {
+        console.log('Demandes fetched successfully:', demandes);
+        this.demandes = demandes;
+        // Iterate through each demand and fetch its status
+        this.demandes.forEach(demande => {
           this.getStatusForDemande(demande);
-        },
-        (error) => {
-          console.error('Error fetching demande:', error);
-          // Handle error, show error message, etc.
-        }
-      );
-    }
+        });
+      },
+      (error) => {
+        console.error('Error fetching demandes:', error);
+        // Handle error, show error message, etc.
+      }
+    );
   }
   
 

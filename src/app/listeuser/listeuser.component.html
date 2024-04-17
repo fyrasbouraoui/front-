@@ -52,6 +52,8 @@
               <li><a class="link_name" href="#">Administration</a></li>
               <li><a href="liste">Liste APIs</a></li>
               <li><a href="user">Liste Utilisateur</a></li>
+              <li><a href="str">Liste Structure</a></li>
+
               <li><a href="demande">Liste Demande</a></li>
             </ul>
           </li>
@@ -106,7 +108,7 @@
                                         
                                         <th style="width: 30%;">Prénom</th>
                                         <th style="width: 30%;">Email</th>
-                                        <th style="width: 30%;">CIN</th>
+                                        <th style="width: 30%;">profile</th>
                                         <th style="width: 30%;">Action</th>
                                     </tr>
                                 </thead>
@@ -115,7 +117,7 @@
                                         
                                         <td>{{ user.prenom }}</td>
                                         <td>{{ user.email }}</td>
-                                        <td>{{ user.cin }}</td>
+                                        <td>{{ user.profil?.nomProfil }}</td>
                                         <td>
                                             <a class="edit" (click)="openUpdateUserDialog(user)"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                                             <a class="delete" (click)="deleteUser(user.idUser!)"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>

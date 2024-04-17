@@ -33,6 +33,7 @@ export class ListeuserComponent implements OnInit {
         // Assign a unique identifier to each user
         console.log(users);
         this.registeredUsers = users.map((user, index) => ({ ...user, id: index + 1 }));
+        
       },
       error: (err: any) => {
         console.error('Error fetching users:', err);
@@ -69,8 +70,7 @@ export class ListeuserComponent implements OnInit {
     const userInfo = this.userService.getUserInfo(); // Assuming this method returns user information
     if (userInfo) {
       this.userName = userInfo.prenom; // Update 'prenom' with the actual property name for the user's name
-      this.profileName = userInfo.profileName; // Update 'profileName' with the actual property name for the profile name
-    }
+      this.profileName = userInfo.profileName;    }
   }
   logout() {
     this.userService.logout().subscribe(

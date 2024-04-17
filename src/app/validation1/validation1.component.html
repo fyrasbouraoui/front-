@@ -61,6 +61,8 @@
               <li><a class="link_name" href="#">Admin</a></li>
               <li><a href="liste">Liste APIs</a></li>
               <li><a href="user">Liste Utilisateur</a></li>
+              <li><a href="str">Liste Structure</a></li>
+
               <li><a href="demande">Liste Demande</a></li>
             </ul>
           </li>
@@ -128,8 +130,9 @@
                                         </td>
                                         <td>
                                             <a class="check"*ngIf="demande.idDemande !== undefined" (click)="handleCheckIconClick(demande.idDemande)" ><i class="material-icons" data-toggle="tooltip" title="check">&#10004;</i></a>
-                                            <a class="delete" ><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                                            <a class="details" (click)="showDetails(demande)"><i class="material-icons" title="Details">&#xE88E;</i></a>
+                                            <a class="delete" (click)="confirmRejectDemande(demande.idDemande, 'Your reason message here')">
+                                              <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
+                                            </a>                                          <a class="details" (click)="showDetails(demande)"><i class="material-icons" title="Details">&#xE88E;</i></a>
                                         </td>
                                     </tr>
                                 </tbody>

@@ -10,11 +10,11 @@ import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { ShowApiDetailComponent } from '../show-api-detail/show-api-detail.component';
 @Component({
-  selector: 'app-liste',
-  templateUrl: './liste.component.html',
-  styleUrl: './liste.component.scss'
+  selector: 'app-listeapicons',
+  templateUrl: './listeapicons.component.html',
+  styleUrl: './listeapicons.component.scss'
 })
-export class ListeComponent {
+export class ListeapiconsComponent {
   userName: string = '';
   profileName: string = '';
   isSubMenuVisible: boolean = false;
@@ -82,9 +82,7 @@ ngOnInit(): void {
       }
     );
   }
-  openAddEditEmpForm() {
-    this._dialog.open(DialogComponentComponent);
-  }
+  
 
   getApis() {
     this._apiservice.getAllApis().subscribe({
@@ -92,43 +90,16 @@ ngOnInit(): void {
         this.dataSource = new MatTableDataSource(res);
         this.dataSource.sort = this.sort;
         this.totalPages = Math.ceil(this.dataSource.data.length / this.pageSize);
-        this.updateDisplayedRows();
+        this.dataSource.paginator = this.paginator; // Set paginator
+        this.updateDisplayedRows(); // Update displayed rows
       },
-      error: console.log,
+      error: console.error,
     });
   }
 
-      editRow(row: any) {
-        
-        const dialogRef = this._dialog.open(EditdialogComponent, {
-          data: { row: { ...row } }, 
-        });
     
-        dialogRef.afterClosed().subscribe((result) => {
-          if (result) {
-            const index = this.dataSource.data.indexOf(row);
-            this.dataSource.data[index] = result;
-           
-            this.dataSource._updateChangeSubscription();
-            this.getApis();
+    
 
-          }
-        });
-      }
-    
-    
-      deleteApi(idApi: number): void {
-        this._apiservice.deleteApi(idApi).subscribe({
-          next: () => {
-            this.dataSource.data = this.dataSource.data.filter((item: any) => item.idApi !== idApi);
-            console.log('API deleted successfully');
-              this.getApis();
-          },
-          error: (error: any) => {
-            console.error('Error deleting API:', error);
-          }
-        });
-      }
       showDetails(row: any) {
         const dialogRef = this._dialog.open(ShowApiDetailComponent, {
           width: '400px',
@@ -143,11 +114,15 @@ ngOnInit(): void {
       }
     
       nextPage() {
-        if (this.currentPage < this.totalPages) {
-          this.currentPage++;
-          this.updateDisplayedRows();
+        if (this.currentPage < this.totalPages - 1) {
+            this.currentPage++;
+            this.paginator.pageIndex = this.currentPage;
+            this.paginator._changePageSize(this.paginator.pageSize);
+            this.updateDisplayedRows();
         }
-      }
+    }
+    
+    
     
       goToPage(page: number) {
         if (page >= 1 && page <= this.totalPages) {
@@ -160,8 +135,8 @@ ngOnInit(): void {
         const startIndex = (this.currentPage - 1) * this.pageSize;
         const endIndex = Math.min(startIndex + this.pageSize, this.dataSource.data.length);
         this.displayedRows = this.dataSource.data.slice(startIndex, endIndex);
+        this.totalPages = Math.ceil(this.dataSource.data.length / this.pageSize);
         this.updatePageNumbers();
-        this.totalPages = Math.ceil(this.dataSource.data.length / this.pageSize); // Move this line here
       }
       updatePageNumbers() {
         this.pageNumbers = [];

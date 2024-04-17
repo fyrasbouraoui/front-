@@ -16,6 +16,7 @@ import { Validation2Component } from './validation2/validation2.component';
 import { ListestructureComponent } from './listestructure/listestructure.component';
 import {dashboardComponent} from './dashboard/dashboard.component';
 import { ListedemandeconsommateurComponent } from './listedemandeconsommateur/listedemandeconsommateur.component';
+import { ListeapiconsComponent } from './listeapicons/listeapicons.component';
 
 const routes: Routes = [
   { path: 'form', component: FormulaireComponent },
@@ -33,7 +34,9 @@ const routes: Routes = [
   { path: 'validation2', component: Validation2Component },
   { path: 'str', component: ListestructureComponent },
   { path: 'dashboard', component:dashboardComponent },
-  {path: 'demandecons' , component:ListedemandeconsommateurComponent}
+  {path: 'demandecons' , component:ListedemandeconsommateurComponent},
+  {path: 'apicons' , component:ListeapiconsComponent}
+
 
 
 

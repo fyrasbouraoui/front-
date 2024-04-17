@@ -7,6 +7,7 @@ import { UserService } from '../services/user.service';
 import { Router } from '@angular/router'; 
 import { ShowDemandeDetailComponent } from '../show-demande-detail/show-demande-detail.component';
 import { MatDialog } from '@angular/material/dialog';
+import { ConfirmRejectComponent } from '../confirm-reject/confirm-reject.component';
 @Component({
   selector: 'app-validation1',
   templateUrl: './validation1.component.html',
@@ -18,6 +19,7 @@ export class Validation1Component implements OnInit {
   demandes: Demande[] = [];
   isSubMenu: boolean = false;
   validationMessage: string = '';
+  rejectionMessage: string = '';
 
   constructor(private demandeService: DemandeServiceService,
     private statusService: StatusService,
@@ -159,4 +161,52 @@ export class Validation1Component implements OnInit {
       width: '500px',
       data: row 
     });}
+    confirmRejectDemande(demandeId: number | undefined, raison: string): void {
+      if (demandeId === undefined || raison.trim() === '') {
+        console.error('Invalid demandeId or empty rejection reason');
+        return;
+      }
+    
+      const dialogRef = this.dialog.open(ConfirmRejectComponent, {
+        width: '250px',
+        data: { raison: raison } // Pass rejection reason to dialog
+      });
+    
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          // If user confirms rejection, call rejectDemande service method
+          this.rejectDemande(demandeId, result); // Pass the confirmed rejection reason
+        }
+      });
+    }
+    
+  
+  rejectDemande(demandeId: number, rejectionReason: string): void {
+    const userInfo = this.userService.getUserInfo();
+
+    if (userInfo !== null) {
+        const userId = userInfo.idUser;
+
+        if (!userId) {
+            console.error('Invalid userId:', userId);
+            return;
+        }
+
+        // Call rejectDemande service method with the rejection reason
+        this.demandeService.rejectDemande(demandeId, userId, rejectionReason).subscribe(
+            (response: string) => {
+                console.log('Rejection success:', response);
+                alert("Rejection success");
+
+                // After successful rejection, refetch the demandes
+                this.fetchDemandes();
+            },
+            (error: any) => {
+                console.error('Rejection error:', error);
+            }
+        );
+    } else {
+        console.error('User info is null.');
+    }
+}
 }

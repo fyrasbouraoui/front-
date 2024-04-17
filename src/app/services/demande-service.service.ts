@@ -42,6 +42,28 @@ export class DemandeServiceService {
   validateDemande(id: number, userId: number): Observable<string> {
     return this._http.post<string>(`${this.baseUrl}/${id}/validation?userId=${userId}`, {});
   }
+  rejectDemande(demandeId: number, userId: number, reason: string): Observable<string> {
+    const params = new HttpParams()
+      .set('demandeId', demandeId.toString())
+      .set('userId', userId.toString());
+    return this._http.post<string>(`${this.baseUrl}/rejectDemande`, reason, { params }).pipe(
+      catchError((error: any) => {
+        console.error('Error rejecting demande:', error);
+        return throwError('Error rejecting demande: ' + error.message);
+      })
+    );
+  }
+  rectifyDemande(demandeId: number, userId: number, rectificationMessage: string): Observable<string> {
+    const params = new HttpParams()
+      .set('demandeId', demandeId.toString())
+      .set('userId', userId.toString());
+    return this._http.post<string>(`${this.baseUrl}/rectifyDemande`, rectificationMessage, { params }).pipe(
+      catchError((error: any) => {
+        console.error('Error rectifying demande:', error);
+        return throwError('Error rectifying demande: ' + error.message);
+      })
+    );
+  }
   createDemande(demande: any, structureId: number | null, userId: number | null, profileId: number | null, apiId:number): Observable<any> {
     console.log('structureId:', structureId);
     console.log('userId:', userId);

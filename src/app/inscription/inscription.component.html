@@ -22,6 +22,12 @@
       <input type="tel" id="mobile" placeholder="Votre numero mobile" formControlName="mobile">
     </div>
     <div class="form-group">
+      <label for="profil-name">Structure</label>
+      <select id="profil-name" formControlName="structureId">
+        <option *ngFor="let structure of structures" [value]="structure.idstr">{{ structure.idstr }}</option>
+      </select>
+    </div>
+    <div class="form-group">
       <label for="profil-name">Choisissez le Profil</label>
       <select id="profil-name" formControlName="nomProfil">
         <option value="admin">Admin</option>

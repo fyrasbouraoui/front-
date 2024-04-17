@@ -34,13 +34,14 @@ export class ListestructureComponent implements OnInit {
     this.structureService.getAllStructures().subscribe({
       next: (structures: Structure[]) => {
         console.log(structures);
-        this.structures = structures;
+        this.structures = structures.filter(structure => structure.code !== null);
       },
       error: (err: any) => {
         console.error('Error fetching structures:', err);
         // Optionally, display an error message to the user
       }
     });
+  
     this.getUserDetails();
     const arrow = document.querySelectorAll(".arrow");
     arrow.forEach(arrowItem => {

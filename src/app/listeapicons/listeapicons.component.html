@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="listeapicons.component.scss">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <title>Dashboard</title>
+</head>
+<body>
+    <div class="sidebar close">
+      <div class="logo-details">
+        <i class='bx bx-menu' ></i>
+        <span class="logo_name">Nom Projet</span>
+      </div>
+      <ul class="nav-links">
+        
+        
+        <li [hidden]="profileName !== 'consommateur'">
+          <a href="form">
+            <i class='bx bx-plug' ></i>
+            <span class="link_name">Demande API</span>
+          </a>
+          <ul class="sub-menu blank">
+            <li><a class="link_name" href="#">Demande API</a></li>
+          </ul>
+        </li>
+        <li [hidden]="profileName !== 'consommateur'">
+          <a href="apicons">
+            <i class='bx bx-collection' ></i>
+            <span class="link_name">Liste APIs</span>
+          </a>
+          <ul class="sub-menu blank">
+            <li><a class="link_name" href="#">Liste APIs</a></li>
+          </ul>
+        </li>
+        <li [hidden]="profileName !== 'consommateur'">
+          <a href="demandecons">
+            <i class='bx bx-book-alt' ></i>
+            <span class="link_name">Liste de demande terminée</span>
+          </a>
+          <ul class="sub-menu blank">
+            <li><a class="link_name" href="demandecons">Liste de demande terminée</a></li>
+          </ul>
+        </li>
+        <li [hidden]="profileName !== 'consommateur'">
+          <a href="">
+            <i class='bx bx-book-alt' ></i>
+            <span class="link_name">Liste de demande a rectifier</span>
+          </a>
+          <ul class="sub-menu blank">
+            <li><a class="link_name" href="#">Liste de demande a rectifier</a></li>
+          </ul>
+        </li>
+        <li>
+        
+        <li>
+      <div class="profile-details">
+        <div class="profile-content">
+        </div>
+        <div class="name-job">
+          <div class="profile_name">{{ userName }}</div>
+          <div class="job">{{ profileName }}</div>
+        </div>
+        <i class='bx bx-log-out' (click)="logout()"></i>
+      </div>
+    </li>
+  </ul>
+    </div>
+    <div class='dashboard-app'>
+        <div class='dashboard-content'>
+            <div class='container'>
+                <div class="container-xl">
+                    <div class="table-responsive">
+                        <div class="table-wrapper">
+                            <div class="table-title">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <h2>Liste <b>APIs</b></h2>
+                                    </div>
+                                    <div class="col-sm-6">
+                                    </div>
+                                </div>
+                            </div>
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 30%;">Nom</th>
+                                        <th style="width: 30%;">code</th>
+                                        <th style="width: 30%;">description</th>
+                                        <th style="width: 30%;">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <ng-container *ngFor="let row of displayedRows">
+                                        <tr>
+                                            <td>{{ row.nom }}</td>
+                                            <td>{{ row.code }}</td>
+                                            <td>{{ row.description }}</td>
+                                            <td>
+                                                <a class="details" (click)="showDetails(row)"><i class="material-icons"
+                                                        title="Details">&#xE88E;</i></a>
+                                            </td>
+                                        </tr>
+                                    </ng-container>
+                                </tbody>
+                            </table>
+                            <mat-paginator [length]="dataSource.data.length" [pageSize]="pageSize"
+                                [pageSizeOptions]="[5, 10, 25, 100]">
+                            </mat-paginator>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    

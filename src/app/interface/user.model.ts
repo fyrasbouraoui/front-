@@ -3,6 +3,7 @@ import { Structure } from "./structure.model";
 
 export interface User {
   idUser: number;
+  code: number;
   structure?: Structure;
   profil?: Profil;
   cin: string;
