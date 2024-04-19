@@ -88,6 +88,9 @@
         <div class='dashboard-content'>
             <div class='container'>
                 <div class="container-xl">
+                  <div class="search-container">
+                    <input type="text" placeholder="Recherche" [(ngModel)]="searchText">
+                  </div>
                     <div class="table-responsive">
                         <div class="table-wrapper">
                             <div class="table-title">
@@ -105,17 +108,27 @@
                                     <tr>
                                         
                                         <th style="width: 30%;">Prénom</th>
+<<<<<<< Updated upstream
                                         <th style="width: 30%;">Email</th>
                                         <th style="width: 30%;">CIN</th>
+=======
+                                        <th style="width: 30%;">Structure</th>
+                                        <th style="width: 30%;">profile</th>
+>>>>>>> Stashed changes
                                         <th style="width: 30%;">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let user of registeredUsers; let i = index" [attr.id]="'user-row-' + i">
+                                    <tr *ngFor="let user of registeredUsers| filter:searchText |  paginate:{itemsPerPage: tableSize,currentPage: page, totalItems: count}; let i = index" [attr.id]="'user-row-' + i">
                                         
                                         <td>{{ user.prenom }}</td>
+<<<<<<< Updated upstream
                                         <td>{{ user.email }}</td>
                                         <td>{{ user.cin }}</td>
+=======
+                                        <td>{{ user.structure?.code }}</td>
+                                        <td>{{ user.profil?.nomProfil }}</td>
+>>>>>>> Stashed changes
                                         <td>
                                             <a class="edit" (click)="openUpdateUserDialog(user)"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                                             <a class="delete" (click)="deleteUser(user.idUser!)"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
@@ -127,7 +140,9 @@
                                     </tr>
                                 </tbody>
                             </table>
-                          
+                            <div class="clearfix">
+                              <pagination-controls previousLabel="précédent" nextLabel="Suivant" (pageChange)="onTableDataChange($event)" class="hint-text" class="pagination"></pagination-controls>
+                            </div>
                         </div>
                     </div>        
                 </div>

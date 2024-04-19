@@ -1,0 +1,32 @@
+<div mat-dialog-content>
+  <form [formGroup]="structureForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="code">Code</label>
+      <input type="text" id="code" placeholder="Enter code" formControlName="code">
+      <mat-error *ngIf="structureForm.get('code')?.hasError('required')">Code is required</mat-error>
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="Enter email" formControlName="email">
+      <mat-error *ngIf="structureForm.get('email')?.hasError('required')">Email is required</mat-error>
+      <mat-error *ngIf="structureForm.get('email')?.hasError('email')">Invalid email</mat-error>
+    </div>
+    <div class="form-group">
+      <label for="adresse">Address</label>
+      <input type="text" id="adresse" placeholder="Enter address" formControlName="adresse">
+      <mat-error *ngIf="structureForm.get('adresse')?.hasError('required')">Address is required</mat-error>
+    </div>
+    <div class="form-group">
+      <label for="telStr">Mobile</label>
+      <input type="text" id="telStr" placeholder="Enter telStr" formControlName="telStr">
+    </div>
+    <div class="form-group">
+      <label for="role">Type</label>
+      <input type="text" id="role" placeholder="Enter role" formControlName="role">
+    </div>
+    <div class="form-group">
+      <button type="submit" [disabled]="!structureForm.valid">Mettre A jour</button>
+    </div>
+  </form>
+</div>
+

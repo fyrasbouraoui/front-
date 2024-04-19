@@ -9,7 +9,7 @@ export interface User {
   nom: string;
   prenom: string;
   email: string;
-  mobile: string;
+  mobile: number;
   password: string;
   grade: string;
   token?: string;

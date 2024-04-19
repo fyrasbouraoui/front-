@@ -1,83 +1,51 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #f2f2f2;
-}
-
 .container {
-    width: 400px;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 4px;
-    margin: auto;
-    border-radius: 4px;
-    margin-top: 50px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
-}
-
-.container h1 {
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-
-.form-group input,
-.form-group select {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-.form-group select {
-    height: 44px;
-}
-
-.form-group input:focus,
-.form-group select:focus {
-    outline: none;
-    box-shadow: 0 0 2px 1px #4caf50;
-}
-
-
-.form-group button {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    background-color: #85050a;
-    margin-bottom: 10px;
-    /* Ajoutez une marge basse pour séparer les boutons */
-}
-
-/* Vous pouvez également appliquer des styles spécifiques aux boutons ici, comme les couleurs, polices, etc. */
-.btn-cancel {
-    background-color: #e74c3c;
-    /* Couleur de fond rouge pour le bouton Annuler Inscription */
-    color: #fff;
-    /* Couleur du texte blanc */
-}
-
-.btn-submit {
-    background-color: #3498db;
-    /* Couleur de fond bleue pour le bouton Inscrivez-vous */
-    color: #fff;
-    /* Couleur du texte blanc */
-}
-
-
-/* Stylisez les liens (<a>) comme vous le souhaitez */
-a {
-    text-decoration: none;
-    color: inherit;
-}
+    max-width: 400px; /* Maximum width of the container */
+    margin: 5px auto; /* Center the container horizontally with 5px margin on top and bottom */
+  }
+  
+  .form-group {
+    margin-bottom: 20px; /* Add margin bottom to create space between form groups */
+  }
+  
+  label {
+    display: block; /* Make labels block elements */
+    font-weight: bold; /* Make labels bold */
+    margin-bottom: 5px; /* Add some space below the labels */
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="tel"],
+  select {
+    width: 100%; /* Make input fields full width */
+    padding: 10px; /* Add padding to input fields */
+    border: 1px solid #ccc; /* Add border to input fields */
+    border-radius: 5px; /* Add border radius for rounded corners */
+    transition: border-color 0.3s; /* Add transition effect for border color */
+  }
+  
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="password"]:focus,
+  input[type="tel"]:focus,
+  select:focus {
+    outline: none; /* Remove default focus outline */
+    border-color: #007bff; /* Change border color on focus */
+  }
+  
+  button[type="submit"] {
+    width: 100%; /* Make button full width */
+    background-color: #1d1b31; /* Button background color */
+    color: #fff; /* Button text color */
+    border: none; /* Remove button border */
+    border-radius: 5px; /* Add border radius for rounded corners */
+    padding: 10px; /* Add padding to button */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    transition: background-color 0.3s; /* Add transition effect for background color */
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #1d1b31; /* Change button background color on hover */
+  }
+  

@@ -40,6 +40,19 @@ import { dashboardComponent } from './dashboard/dashboard.component';
 import { ShowApiDetailComponent } from './show-api-detail/show-api-detail.component';
 import { ShowuserdetailComponent } from './showuserdetail/showuserdetail.component';
 import { ShowDemandeDetailComponent } from './show-demande-detail/show-demande-detail.component';
+<<<<<<< Updated upstream
+=======
+import { ListedemandeconsommateurComponent } from './listedemandeconsommateur/listedemandeconsommateur.component';
+import { ListeapiconsComponent } from './listeapicons/listeapicons.component';
+import { ConfirmRejectComponent } from './confirm-reject/confirm-reject.component';
+import { RejectionReasonDialogComponent } from './rejection-reason-dialog/rejection-reason-dialog.component';
+import { UpdateStructureDialogComponent } from './update-structure-dialog/update-structure-dialog.component';
+import { DemandetermineeconsComponent } from './demandetermineecons/demandetermineecons.component';
+import { DemtermvalComponent } from './demtermval/demtermval.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import {NgPipesModule} from 'ngx-pipes';
+import { FilterPipe } from './filter.pipe';
+>>>>>>> Stashed changes
 
 @NgModule({
   declarations: [
@@ -65,7 +78,19 @@ import { ShowDemandeDetailComponent } from './show-demande-detail/show-demande-d
     dashboardComponent,
     ShowApiDetailComponent,
     ShowuserdetailComponent,
+<<<<<<< Updated upstream
     ShowDemandeDetailComponent
+=======
+    ShowDemandeDetailComponent,
+    ListedemandeconsommateurComponent,
+    ListeapiconsComponent,
+    ConfirmRejectComponent,
+    RejectionReasonDialogComponent,
+    UpdateStructureDialogComponent,
+    DemandetermineeconsComponent,
+    DemtermvalComponent,
+    FilterPipe
+>>>>>>> Stashed changes
       ],
   imports: [
     BrowserModule,
@@ -84,7 +109,10 @@ import { ShowDemandeDetailComponent } from './show-demande-detail/show-demande-d
     BrowserAnimationsModule,
     MatPaginatorModule,
     FormsModule,
-    RouterModule.forRoot([])
+    RouterModule.forRoot([]),
+    NgxPaginationModule,
+    NgPipesModule,
+    
   ],
   providers: [ AuthGuard],
   bootstrap: [AppComponent]

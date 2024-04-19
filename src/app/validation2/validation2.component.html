@@ -31,15 +31,7 @@
               <li><a class="link_name" href="#">Dashboard</a></li>
             </ul>
           </li>
-          <li>
-            <a href="">
-              <i class='bx bx-compass' ></i>
-              <span class="link_name">Demande En cours</span>
-            </a>
-            <ul class="sub-menu blank">
-              <li><a class="link_name" href="#">Demande En cours</a></li>
-            </ul>
-          </li>
+          
           <li [hidden]="profileName !== 'consommateur'">
             <a href="form">
               <i class='bx bx-plug' ></i>
@@ -68,14 +60,16 @@
             <div class="iocn-link">
               <a >
                 <i class='bx bx-book-alt' ></i>
-                <span class="link_name">Data Owner</span>
+                <span class="link_name">Mes demandes</span>
               </a>
               <i class='bx bxs-chevron-down arrow' ></i>
             </div>
             <ul class="sub-menu">
-              <li><a class="link_name" >DataOwner</a></li>
-              <li [hidden]="profileName !== '1er validateur'"><a href="validation1">1er validateur</a></li>
-              <li [hidden]="profileName !== '2eme validateur'"><a href="validation2">2eme validateur</a></li>
+              <li><a class="link_name" >Mes demandes</a></li>
+              <li><a [attr.href]="getValidationLink(profileName)">Demande En Attentes</a></li>
+              <li ><a href="termineeval">Demande Terminée</a></li>
+
+              <li ><a href="">Demande rectifiée</a></li>
             </ul>
           </li>
           <li>
@@ -98,6 +92,9 @@
         <div class='dashboard-content'>
             <div class='container'>
                 <div class="container-xl">
+                  <div class="search-container">
+                    <input type="text" placeholder="Recherche" [(ngModel)]="searchText">
+                  </div>
                     <div class="table-responsive">
                         <div class="table-wrapper">
                             <div class="table-title">
@@ -119,7 +116,8 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let demande of demandes; let i = index" [attr.id]="'demande-row-' + i">
+                                    <tr *ngFor="let demande of demandes 
+                                    | filter:searchText |  paginate:{itemsPerPage: tableSize,currentPage: page, totalItems: count}; let i = index" [attr.id]="'demande-row-' + i">
                                         <td>{{ demande.descriptionAPI }}</td>
                                         <td>{{ demande.nomAPI }}</td>
                                         <td>
@@ -128,10 +126,18 @@
                                             </ng-container>
                                         </td>
                                         <td>
-                                            <a class="check"*ngIf="demande.idDemande !== undefined" (click)="handleCheckIconClick(demande.idDemande)" ><i class="material-icons" data-toggle="tooltip" title="check">&#10004;</i></a>
-                                            <a class="Refusee" ><i class="material-icons" data-toggle="tooltip" title="Refusee">&#xE872;</i></a>
+                                            <a class="check"*ngIf="demande.idDemande !== undefined" (click)="handleCheckIconClick(demande.idDemande)" ><i class="material-icons accept-icon" data-toggle="tooltip" title="Accept">&#xe5ca;</i>
+                                            </a>
+                                            <a class="delete" (click)="confirmRejectDemande(demande.idDemande, 'Your reason message here')">
+                                              <i class="material-icons" data-toggle="tooltip" title="Cancel">&#xE5CD;</i>
+                                            </a>       
                                             <a class="details" (click)="showDetails(demande)"><i class="material-icons" title="Details">&#xE88E;</i></a>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
+                            
+                            <div class="clearfix">
+                              <pagination-controls previousLabel="précédent" nextLabel="Suivant" (pageChange)="onTableDataChange($event)" class="hint-text" class="pagination"></pagination-controls>
+                            </div>
+                            

@@ -127,4 +127,14 @@ export class dashboardComponent implements OnInit {
       });
     }
   }
+  getValidationLink(profileName: string): string {
+    if (profileName === '1er validateur') {
+      return 'validation1';
+    } else if (profileName === '2eme validateur') {
+      return 'validation2';
+    } else {
+      // Return a default link or handle other cases as needed
+      return '#';
+    }
+  }
 }

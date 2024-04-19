@@ -1,0 +1,31 @@
+/* CSS for Confirm Rejection dialog */
+.mat-dialog-container.confirm-rejection-dialog {
+    width: 350px;
+    padding: 20px;
+  }
+  
+  .mat-dialog-container.confirm-rejection-dialog .mat-dialog-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .mat-dialog-container.confirm-rejection-dialog mat-form-field {
+    width: 100%;
+  }
+  
+  .mat-dialog-container.confirm-rejection-dialog textarea {
+    width: calc(100% - 24px); /* Adjust textarea width to fit inside the form field */
+    font-size: 16px;
+    padding: 8px;
+  }
+  
+  .mat-dialog-container.confirm-rejection-dialog .mat-dialog-actions {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .mat-dialog-container.confirm-rejection-dialog .mat-dialog-actions button {
+    margin-left: 8px;
+  }
+  

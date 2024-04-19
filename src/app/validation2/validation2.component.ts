@@ -7,18 +7,24 @@ import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
 import { ShowDemandeDetailComponent } from '../show-demande-detail/show-demande-detail.component';
 import { MatDialog } from '@angular/material/dialog';
+import { ConfirmRejectComponent } from '../confirm-reject/confirm-reject.component';
+
 @Component({
   selector: 'app-validation2',
   templateUrl: './validation2.component.html',
   styleUrls: ['./validation2.component.scss']
 })
 export class Validation2Component implements OnInit {
+  searchText: any;
   demandes: Demande[] = [];
   isSubMenu: boolean = false;
   validationMessage: string = '';
   userName: string = '';
   profileName: string = '';
-
+  page: number=1;
+  count: number = 0;
+  tableSize: number = 5;
+  tableSizes: any= [5,10,15,20]
   constructor(private demandeService: DemandeServiceService,
     private statusService: StatusService,
     private userService: UserService,
@@ -153,7 +159,68 @@ export class Validation2Component implements OnInit {
   }
   showDetails(row: any) {
     const dialogRef = this.dialog.open(ShowDemandeDetailComponent, {
-      width: '500px',
+      width: '400px',
       data: row 
     });}
+    confirmRejectDemande(demandeId: number | undefined, raison: string): void {
+      if (demandeId === undefined || raison.trim() === '') {
+        console.error('Invalid demandeId or empty rejection reason');
+        return;
+      }
+    
+      const dialogRef = this.dialog.open(ConfirmRejectComponent, {
+        width: '350px',
+        data: { raison: raison } // Pass rejection reason to dialog
+      });
+    
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          // If user confirms rejection, call rejectDemande service method
+          this.rejectDemande(demandeId, result); // Pass the confirmed rejection reason
+        }
+      });
+    }
+    
+  
+    rejectDemande(demandeId: number, rejectionReason: string): void {
+      const userInfo = this.userService.getUserInfo();
+  
+      if (userInfo !== null) {
+        const userId = userInfo.idUser;
+  
+        if (!userId) {
+          console.error('Invalid userId:', userId);
+          return;
+        }
+  
+        this.demandeService.rejectDemande(demandeId, userId, rejectionReason).subscribe(
+          (response: string) => {
+            console.log('Rejection success:', response);
+            alert("Rejection success");
+  
+            // After successful rejection, refetch the demandes
+            this.fetchDemandes();
+          },
+          (error: any) => {
+            console.error('Rejection error:', error);
+          }
+        );
+      } else {
+        console.error('User info is null.');
+      }
+    }
+    getValidationLink(profileName: string): string {
+      if (profileName === '1er validateur') {
+        return 'validation1';
+      } else if (profileName === '2eme validateur') {
+        return 'validation2';
+      } else {
+        // Return a default link or handle other cases as needed
+        return '#';
+      }
+    }
+    onTableDataChange(event: any): void {
+      this.page = event;
+      this.fetchDemandes(); 
+    }
 }

@@ -7,6 +7,8 @@ import { User } from "./user.model";
 import { Api } from "./api.model"; 
 
 export interface Demande {
+    creationDate: Date;
+
     idDemande?: number; // Add the id property
     user?: User;
     structure?: Structure;

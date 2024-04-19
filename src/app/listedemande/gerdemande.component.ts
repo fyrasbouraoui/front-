@@ -7,6 +7,7 @@ import { UserService } from '../services/user.service';
 import { Router } from '@angular/router'; 
 import { ShowDemandeDetailComponent } from '../show-demande-detail/show-demande-detail.component';
 import { MatDialog } from '@angular/material/dialog';
+import { RejectionReasonDialogComponent } from '../rejection-reason-dialog/rejection-reason-dialog.component';
 
 
 
@@ -16,11 +17,16 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./gerdemande.component.scss']
 })
 export class GerdemandeComponent implements OnInit {
+  searchText: any;
   userName: string = '';
   profileName: string = '';
   demandes: Demande[] = [];
   isSubMenu: boolean = false;
   validationMessage: string = '';
+  page: number=1;
+  count: number = 0;
+  tableSize: number = 5;
+  tableSizes: any= [5,10,15,20]
 
   constructor(
     private demandeService: DemandeServiceService,
@@ -172,5 +178,18 @@ showDetails(row: any) {
     data: row // Pass the selected row data to the dialog component
   });
 
+}
+showRejectionReason(status: Status): void {
+  // Check if the status has a rejection reason
+  if (status.raisonRefus) {
+    this.dialog.open(RejectionReasonDialogComponent, {
+      width: '250px',
+      data: { status: status }
+    });
+  }
+}
+onTableDataChange(event: any): void {
+  this.page = event;
+  this.fetchDemandes(); 
 }
 }

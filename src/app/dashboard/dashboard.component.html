@@ -55,21 +55,26 @@
               <li><a href="demande">Liste Demande</a></li>
             </ul>
           </li>
-          <li [hidden]="profileName !== '1er validateur' && profileName !== '2eme validateur'">
-            <div class="iocn-link">
-              <a >
-                <i class='bx bx-book-alt' ></i>
-                <span class="link_name">Data Owner</span>
-              </a>
-              <i class='bx bxs-chevron-down arrow' ></i>
-            </div>
-            <ul class="sub-menu">
-              <li><a class="link_name" >DataOwner</a></li>
-              <li [hidden]="profileName !== '1er validateur'"><a href="validation1">1er validateur</a></li>
-              <li [hidden]="profileName !== '2eme validateur'"><a href="validation2">2eme validateur</a></li>
-            </ul>
-          </li>
+          
           <li>
+            <li [hidden]="profileName !== '1er validateur' && profileName !== '2eme validateur'">
+              <div class="iocn-link">
+                <a >
+                  <i class='bx bx-book-alt' ></i>
+                  <span class="link_name">Mes demandes</span>
+                </a>
+                <i class='bx bxs-chevron-down arrow' ></i>
+              </div>
+              <ul class="sub-menu">
+                <li><a class="link_name" >Mes demandes</a></li>
+                <li [hidden]="profileName !== '1er validateur'"><a href="validation1">Demande En Attentes</a></li>
+                <li [hidden]="profileName !== '2eme validateur'"><a href="validation2">Demande En Attentes</a></li>
+                <li><a [attr.href]="getValidationLink(profileName)">Demande En Attentes</a></li>
+  
+                <li ><a href="">Demande rectifiée</a></li>
+              </ul>
+            </li>
+            <li>
           
           <li>
         <div class="profile-details">

@@ -2,21 +2,25 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { User } from '../interface/user.model';
 import { MatDialog } from '@angular/material/dialog';
-import { UpdateUserDialogComponent } from '../update-user-dialog/update-user-dialog.component';
 import { Router } from '@angular/router'; 
 import { Structure } from '../interface/structure.model';
 import { StructureService } from '../services/structure.service';
 import { InscriptionstrComponent } from '../inscriptionstr/inscriptionstr.component';
+import { UpdateStructureDialogComponent } from '../update-structure-dialog/update-structure-dialog.component';
 @Component({
   selector: 'app-listestructure',
   templateUrl: './listestructure.component.html',
   styleUrl: './listestructure.component.scss'
 })
 export class ListestructureComponent implements OnInit {
+  searchText: any;
   userName: string = '';
   profileName: string = '';
   selectedUser: User | null = null; // Property to store the selected user
-
+  page: number=1;
+  count: number = 0;
+  tableSize: number = 5;
+  tableSizes: any= [5,10,15,20]
   isSubMenuVisible: boolean = false;
   toggleSubMenu() {
     this.isSubMenuVisible = !this.isSubMenuVisible;
@@ -92,45 +96,54 @@ export class ListestructureComponent implements OnInit {
 
     }
 
-    openAddUserModal() {
+    openAddStrModal() {
       const dialogRef = this.dialog.open(InscriptionstrComponent, {
         width: '400px' 
       });
     }
-    openUpdateUserDialog(user: User) {
-      const dialogRef = this.dialog.open(UpdateUserDialogComponent, {
-        width: '400px', 
-        data: user
+    
+    editStructure(structure: Structure) {
+      const dialogRef = this.dialog.open(UpdateStructureDialogComponent, {
+        width: '400px', height: 'auto',
+        data: structure
       });
     
       dialogRef.afterClosed().subscribe(result => {
-        if (result) {
-          // Pass the idUser parameter when calling updateUser method
-          this.userService.updateUser(user.idUser, result).subscribe({
-            next: () => {
-              // Success message or other actions
+        if (result && structure.idstr !== undefined) {
+          this.structureService.updateStructure(structure.idstr, result).subscribe({
+            next: updatedStructure => {
+              const index = this.structures.findIndex(s => s.idstr === updatedStructure.idstr);
+              if (index !== -1) {
+                this.structures[index] = updatedStructure;
+              }
             },
             error: (err: any) => {
-              console.error('User update failed:', err);
-              // Handle error
+              console.error('Structure update failed:', err);
             }
           });
         }
       });
     }
-    showDetails(user: User, index: number) {
-      this.selectedUser = user;
-      const rowElement = document.getElementById(`user-row-${index}`);
-      if (rowElement) {
-          const rect = rowElement.getBoundingClientRect();
-          const topOffset = rect.top + window.pageYOffset + rowElement.offsetHeight;
-          const leftOffset = rect.left + window.pageXOffset;
-          const detailsSection = document.querySelector('.details-section') as HTMLElement;
-          detailsSection.style.top = `${topOffset}px`;
-          detailsSection.style.left = `${leftOffset}px`;
+    deleteStructure(id: number | undefined) {
+      if (id !== undefined) {
+        this.structureService.deleteStructure(id).subscribe({
+          next: () => {
+            this.structures = this.structures.filter(structure => structure.idstr !== id);
+            console.log('Structure deleted successfully');
+          },
+          error: (err: any) => {
+            console.error('Error deleting structure:', err);
+          }
+        });
+      } else {
+        console.error('Error: id is undefined');
       }
-  }
-  
+    }
+    
+    onTableDataChange(event: any): void {
+      this.page = event;
+      this.getAllStructures(); 
+    }
 }
 
 

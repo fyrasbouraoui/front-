@@ -15,6 +15,11 @@ import { ShowApiDetailComponent } from '../show-api-detail/show-api-detail.compo
   styleUrl: './liste.component.scss'
 })
 export class ListeComponent {
+  searchText: any;
+  page: number=1;
+  count: number = 0;
+  tableSize: number = 5;
+  tableSizes: any= [5,10,15,20]
   userName: string = '';
   profileName: string = '';
   isSubMenuVisible: boolean = false;
@@ -90,7 +95,6 @@ ngOnInit(): void {
     this._apiservice.getAllApis().subscribe({
       next: (res) => {
         this.dataSource = new MatTableDataSource(res);
-        this.dataSource.sort = this.sort;
         this.totalPages = Math.ceil(this.dataSource.data.length / this.pageSize);
         this.updateDisplayedRows();
       },
@@ -168,5 +172,9 @@ ngOnInit(): void {
         for (let i = 1; i <= this.totalPages; i++) {
           this.pageNumbers.push(i);
         }
+      }
+      onTableDataChange(event: any): void {
+        this.page = event;
+        this.getApis(); 
       }
     }

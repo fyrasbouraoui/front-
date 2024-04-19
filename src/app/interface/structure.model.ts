@@ -3,11 +3,12 @@ import { Profil } from "./profil.model";
 import { User } from "./user.model";
 
 export interface Structure {
+    nom: string;
     idstr?: number;
     code: number;
     email: string;
     telStr: number;
-    adresse: number;
+    adresse: string;
     role: string;
     user?: User;
     demandes?: Demande[];

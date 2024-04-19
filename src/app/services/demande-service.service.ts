@@ -60,6 +60,9 @@ export class DemandeServiceService {
   getDemandesByStatus(nomStatus: string): Observable<Demande[]> {
     return this._http.get<Demande[]>(`${this.baseUrl}/status?nomStatus=${nomStatus}`);
   }
+  getDemandesByUserIdAndStatus(userId: number, nomStatus: string): Observable<Demande[]> {
+    return this._http.get<Demande[]>(`${this.baseUrl}/user/${userId}/status?nomStatus=${nomStatus}`);
+  }
 }
 
 

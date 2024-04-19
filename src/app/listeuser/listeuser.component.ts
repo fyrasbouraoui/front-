@@ -12,9 +12,15 @@ import { ShowuserdetailComponent } from '../showuserdetail/showuserdetail.compon
   styleUrls: ['./listeuser.component.scss']
 })
 export class ListeuserComponent implements OnInit {
+  
+searchText: any;
   userName: string = '';
   profileName: string = '';
   selectedUser: User | null = null; // Property to store the selected user
+  page: number=1;
+  count: number = 0;
+  tableSize: number = 5;
+  tableSizes: any= [5,10,15,20]
 
   isSubMenuVisible: boolean = false;
   toggleSubMenu() {
@@ -136,6 +142,9 @@ export class ListeuserComponent implements OnInit {
       });
     
   }
-  
+  onTableDataChange(event: any): void {
+    this.page = event;
+    this.getAllUsers(); 
+  }
 }
 

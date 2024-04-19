@@ -19,10 +19,14 @@ export class InscriptionstrComponent {
     public dialogRef: MatDialogRef<InscriptionstrComponent>
   ) {
     this.structureForm = this.fb.group({
+      nom: ['', Validators.required], // Set up form controls with validators
+
+
       code: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       telStr: ['', Validators.required],
       adresse: ['', Validators.required],
+      role:['', Validators.required]
     });
   }
 

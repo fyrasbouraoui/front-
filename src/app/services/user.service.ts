@@ -24,9 +24,21 @@ export class UserService {
     return this.http.get<User>(`${this.baseUrl}/${id}`);
   }
 
-  createUser(request: RegisterRequest, profileName: string): Observable<AuthenticationResponse> {
-    return this.http.post<AuthenticationResponse>(`${this.baseUrl}/register?profileName=${profileName}`, request);
+  createUser(registerRequest: RegisterRequest, profileName: string, registerStructureRequest: RegisterStructureRequest): Observable<AuthenticationResponse> {
+    const idstr = registerStructureRequest.idstr ?? 0; // Provide a default value if idstr is undefined
+
+    return this.http.post<AuthenticationResponse>(
+      `${this.baseUrl}/register`,
+      registerRequest,
+      {
+        params: {
+          profileName: profileName,
+          idstr: idstr.toString()
+        }
+      }
+    );
   }
+
    registerStructure(request: RegisterStructureRequest, profileName: string): Observable<AuthenticationResponse> {
     return this.http.post<AuthenticationResponse>(`${this.baseUrl}/registerStructure?profileName=${profileName}`, request);
   }

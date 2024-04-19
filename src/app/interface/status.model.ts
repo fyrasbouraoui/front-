@@ -7,4 +7,5 @@ export interface Status {
   codeStatus: number;
   nomStatus: string;
   description: string;
+  raisonRefus?: string;
 }

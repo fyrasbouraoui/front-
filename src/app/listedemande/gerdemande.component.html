@@ -86,7 +86,11 @@
     <div class='dashboard-app'>
         <div class='dashboard-content'>
             <div class='container'>
+              
                 <div class="container-xl">
+                  <div class="search-container">
+                    <input type="text" placeholder="Recherche" [(ngModel)]="searchText">
+                  </div>
                     <div class="table-responsive">
                         <div class="table-wrapper">
                             <div class="table-title">
@@ -102,26 +106,38 @@
                                     <tr>
                                        
                                         <th style="width: 30%;">Description</th>
-                                        <th style="width: 30%;">NomApi</th>
-                                        <th style="width: 20%;">status</th>
+                                        <th style="width: 20%;">NomApi</th>
+                                        <th style="width: 30%;">status</th>
+                                        <th style="width: 30%;">Date</th>
+
                                         <th style="width: 30%;">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let demande of demandes; let i = index" [attr.id]="'demande-row-' + i">
-                                        <td>{{ demande.descriptionAPI }}</td>
+                                  <tr *ngFor="let demande of demandes| filter:searchText |  paginate:{itemsPerPage: tableSize,currentPage: page, totalItems: count}; let i = index" [attr.id]="'demande-row-' + i">
+                                    <td>{{ demande.descriptionAPI }}</td>
                                         <td>{{ demande.nomAPI }}</td>
                                         <td>
-                                            <ng-container *ngFor="let status of demande.statuses">
+                                            <ng-container *ngFor="let status of demande.statuses ">
                                                 {{ status.nomStatus }}
+                                                <ng-container *ngIf="status.nomStatus === 'La demande a été rejetée par le 1er validateur.' || status.nomStatus === 'La demande a été rejetée par le 2ème validateur.'">
+                                                  <a class="show-rejection-reason" (click)="showRejectionReason(status)">
+                                                    <i class="material-icons" data-toggle="tooltip" title="Show Rejection Reason">error_outline</i>
+                                                  </a>
+                                                </ng-container>
                                             </ng-container>
                                         </td>
+                                        <td>{{ demande.creationDate | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
+
                                         <td>
-                                            <a class="edit" ><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                            <a class="delete" (click)="handleDeleteIconClick(demande.idDemande)"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                            
                                             <a class="details" (click)="showDetails(demande)"><i class="material-icons" title="Details">&#xE88E;</i></a>
 
                                           </td>
                                     </tr>
                                 </tbody>
                             </table>
+                            <div class="clearfix">
+                              <pagination-controls previousLabel="précédent" nextLabel="Suivant" (pageChange)="onTableDataChange($event)" class="hint-text" class="pagination"></pagination-controls>
+                            </div>
+                            

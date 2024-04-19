@@ -1,0 +1,51 @@
+.mat-dialog-content {
+    max-height: none !important; /* Ensure the maximum height is overridden */
+    padding: 20px; /* Add padding for better spacing */
+    overflow: hidden; /* Prevent overflow and hide scroll */
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="tel"],
+  select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s;
+  }
+  
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="password"]:focus,
+  input[type="tel"]:focus,
+  select:focus {
+    border-color: #007bff;
+  }
+  
+  button[type="submit"] {
+    width: 100%;
+    background-color: #1d1b31;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #1d1b31;
+  }
+  

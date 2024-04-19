@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="demtermval.component.scss">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <title>Dashboard</title>
+</head>
+<body>
+    
+    <section class="main" >
+      <div class="sidebar close">
+        <div class="logo-details">
+          <i class='bx bx-menu' ></i>
+          <span class="logo_name">Nom Projet</span>
+        </div>
+        <ul class="nav-links">
+          
+          <li  [hidden]="profileName !== 'admin' && profileName !== '1er validateur' && profileName !== '2eme validateur'">
+            <a href="dashboard">
+              <i class='bx bx-grid-alt' ></i>
+              <span class="link_name">Dashboard</span>
+            </a>
+            <ul class="sub-menu blank">
+              <li><a class="link_name" href="#">Dashboard</a></li>
+            </ul>
+          </li>
+          
+          <li [hidden]="profileName !== 'consommateur'">
+            <a href="form">
+              <i class='bx bx-plug' ></i>
+              <span class="link_name">Demande API</span>
+            </a>
+            <ul class="sub-menu blank">
+              <li><a class="link_name" href="#">Demande API</a></li>
+            </ul>
+          </li>
+          <li [hidden]="profileName !== 'admin'">
+            <div  class="iocn-link">
+              <a >
+                <i class='bx bx-collection'></i>
+                <span class="link_name">Admin</span>
+              </a>
+              <i class='bx bxs-chevron-down arrow'></i>
+            </div>
+            <ul class="sub-menu">
+              <li><a class="link_name" href="#">Admin</a></li>
+              <li><a href="liste">Liste APIs</a></li>
+              <li><a href="user">Liste Utilisateur</a></li>
+              <li><a href="str">Liste Structure</a></li>
+
+              <li><a href="demande">Liste Demande</a></li>
+            </ul>
+          </li>
+          <li [hidden]="profileName !== '1er validateur' && profileName !== '2eme validateur'">
+            <div class="iocn-link">
+              <a >
+                <i class='bx bx-book-alt' ></i>
+                <span class="link_name">Mes demandes</span>
+              </a>
+              <i class='bx bxs-chevron-down arrow' ></i>
+            </div>
+            <ul class="sub-menu">
+              <li><a class="link_name" >Mes demandes</a></li>
+              <li><a [attr.href]="getValidationLink(profileName)">Demande En Attentes</a></li>
+              <li ><a href="termineeval">Demande Terminée</a></li>
+
+              <li ><a href="">Demande rectifiée</a></li>
+            </ul>
+          </li>
+          <li>
+          
+          <li>
+        <div class="profile-details">
+          <div class="profile-content">
+          </div>
+          <div class="name-job">
+            <div class="profile_name">{{ userName }}</div>
+            <div class="job">{{ profileName }}</div>
+          </div>
+          <i class='bx bx-log-out' (click)="logout()"></i>
+        </div>
+      </li>
+    </ul>
+      </div>
+      <div class='dashboard-app'>
+        <div class='dashboard-content'>
+            <div class='container'>
+                <div class="container-xl">
+                  <div class="search-container">
+                    <input type="text" placeholder="Recherche" [(ngModel)]="searchText">
+                  </div>
+                    <div class="table-responsive">
+                        <div class="table-wrapper">
+                            <div class="table-title">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <h2>2eme <b>validation</b></h2>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                       
+                                        <th style="width: 30%;">Description</th>
+                                        <th style="width: 20%;">NomApi</th>
+                                        <th style="width: 40%;">status</th>
+                                        <th style="width: 30%;">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let demande of demandes| filter:searchText |  paginate:{itemsPerPage: tableSize,currentPage: page, totalItems: count}; let i = index" [attr.id]="'demande-row-' + i">
+                                        <td>{{ demande.descriptionAPI }}</td>
+                                        <td>{{ demande.nomAPI }}</td>
+                                        <td>
+                                            <ng-container *ngFor="let status of demande.statuses">
+                                                {{ status.nomStatus }}
+                                            </ng-container>
+                                        </td>
+                                        <td>
+                                                 
+                                            <a class="details" (click)="showDetails(demande)"><i class="material-icons" title="Details">&#xE88E;</i></a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="clearfix">
+                              <pagination-controls previousLabel="précédent" nextLabel="Suivant" (pageChange)="onTableDataChange($event)" class="hint-text" class="pagination"></pagination-controls>
+                               </div>

@@ -22,9 +22,19 @@
       <input type="tel" id="mobile" placeholder="Votre numero mobile" formControlName="mobile">
     </div>
     <div class="form-group">
+<<<<<<< Updated upstream
+=======
+      <label for="profil-name">Structure</label>
+      <select id="profil-name" formControlName="structureId">
+        <option *ngFor="let structure of structures" [value]="structure.idstr">{{ structure.code }}</option>
+      </select>
+    </div>
+    <div class="form-group">
+>>>>>>> Stashed changes
       <label for="profil-name">Choisissez le Profil</label>
       <select id="profil-name" formControlName="nomProfil">
         <option value="admin">Admin</option>
+        <option value="admin délégué">Admin délégué</option>
         <option value="1er validateur">1er validateur</option>
         <option value="2eme validateur">2eme validateur</option>
         <option value="consommateur">Consommateur</option>

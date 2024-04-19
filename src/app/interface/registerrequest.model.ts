@@ -5,5 +5,7 @@ export interface RegisterRequest {
     password: string;
     grade: string;
     cin: number;
+    mobile: number;
+    
   }
   

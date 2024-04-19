@@ -15,6 +15,13 @@ import { InscriptionComponent } from './inscription/inscription.component';
 import { Validation2Component } from './validation2/validation2.component';
 import { ListestructureComponent } from './listestructure/listestructure.component';
 import {dashboardComponent} from './dashboard/dashboard.component';
+<<<<<<< Updated upstream
+=======
+import { ListedemandeconsommateurComponent } from './listedemandeconsommateur/listedemandeconsommateur.component';
+import { ListeapiconsComponent } from './listeapicons/listeapicons.component';
+import { DemandetermineeconsComponent } from './demandetermineecons/demandetermineecons.component';
+import { DemtermvalComponent } from './demtermval/demtermval.component';
+>>>>>>> Stashed changes
 
 const routes: Routes = [
   { path: 'form', component: FormulaireComponent },
@@ -31,7 +38,17 @@ const routes: Routes = [
   { path: 'validation1', component: Validation1Component },
   { path: 'validation2', component: Validation2Component },
   { path: 'str', component: ListestructureComponent },
+<<<<<<< Updated upstream
   { path: 'dashboard', component:dashboardComponent }
+=======
+  { path: 'dashboard', component:dashboardComponent },
+  {path: 'demandecons' , component:ListedemandeconsommateurComponent},
+  {path: 'apicons' , component:ListeapiconsComponent},
+  {path:'terminee',component:DemandetermineeconsComponent},
+  {path:'termineeval',component:DemtermvalComponent}
+
+
+>>>>>>> Stashed changes
 
 
 

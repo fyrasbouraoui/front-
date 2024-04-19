@@ -1,29 +1,32 @@
 <div class="container">
-    <form [formGroup]="structureForm" (ngSubmit)="onSubmit()">
-      <div class="form-group">
-        <label for="code">Entrez le Code</label>
-        <input type="text" id="code" placeholder="Le code" formControlName="code">
-      </div>
-      <div class="form-group">
-        <label for="email">Entrez l'email</label>
-        <input type="email" id="email" placeholder="Votre email" formControlName="email">
-      </div>
-      <div class="form-group">
-        <label for="telStr">Entrez le Numero de telephone</label>
-        <input type="tel" id="telStr" placeholder="Le numero de telephone" formControlName="telStr">
-      </div>
-      <div class="form-group">
-        <label for="adresse">Entrez l'adresse</label>
-        <input type="text" id="adresse" placeholder="L'adresse" formControlName="adresse">
-      </div>
-      <div class="form-group">
-        <label for="adresse">type</label>
-        <input type="text" id="adresse" placeholder="L'adresse" formControlName="role">
-      </div>
-      
-      <div class="form-group">
-        <button type="submit" [disabled]="!structureForm.valid">Ajouter</button>
-      </div>
-    </form>
-  </div>
-  
+  <form [formGroup]="structureForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="nom">Entrez le Nom</label>
+      <input type="text" id="nom" placeholder="Le nom" formControlName="nom">
+    </div>
+    <div class="form-group">
+      <label for="code">Entrez le Code</label>
+      <input type="text" id="code" placeholder="Le code" formControlName="code">
+    </div>
+    <div class="form-group">
+      <label for="email">Entrez l'email</label>
+      <input type="email" id="email" placeholder="Votre email" formControlName="email">
+    </div>
+    <div class="form-group">
+      <label for="telStr">Entrez le Numero de telephone</label>
+      <input type="tel" id="telStr" placeholder="Le numero de telephone" formControlName="telStr">
+    </div>
+    <div class="form-group">
+      <label for="adresse">Entrez l'adresse</label>
+      <input type="text" id="adresse" placeholder="L'adresse" formControlName="adresse">
+    </div>
+    <div class="form-group">
+      <label for="role">Entrez le type</label>
+      <input type="text" id="role" placeholder="Le type" formControlName="role">
+    </div>
+    
+    <div class="form-group">
+      <button type="submit" [disabled]="!structureForm.valid">Ajouter</button>
+    </div>
+  </form>
+</div>

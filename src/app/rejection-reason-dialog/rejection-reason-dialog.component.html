@@ -1,0 +1,6 @@
+<h2 mat-dialog-title>Raison de Reject</h2>
+<div mat-dialog-content>
+  <p *ngIf="data.status.raisonRefus; else noReason">{{ data.status.raisonRefus }}</p>
+  <ng-template #noReason>No rejection reason available.</ng-template>
+</div>
+
